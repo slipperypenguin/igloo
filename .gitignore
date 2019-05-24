@@ -1,3 +1,17 @@
+# General OS and IDE things
+.DS_Store
+
+# Catch all for secret definitions
+secret.yaml
+secrets.yaml
+
+# Home Assistant Config
+home-assistant/config_copy
+home-assistant/config/*
+!home-assistant/config/www
+!home-assistant/config/*.yaml
+home-assistant/config/secrets.yaml
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -7,6 +21,3 @@
 
 # Test binary, build with `go test -c`
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
