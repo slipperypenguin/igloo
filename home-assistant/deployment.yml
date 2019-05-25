@@ -13,3 +13,75 @@ spec:
   revisionHistoryLimit: 2
   strategy:
     type: Recreate
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      hostNetwork: true
+      containers:
+        - name: home-assistant
+          image: odicro/rpi-home-assistant:v4
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          # Configuration
+          - mountPath: "/config/automations.yaml"
+            subPath: automations.yaml
+            name: "config"
+          - mountPath: "/config/configuration.yaml"
+            subPath: configuration.yaml
+            name: "config"
+          - mountPath: "/config/groups.yaml"
+            subPath: groups.yaml
+            name: "config"
+          - mountPath: "/config/input_boolean.yaml"
+            subPath: input_boolean.yaml
+            name: "config"
+          - mountPath: "/config/light.yaml"
+            subPath: light.yaml
+            name: "config"
+          - mountPath: "/config/scripts.yaml"
+            subPath: scripts.yaml
+            name: "config"
+          - mountPath: "/config/sensor.yaml"
+            subPath: sensor.yaml
+            name: "config"
+          - mountPath: "/config/switch.yaml"
+            subPath: switch.yaml
+            name: "config"
+          # Secrets
+          - name: secrets
+            mountPath: "/config/secrets.yaml"
+            subPath: secrets.yaml
+          # Stateful host mounts
+          - name: deps
+            mountPath: "/config/deps"
+          - name: www
+            mountPath: "/config/www"
+          - name: panels
+            mountPath: "/config/panels"
+          - name: "db"
+            mountPath: "/config/home-assistant_v2.db"
+      volumes:
+        - name: config
+          configMap:
+            name: hass-config
+        - name: secrets
+          secret:
+            secretName: hass-secrets
+        - name: deps
+          hostPath:
+            type: DirectoryOrCreate
+            path: /igloo/home-assistant/config/deps
+        - name: www
+          hostPath:
+            type: DirectoryOrCreate
+            path: /igloo/home-assistant/config/www
+        - name: panels
+          hostPath:
+            type: DirectoryOrCreate
+            path: /igloo/home-assistant/config/panels
+        - name: db
+          hostPath:
+            type: FileOrCreate
+            path: /igloo/home-assistant/config/home-assistant_v2.db

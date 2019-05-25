@@ -3,4 +3,151 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: hass-config
-  namespace: k8s-home
+  namespace: igloo
+data:
+  automations.yaml: |-
+    # - - - - - - - - - - - - - - - - - - - -
+    #    Presence Based
+    # - - - - - - - - - - - - - - - - - - - -
+    - alias: Turn On Lights on Arrival
+      trigger:
+        - entity_id: group.all_devices
+          platform: state
+          to: home
+      condition:
+        - after: sunset
+          after_offset: -01:00:00
+          condition: sun
+      action:
+        - data:
+            entity_id: group.living_room_lights
+          service: light.turn_on
+  configuration.yaml: |-
+    # - - - - - - - - - - - - - - - - - - - -
+    #    Core Configuration
+    # - - - - - - - - - - - - - - - - - - - -
+    homeassistant:
+      name: Home
+      # Location required to calculate the time the sun rises and sets
+      latitude: !secret lat_key
+      longitude: !secret lon_key
+      # Impacts weather/sunrise data (altitude above sea level in meters)
+      elevation: 0
+      # metric for Metric, imperial for Imperial
+      unit_system: imperial
+      # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      time_zone: America/New_York
+      # Customization file
+      customize: !include customize.yaml
+    sun:
+    # - - - - - - - - - - - - - - - - - - - -
+    #    Core Enables
+    # - - - - - - - - - - - - - - - - - - - -
+    http:
+      # Secrets are defined in the file secrets.yaml
+      api_password: !secret http_password
+      base_url: hass.home.odicro.com
+      #base_url: odicro.duckdns.org:8123
+      #ssl_certificate: /ssl/fullchain.pem
+      #ssl_key: /ssl/privkey.pem
+      #ip_ban_enabled: True
+      #login_attempts_threshold: 5
+      #trusted_networks:
+        #- 192.168.0.0/24
+        #- !secret external_ip
+    # Show links to resources in log and frontend
+    introduction:
+    # Enable frontend and configuration panels
+    frontend:
+      javascript_version: latest
+    config:
+    # Checks for available updates
+    updater:
+    # Discover some devices automatically
+    discovery:
+    # Allows you to issue voice commands from the frontend in enabled browsers
+    conversation:
+    # Enables support for tracking state changes over time
+    history:
+    # View all events in a logbook
+    logbook:
+    # Enables a map showing the location of tracked devices
+    map:
+    # Track the sun
+    sun:
+    # Expose metrics to prometheus
+    prometheus:
+      include:
+        domains:
+          - sensor
+          - light
+          - switch
+          - media_player
+          - weather
+          - device_tracker
+          - automation
+    # Text to speech
+    tts:
+      - platform: google
+    # Cloud
+    cloud:
+    #iframe setup in dashboard
+    panel_custom:
+      configurator:
+        title: Configurator
+        icon: mdi:wrench
+        url: https://hassio.local:3218
+      terminal:
+        title: Terminal
+        icon: mdi:console
+        url: https://hassio.local:7681
+      influxdb:
+        title: InfluxDB
+        icon: mdi:chart-areaspline
+        url: http://hassio.local:8888
+    # - - - - - - - - - - - - - - - - - - - -
+    #    Extras
+    # - - - - - - - - - - - - - - - - - - - -
+    # MQTT Broker
+    mqtt:
+      broker: 192.168.0.101
+      port: 1883
+    # InfluxDB integration
+    influxdb:
+      host: a0d7b954-influxdb
+      port: 8086
+      database: homeassistant
+      username: homeassistant
+      password: !secret http_password
+      max_retries: 3
+      default_measurement: state
+    # MariaDB integration
+      recorder:
+        db_url: !secret mysql_url
+    # Weather prediction
+    sensor:
+      - platform: darksky
+        api_key: !secret darksky_key
+        monitored_conditions:
+          - summary
+          - icon
+          - nearest_storm_distance
+    # - - - - - - - - - - - - - - - - - - - -
+    #    Includes
+    # - - - - - - - - - - - - - - - - - - - -
+    sensor: !include sensor.yaml
+    input_boolean: !include input_boolean.yaml
+    switch: !include switch.yaml
+    light: !include light.yaml
+    group: !include groups.yaml
+    automation: !include automations.yaml
+    script: !include scripts.yaml
+  groups.yaml: ""
+  input_boolean.yaml: |
+    voice_alerts:
+        name: Voice Alerts
+        initial: on
+  light.yaml: ""
+  scripts.yaml: ""
+  sensor.yaml: ""
+  switch.yaml: ""
