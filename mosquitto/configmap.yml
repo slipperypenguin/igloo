@@ -1,0 +1,24 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mosquitto-conf
+  namespace: igloo
+data:
+  mosquitto.conf: |
+    # Mosquitto Config File
+    pid_file /var/run/mosquitto.pid
+
+    persistence false
+
+    # Logging Configuration
+    log_dest stdout
+    log_type error
+    log_type warning
+    log_type notice
+    log_type information
+
+    connection_messages true
+    log_timestamp true
+
+    # Include directory
+    include_dir /etc/mosquitto/conf.d
