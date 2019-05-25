@@ -1,0 +1,10 @@
+Devices Used
+- 2, rpi 3 B+ (nodes)
+- 1, MacBook Pro 2012 (master node)
+
+
+Services
+- prometheus
+- traefik
+- mosquitto
+- home-assistant
