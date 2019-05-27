@@ -35,4 +35,6 @@ data:
       acmeLogging=true
       onDemand=true
       onHostRule=true
-      dnsProvider="cloudflare"
+      dnsProvider="zeit.world"
+    [acme.dnsChallenge]
+      provider = "zeit.world"

@@ -9,7 +9,7 @@ metadata:
     ingress.kubernetes.io/auth-secret: "prometheus-auth"
 spec:
   rules:
-  - host: prometheus.home.odicro.com
+  - host: prometheus.igloo.odicro.com
     http:
       paths:
       - backend:

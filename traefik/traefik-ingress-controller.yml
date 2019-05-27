@@ -26,18 +26,18 @@ spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
       containers:
-      - image: traefik:v1.4.6
+      - image: traefik:v1.7.11
         name: traefik-ingress-lb
         env:
-          - name: CLOUDFLARE_EMAIL
+          - name: ZEIT-WORLD_EMAIL
             valueFrom:
               secretKeyRef:
-                name: cloudflare
+                name: zeit.world
                 key: email
-          - name: CLOUDFLARE_API_KEY
+          - name: ZEIT-WORLD_API_KEY
             valueFrom:
               secretKeyRef:
-                name: cloudflare
+                name: zeit.world
                 key: api_key
         volumeMounts:
           - mountPath: "/config"

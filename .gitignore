@@ -3,7 +3,9 @@
 
 # Catch all for secret definitions
 secret.yaml
+secret.yml
 secrets.yaml
+secrets.yml
 
 # Home Assistant Config
 home-assistant/config_copy

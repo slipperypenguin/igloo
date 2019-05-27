@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: IfNotPresent
           command: ["/bin/prometheus",
                     "--config.file", "/prometheus/prometheus.yml",
-                    "--web.external-url", "https://prometheus.home.odicro.com",
+                    "--web.external-url", "https://prometheus.igloo.odicro.com",
                     "--storage.tsdb.path", "/data"]
           volumeMounts:
           - mountPath: "/prometheus"

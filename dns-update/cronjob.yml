@@ -18,22 +18,22 @@ spec:
             - name: EMAIL
               valueFrom:
                 secretKeyRef:
-                  name: cloudflare
+                  name: zeit.world
                   key: email
             - name: RECORD_NAME
               valueFrom:
                 secretKeyRef:
-                  name: cloudflare
+                  name: zeit.world
                   key: record_name
             - name: API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: cloudflare
+                  name: zeit.world
                   key: api_key
             - name: ZONE_ID
               valueFrom:
                 secretKeyRef:
-                  name: cloudflare
+                  name: zeit.world
                   key: zone_id
             volumeMounts:
             - name: config-volume

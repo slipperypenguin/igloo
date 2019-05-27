@@ -21,7 +21,8 @@ spec:
       hostNetwork: true
       containers:
         - name: home-assistant
-          image: odicro/rpi-home-assistant:v4
+          #image: slipperypenguin/rpi-home-assistant
+          image: homeassistant/home-assistant:latest
           imagePullPolicy: IfNotPresent
           volumeMounts:
           # Configuration
