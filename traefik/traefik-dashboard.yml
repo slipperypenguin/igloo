@@ -21,9 +21,15 @@ metadata:
     ingress.kubernetes.io/auth-secret: "traefik-dashboard-auth"
 spec:
   rules:
-  - host: traefik.igloo.odicro.com
-    http:
-      paths:
-      - backend:
-          serviceName: traefik-dashboard
-          servicePort: 8080
+  - http:
+    paths:
+    - path: /
+      backend:
+        serviceName: traefik-dashboard
+        servicePort: 8080
+  # - host: traefik.igloo.odicro.com
+  #   http:
+  #     paths:
+  #     - backend:
+  #         serviceName: traefik-dashboard
+  #         servicePort: 8080
