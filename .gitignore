@@ -6,6 +6,7 @@ secret.yaml
 secret.yml
 secrets.yaml
 secrets.yml
+k3s.yaml
 
 # Home Assistant Config
 home-assistant/config_copy
