@@ -6,6 +6,8 @@ secret.yaml
 secret.yml
 secrets.yaml
 secrets.yml
+*.secret
+secret.*
 k3s.yaml
 
 # Home Assistant Config

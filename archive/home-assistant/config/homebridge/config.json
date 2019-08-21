@@ -1,0 +1,51 @@
+{
+  "bridge": {
+    "name": "Home Assistant",
+    "username": "B8:27:EB:95:D6:CA",
+    "port": 51826,
+    "pin": "935-80-833"
+  },
+  "description": "Homebridge for Home Assistant",
+  "accessories": [],
+  "platforms": [
+    {
+      "platform": "HomeAssistant",
+      "name": "HomeAssistant",
+      "host": "http://hassio/homeassistant",
+      "password": "e8f178d156a142848b57134ffaef51a1",
+      "default_visibility": "hidden",
+      "supported_types": [
+        "automation",
+        "binary_sensor",
+        "climate",
+        "cover",
+        "device_tracker",
+        "fan",
+        "group",
+        "input_boolean",
+        "light",
+        "lock",
+        "media_player",
+        "remote",
+        "scene",
+        "script",
+        "sensor",
+        "switch",
+        "vacuum"
+      ],
+      "logging": true,
+      "verify_ssl": true
+    },
+    {
+      "platform": "BelkinWeMo",
+      "name": "WeMo Platform"
+    },
+    {
+      "platform": "Nest",
+      "token": "c.ErrFhORO4FMDsmjHaqRC5ZmItd6Saff9C1Hl2cjyae1PK3tm1VBagYuWuXB92PxbSbXyvkutjL1LoUC73mmYQaZFS7yHxfU31uZEEzixe4TRsBUMCsMQJgplSOLgESlYs9AttjeGrJRnf9KK",
+      "clientId": "044cd174-6b33-459c-9ee6-1304ea5c4882",
+      "clientSecret": "mjmOGa1lqZejkUUiX6LqvzHeu",
+      "code": "DF5GUBJ6"
+    }
+  ]
+}
