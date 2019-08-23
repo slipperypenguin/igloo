@@ -6,7 +6,7 @@ metadata:
   labels:
     k8s-app: kubernetes-metrics-scraper
   name: dashboard-metrics-scraper
-  namespace: kubernetes-dashboard
+  namespace: igloo
 spec:
   ports:
     - port: 8000
@@ -22,7 +22,7 @@ metadata:
   labels:
     k8s-app: kubernetes-metrics-scraper
   name: kubernetes-metrics-scraper
-  namespace: kubernetes-dashboard
+  namespace: igloo
 spec:
   replicas: 1
   revisionHistoryLimit: 10
