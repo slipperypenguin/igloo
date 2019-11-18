@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-metrics-scraper
-          image: kubernetesui/metrics-scraper:v1.0.0
+          image: kubernetesui/metrics-scraper:v1.0.2
           ports:
             - containerPort: 8000
               protocol: TCP

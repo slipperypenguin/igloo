@@ -1,0 +1,20 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: home-assistant
+  namespace: kube-system
+spec:
+  chart: stable/home-assistant
+  version: 0.9.10
+  targetNamespace: igloo
+  valuesContent: |-
+    configurator:
+      enabled: true
+      image:
+        repository: causticlab/hass-configurator-docker
+        tag: 0.3.6-arm
+    git:
+      enabled: false
+      image:
+        repository: causticlab/hass-configurator-docker
+        tag: 0.3.6-arm

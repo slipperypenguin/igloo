@@ -1,0 +1,103 @@
+kind: ReplicaSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: traefik-56688c4464
+  namespace: kube-system
+  selfLink: >-
+    /apis/extensions/v1beta1/namespaces/kube-system/replicasets/traefik-56688c4464
+  uid: 648be605-c2f6-11e9-b84e-b827eb1d08db
+  resourceVersion: '474'
+  generation: 1
+  creationTimestamp: '2019-08-20T02:58:31Z'
+  labels:
+    app: traefik
+    chart: traefik-1.64.0
+    heritage: Tiller
+    pod-template-hash: 56688c4464
+    release: traefik
+  annotations:
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '2'
+    deployment.kubernetes.io/revision: '1'
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: traefik
+      uid: 647efff8-c2f6-11e9-b84e-b827eb1d08db
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+      pod-template-hash: 56688c4464
+      release: traefik
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: traefik
+        chart: traefik-1.64.0
+        heritage: Tiller
+        pod-template-hash: 56688c4464
+        release: traefik
+      annotations:
+        checksum/config: 0432fce01d241cafbe45b2440c4e0fcd658160564c2b9139337e613a1eac6b8d
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: traefik
+            defaultMode: 420
+        - name: ssl
+          secret:
+            secretName: traefik-default-cert
+            defaultMode: 420
+      containers:
+        - name: traefik
+          image: 'traefik:1.7.9'
+          args:
+            - '--configfile=/config/traefik.toml'
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+            - name: httpn
+              containerPort: 8880
+              protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: ssl
+              mountPath: /ssl
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      dnsPolicy: ClusterFirst
+      serviceAccountName: traefik
+      serviceAccount: traefik
+      securityContext: {}
+      schedulerName: default-scheduler
