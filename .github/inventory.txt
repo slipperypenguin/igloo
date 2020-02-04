@@ -6,5 +6,5 @@ Devices Used
 Services
 - prometheus
 - traefik
-- mosquitto
+- rabbitmq
 - home-assistant
