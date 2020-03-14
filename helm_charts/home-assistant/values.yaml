@@ -1,13 +1,9 @@
 # Default values for home-assistant.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 image:
   repository: homeassistant/home-assistant
-  tag: 0.104.0
+  tag: 0.106.6
   pullPolicy: IfNotPresent
   pullSecrets: []
-
 git:
   enabled: false
   image:

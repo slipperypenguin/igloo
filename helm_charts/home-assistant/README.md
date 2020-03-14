@@ -19,6 +19,7 @@ helm upgrade home-assistant stable/home-assistant -f values.yaml -n igloo --dry-
 
 # Links
 - helm repo chart: https://github.com/helm/charts/tree/master/stable/home-assistant
+- homeassistant releases: https://github.com/home-assistant/core/releases
 
 # Summary
 This is the initial haas setup. It is working locally in the cluster.

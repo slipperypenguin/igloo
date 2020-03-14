@@ -12,16 +12,27 @@ homeassistant:
   unit_system: imperial
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
-  # Customization file
-  customize: !include customize.yaml
+  auth_providers:
+    - type: trusted_networks
+      allow_bypass_login: true
+      trusted_networks:
+        - 192.168.0.0/24
+        - 192.168.7.0/24
+        - 192.168.7.0/23
+        - 127.0.0.1
 # Configure a default setup of Home Assistant (frontend, api, etc)
 #default_config:
 
 # - - - - - - - - - - - - - - - - - - - -
 #    Core Enables
 # - - - - - - - - - - - - - - - - - - - -
-# Show links to resources in log and frontend
-introduction:
+http:
+  api_password: !secret
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.0.0.200
+    - 10.43.131.37
+    - 10.42.1.67
 # Enable frontend and configuration panels
 config:
 # Checks for available updates
@@ -43,10 +54,12 @@ tts:
 cloud:
 #iframe setup in dashboard
 panel_custom:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: https://hassio.local:3218
+  - name: my-configurator
+    sidebar_title: Configurator
+    sidebar_icon: mdi:wrench
+    url_path: http://127.0.0.1:3218/
+    embed_iframe: true
+    #require_admin: true
 
 # - - - - - - - - - - - - - - - - - - - -
 #    Extras
@@ -62,7 +75,7 @@ sensor:
 # - - - - - - - - - - - - - - - - - - - -
 #    Includes
 # - - - - - - - - - - - - - - - - - - - -
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
+#group: !include groups.yaml
+#automation: !include automations.yaml
+#script: !include scripts.yaml
+#scene: !include scenes.yaml
