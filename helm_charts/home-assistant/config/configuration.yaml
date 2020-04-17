@@ -13,26 +13,29 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
   auth_providers:
+    - type: homeassistant
     - type: trusted_networks
       allow_bypass_login: true
       trusted_networks:
         - 192.168.0.0/24
         - 192.168.7.0/24
-        - 192.168.7.0/23
         - 127.0.0.1
+
 # Configure a default setup of Home Assistant (frontend, api, etc)
-#default_config:
+default_config:
+#frontend:
 
 # - - - - - - - - - - - - - - - - - - - -
 #    Core Enables
 # - - - - - - - - - - - - - - - - - - - -
 http:
-  api_password: !secret
+  #api_password: !secret http_password
   use_x_forwarded_for: true
   trusted_proxies:
     - 10.0.0.200
     - 10.43.131.37
     - 10.42.1.67
+    - 127.0.0.1
 # Enable frontend and configuration panels
 config:
 # Checks for available updates
@@ -52,14 +55,17 @@ tts:
   - platform: google_translate
 # Cloud
 cloud:
+icloud:
+  - username: !secret icloud_username
+    password: !secret icloud_password
+
 #iframe setup in dashboard
 panel_custom:
-  - name: my-configurator
+  - name: configurator
     sidebar_title: Configurator
     sidebar_icon: mdi:wrench
     url_path: http://127.0.0.1:3218/
     embed_iframe: true
-    #require_admin: true
 
 # - - - - - - - - - - - - - - - - - - - -
 #    Extras
