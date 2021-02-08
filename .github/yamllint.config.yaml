@@ -1,9 +1,7 @@
 ignore: |
   .yamllint.yml
   .github/
-  ansible/
   integrations/
-  ignore/
   *-crds.yaml
 extends: default
 rules:

@@ -59,7 +59,7 @@ icloud:
   - username: !secret icloud_username
     password: !secret icloud_password
 
-#iframe setup in dashboard
+# iframe setup in dashboard
 panel_custom:
   - name: configurator
     sidebar_title: Configurator
@@ -81,7 +81,7 @@ sensor:
 # - - - - - - - - - - - - - - - - - - - -
 #    Includes
 # - - - - - - - - - - - - - - - - - - - -
-#group: !include groups.yaml
-#automation: !include automations.yaml
-#script: !include scripts.yaml
-#scene: !include scenes.yaml
+# group: !include groups.yaml
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+# scene: !include scenes.yaml
