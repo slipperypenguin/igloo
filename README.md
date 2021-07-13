@@ -10,7 +10,7 @@ _Work in Progress_
 <br/>
 <br/>
 
-[![k3s](https://img.shields.io/badge/k3s-v1.18.6-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.21.2-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
 
 <br/>
 
@@ -31,13 +31,9 @@ Useful snippets when using k3s
 - `sudo cat /var/lib/rancher/k3s/server/node-token`
 - `journalctl -f`
 
-#### Note on Secrets
-- in order to commit secrets to git, they **must** be encrypted (via `./tools/encrypt.sh`)
-
 #### Project structure
 - `.github` - GitHub Actions configs, repo reference objects, other GitHub configs
-- `cluster` - Charts + manifests to run on cluster. Organized by namespace
-- `hack` - Bash scripts for working within the repository.
+- `cluster` - Charts + manifests deployed on cluster.
 
 ---
 
@@ -47,11 +43,11 @@ Currently evaluating RaspiOS, HypriotOS, Ubuntu
 
 | Device                          | Count | OS Disk Size    | Data Disk Size       | Ram  | Purpose                       | Alias         | OS                   |
 |---------------------------------|-------|-----------------|----------------------|------|-------------------------------|---------------|----------------------|
-| raspberry pi 3B+                | 1     | 64GB Flash      | N/A                  | 1GB  | Kubernetes k3s Master         | rpi-node-01   | rasbian lite         |
-| raspberry pi 3B+                | 1     | 64GB Flash      | N/A                  | 1GB  | Kubernetes k3s Workers        | rpi-node-02   | rasbian lite         |
-| MacBook Pro 2012                | 1     | 250GB SSD       | N/A                  | 8GB  | Kubernetes k3s Worker         | mbp-node-03   | MacOS Big Sur        |
-| raspberry pi 3B+ compute module | 2     | 32GB eMMC Flash | N/A                  | 1GB  | Kubernetes k3s Workers        | tpi-node-04/5 | Raspberry Pi OS Lite |
-| Helios64 NAS                    | 1     | N/A             | 8x4TB RAID6          | 4GB  | Media and shared file storage | glacier       | Debian GNU/Linux     |
+| raspberry pi 3B+ compute module | 2     | 32GB eMMC Flash | N/A                  | 1GB  | Kubernetes Master + workers   | tpi-node-01/2 | Raspberry Pi OS Lite |
+| raspberry pi 3B+                | 2     | 64GB Flash      | N/A                  | 1GB  | Kubernetes Workers            | rpi-node-03/4 | rasbian lite         |
+| MacBook Pro 2012                | 1     | 250GB SSD       | N/A                  | 8GB  | Kubernetes Worker             | hackbook-pro  | Ubuntu 20.4.2        |
+| MacBook Air 2012                | 1     | 150GB SSD       | N/A                  | 4GB  | Kubernetes Worker             | hackbook-air  | Ubuntu 20.4.2        |
+| Helios64 NAS                    | 1     | 64GB Flash      | 8x4TB RAID6          | 4GB  | Media and shared file storage | glacier       | Debian GNU/Linux     |
 
 ---
 
@@ -69,7 +65,6 @@ _Below are some of the tools I'm experimenting with, while working with my clust
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [direnv](https://github.com/direnv/direnv)             | Set `KUBECONFIG` environment variable based on present working directory                                  |
 | [sops](https://github.com/mozilla/sops)                | Encrypt secrets                                                                                           |
-| [git-crypt](https://github.com/AGWA/git-crypt)         | Encrypt certain files in a repository that can only be decrypted with a key on local computers            |
 | [go-task](https://github.com/go-task/task)             | Replacement for make and makefiles                                                                        |
 | [pre-commit](https://github.com/pre-commit/pre-commit) | Ensure the YAML and shell script in my repo are consistent                                                |
 
