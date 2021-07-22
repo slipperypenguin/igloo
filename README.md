@@ -19,8 +19,6 @@ _Work in Progress_
 #### Install
 - Install / Update (with write permissions)
   - `curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -`
-- Install v1 without traefik (traefik v2 is used separately)
-  - `curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=“644” INSTALL_K3S_VERSION=v1.0.0 sh -s - --no-deploy traefik`
 - Make sure systemd starts up after install/update (takes a few minutes)
   - `sudo systemctl status k3s`
 

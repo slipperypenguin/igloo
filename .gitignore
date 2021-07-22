@@ -4,9 +4,7 @@
 
 # Catch all for secret definitions
 secret.yaml
-secret.yml
 secrets.yaml
-secrets.yml
 *.secret
 secret.*
 k3s.yaml
@@ -24,6 +22,21 @@ home-assistant/config/secrets.yaml
 *.dll
 *.so
 *.dylib
+bin
+/flux
+*.iso
 
 # Test binary, build with `go test -c`
 *.test
+
+# Temp folders
+.temp*
+.private/
+.logs/
+.task/
+
+# Sops
+.decrypted~*
+
+# Kubernetes
+kubeconfig
