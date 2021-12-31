@@ -10,17 +10,23 @@ _Work in Progress_
 <br/>
 <br/>
 
-[![k3s](https://img.shields.io/badge/k3s-v1.21.2-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.22.3-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
 
 <br/>
 
 ## 💻&nbsp; Cluster Setup
 
 #### Install
-- Install / Update (with write permissions)
-  - `curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -`
-- Make sure systemd starts up after install/update (takes a few minutes)
-  - `sudo systemctl status k3s`
+- Assumes a working machine with an IP address
+- setup required passwordless ssh login:
+  - `ssh-copy-id $USER@$IP_ADDR`
+- Set up k3s on all machines
+  - modify the `hosts.ini` with expected IPs
+  - `cd ansible && ansible-playbook site.yml -i inventory/turing-pi-v1/hosts.ini`
+- Copy new kubeconfig to local computer for access
+  - `scp $USER@$MASTER_IP:~/.kube/config ~/.kube/config-turing-pi`
+- check nodes
+  - `kubectl get nodes -o wide`
 
 #### Snippets
 Useful snippets when using k3s
@@ -28,6 +34,14 @@ Useful snippets when using k3s
 - `sudo cat /var/lib/rancher/k3s/agent/node-password.txt`
 - `sudo cat /var/lib/rancher/k3s/server/node-token`
 - `journalctl -f`
+
+<br/>
+
+Ansible Snippets:
+- Reset machines if something goes wrong
+  - `cd ansible && ansible-playbook reset.yml -i inventory/turing-pi-v1/hosts.ini`
+- Shut down all hosts
+  - `ansible all -i inventory/hosts.ini -a "shutdown now" -b`
 
 #### Project structure
 - `.github` - GitHub Actions configs, repo reference objects, other GitHub configs
