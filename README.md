@@ -10,7 +10,7 @@ _Work in Progress_
 <br/>
 <br/>
 
-[![k3s](https://img.shields.io/badge/k3s-v1.22.3-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.25.2-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
 
 <br/>
 
@@ -45,7 +45,11 @@ Ansible Snippets:
 
 #### Project structure
 - `.github` - GitHub Actions configs, repo reference objects, other GitHub configs
-- `cluster` - Charts + manifests deployed on cluster.
+- `./cluster` - Charts + manifests deployed on cluster.
+  - `./base` directory is the entrypoint to Flux
+  - `./crds` directory contains custom resource definitions (CRDs) that need to exist globally in your cluster before anything else exists
+  - `./core` directory (depends on crds) are important infrastructure applications (grouped by namespace) that should never be pruned by Flux
+  - `./apps` directory (depends on core) is where your common applications (grouped by namespace) could be placed, Flux will prune resources here if they are not tracked by Git anymore
 
 ---
 

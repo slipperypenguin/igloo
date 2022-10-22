@@ -1,6 +1,7 @@
 # General OS and IDE things
 .DS_Store
 *.icloud
+.fleet
 
 # Catch all for secret definitions
 secret.yaml
