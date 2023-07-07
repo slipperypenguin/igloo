@@ -1,22 +1,23 @@
 # General OS and IDE things
 .DS_Store
 *.icloud
+Thumbs.db
 
 # Catch all for secret definitions
 secret.yaml
-secret.yml
 secrets.yaml
-secrets.yml
 *.secret
 secret.*
 k3s.yaml
+kubeconfig
+.decrypted~*.yaml
+.config.env
+*.agekey
+*.pub
+*.key
 
-# Home Assistant Config
-home-assistant/config_copy
-home-assistant/config/*
-!home-assistant/config/www
-!home-assistant/config/*.yaml
-home-assistant/config/secrets.yaml
+# Ansible
+xanmanning.k3s*
 
 # Binaries for programs and plugins
 *.exe
