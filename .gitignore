@@ -1,7 +1,7 @@
 # General OS and IDE things
 .DS_Store
 *.icloud
-.fleet
+Thumbs.db
 
 # Catch all for secret definitions
 secret.yaml
@@ -9,13 +9,15 @@ secrets.yaml
 *.secret
 secret.*
 k3s.yaml
+kubeconfig
+.decrypted~*.yaml
+.config.env
+*.agekey
+*.pub
+*.key
 
-# Home Assistant Config
-home-assistant/config_copy
-home-assistant/config/*
-!home-assistant/config/www
-!home-assistant/config/*.yaml
-home-assistant/config/secrets.yaml
+# Ansible
+xanmanning.k3s*
 
 # Binaries for programs and plugins
 *.exe
@@ -23,21 +25,6 @@ home-assistant/config/secrets.yaml
 *.dll
 *.so
 *.dylib
-bin
-/flux
-*.iso
 
 # Test binary, build with `go test -c`
 *.test
-
-# Temp folders
-.temp*
-.private/
-.logs/
-.task/
-
-# Sops
-.decrypted~*
-
-# Kubernetes
-kubeconfig
