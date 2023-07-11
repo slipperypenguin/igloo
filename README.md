@@ -19,6 +19,7 @@ _Work in Progress_
 - [Software](#software)
 - [Cluster Notes](#cluster-notes)
 - [Debugging](#-debugging)
+- [Thanks](#-thanks)
 
 
 ## 💻&nbsp; Cluster Setup
@@ -136,3 +137,7 @@ Below is a general guide on trying to debug an issue with an resource or applica
 Note: If a resource exists, running `kubectl -n <namespace> describe <resource> <name>` might give you insight into what the problem(s) could be.
 
 Resolving problems could take some tweaking of your YAML manifests in order to get things working, other times it could be a external factor like permissions on NFS.
+
+
+## 🤝 Thanks
+Huge shout out to [@onedr0p](https://github.com/onedr0p) and the k8s@Home community!
