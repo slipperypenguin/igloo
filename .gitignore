@@ -3,13 +3,10 @@
 *.icloud
 Thumbs.db
 
-# Catch all for secret definitions
-secret.yaml
-secrets.yaml
-*.secret
-secret.*
-k3s.yaml
+# k8s
 kubeconfig
+
+# sops
 .decrypted~*.yaml
 .config.env
 *.agekey
@@ -26,5 +23,5 @@ xanmanning.k3s*
 *.so
 *.dylib
 
-# Test binary, build with `go test -c`
+# Test binary, built with `go test -c`
 *.test
