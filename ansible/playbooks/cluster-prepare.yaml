@@ -8,6 +8,8 @@
     - name: Pausing for 5 seconds...
       ansible.builtin.pause:
         seconds: 5
+    - name: Populate service facts
+      service_facts:
   tasks:
     - name: Locale
       block:
@@ -19,7 +21,7 @@
       block:
         - name: Packages | Install
           ansible.builtin.apt:
-            name: apt-transport-https,ca-certificates,conntrack,curl,dirmngr,gdisk,gnupg,htop,
+            name: apt-transport-https,ca-certificates,conntrack,curl,dirmngr,gdisk,gnupg,hdparm,htop,
               iptables,iputils-ping,ipvsadm,libseccomp2,lm-sensors,neofetch,net-tools,nfs-common,
               nvme-cli,open-iscsi,parted,psmisc,python3,python3-apt,python3-kubernetes,python3-yaml,
               smartmontools,socat,software-properties-common,unzip,util-linux
@@ -33,9 +35,10 @@
             key: "https://github.com/{{ github_username }}.keys"
         - name: User Configuration | Silence login
           ansible.builtin.file:
-            dest: /root/.hushlogin
+            dest: "{{ '/home/' + ansible_user if ansible_user != 'root' else '/root' }}/.hushlogin"
             state: touch
             owner: "{{ ansible_user }}"
+            group: "{{ ansible_user }}"
             mode: "0644"
             modification_time: preserve
             access_time: preserve
@@ -51,7 +54,6 @@
             content: |
               127.0.0.1 localhost
               127.0.1.1 {{ inventory_hostname }}
-
               # The following lines are desirable for IPv6 capable hosts
               ::1     localhost ip6-localhost ip6-loopback
               ff02::1 ip6-allnodes
@@ -79,6 +81,7 @@
             mode: "0755"
             content: neofetch --config none
         - name: System Configuration | Disable apparmor
+          when: ansible_facts.services['apparmor.service'] is defined
           ansible.builtin.systemd:
             name: apparmor
             state: stopped
