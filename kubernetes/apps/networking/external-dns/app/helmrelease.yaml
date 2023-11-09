@@ -9,14 +9,13 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 1.13.0
+      version: 1.13.1
       sourceRef:
         kind: HelmRepository
         name: external-dns
         namespace: flux-system
   maxHistory: 2
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -35,7 +34,7 @@ spec:
             name: external-dns-secret
             key: api-token
     extraArgs:
-      - --annotation-filter=external-dns.alpha.kubernetes.io/target
+      - --ingress-class=external
       - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
