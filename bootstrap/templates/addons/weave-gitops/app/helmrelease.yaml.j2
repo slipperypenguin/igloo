@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: weave-gitops
-      version: 4.0.26
+      version: 4.0.33
       sourceRef:
         kind: HelmRepository
         name: weave-gitops
@@ -31,7 +31,7 @@ spec:
       username: admin
     ingress:
       enabled: true
-      className: nginx
+      className: internal
       annotations:
         hajimari.io/icon: sawtooth-wave
       hosts:
