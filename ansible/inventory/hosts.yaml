@@ -5,4 +5,4 @@ kubernetes:
       hosts:
         mba-node-01:
           ansible_user: penguin
-          ansible_host: 192.168.1.229
+          ansible_host: 100.86.178.31
