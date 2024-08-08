@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: openebs
-      version: 4.0.1
+      version: 4.1.0
       sourceRef:
         kind: HelmRepository
         name: openebs
@@ -36,6 +36,9 @@ spec:
           enabled: false
     localpv-provisioner:
       localpv:
+        image:
+          registry: quay.io/
+      helperPod:
         image:
           registry: quay.io/
       hostpathClass:
