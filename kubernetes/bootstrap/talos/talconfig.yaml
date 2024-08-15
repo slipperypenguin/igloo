@@ -43,6 +43,7 @@ nodes:
         configFiles:
         environment:
           - $TS_AUTHKEY
+          - TS_ROUTES=10.96.0.0/12
 
 # Global patches
 patches:
