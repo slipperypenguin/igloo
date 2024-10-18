@@ -23,6 +23,7 @@ talosconfig
 
 # Taskfile
 .tasks
+.task/
 
 # Brew
 Brewfile.lock.json
