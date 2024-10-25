@@ -14,6 +14,7 @@ clusterSvcNets:
 additionalApiServerCertSans: &sans
   - "192.168.20.6"
   - 127.0.0.1 # KubePrism
+  - "100.112.26.65"
 additionalMachineCertSans: *sans
 
 # Disable built-in Flannel to use Cilium
