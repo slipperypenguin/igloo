@@ -1,20 +1,22 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.8.3
+talosVersion: v1.9.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.31.3
+kubernetesVersion: v1.32.0
 
 clusterName: "igloo"
 endpoint: https://192.168.20.6:6443
+
 clusterPodNets:
   - "10.69.0.0/16"
 clusterSvcNets:
   - "10.96.0.0/16"
+
 additionalApiServerCertSans: &sans
   - "192.168.20.6"
-  - 127.0.0.1 # KubePrism
   - "100.112.26.65"
+  - "127.0.0.1" # KubePrism
 additionalMachineCertSans: *sans
 
 # Disable built-in Flannel to use Cilium
@@ -22,9 +24,9 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: "mba-node-01"
+  - hostname: "mbp-node-01"
     ipAddress: "192.168.20.228"
-    installDisk: "/dev/sda"
+    installDisk: "/dev/sdb"
     talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
     controlPlane: true
     networkInterfaces:
