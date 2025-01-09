@@ -5,7 +5,7 @@ serviceAccount:
   create: true
 service:
   name: kube-dns
-  clusterIP: "#{ bootstrap_service_network | nthhost(10) }#"
+  clusterIP: "#{ service_network | nthhost(10) }#"
 replicaCount: 2
 servers:
   - zones:
@@ -49,3 +49,7 @@ tolerations:
   - key: node-role.kubernetes.io/control-plane
     operator: Exists
     effect: NoSchedule
+# Graceful Helmfile to HelmRelease takeover
+customLabels:
+  helm.toolkit.fluxcd.io/name: coredns
+  helm.toolkit.fluxcd.io/namespace: kube-system

@@ -1,10 +1,11 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #% if bootstrap_bgp.enabled %#
+  #% if bgp.enabled %#
   - ./cilium-l3.yaml
-  #% elif not bootstrap_feature_gates.dual_stack_ipv4_first %#
+  #% elif not feature_gates.dual_stack_ipv4_first %#
   - ./cilium-l2.yaml
   #% else %#
   []

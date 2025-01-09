@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -28,7 +29,7 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-        lbipam.cilium.io/ips: "#{ bootstrap_cloudflare.gateway_vip }#"
+        lbipam.cilium.io/ips: "#{ cloudflare.gateway_vip }#"
       #% if bgp.enabled %#
       externalTrafficPolicy: Local
       #% else %#
