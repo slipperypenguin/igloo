@@ -1,11 +1,10 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrepository-source-v1.json
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: stakater
+  name: metrics-server
   namespace: flux-system
 spec:
-  type: oci
-  interval: 5m
-  url: oci://ghcr.io/stakater/charts
+  interval: 1h
+  url: https://kubernetes-sigs.github.io/metrics-server
