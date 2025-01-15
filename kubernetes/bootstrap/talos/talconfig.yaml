@@ -15,9 +15,9 @@ clusterSvcNets:
 
 additionalApiServerCertSans: &sans
   - "192.168.20.6"
-  - "100.93.47.95"
   - "100.112.26.65"
-  - "127.0.0.1" # KubePrism
+  - "100.93.47.95"
+  - "127.0.0.1"
 additionalMachineCertSans: *sans
 
 # Disable built-in Flannel to use Cilium
@@ -27,7 +27,9 @@ cniConfig:
 nodes:
   - hostname: "mbp-node-01"
     ipAddress: "192.168.20.228"
-    installDisk: "/dev/sdb"
+    installDisk: "/dev/sda"
+    machineSpec:
+      secureboot: false
     talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
     controlPlane: true
     networkInterfaces:
@@ -37,7 +39,7 @@ nodes:
         addresses:
           - "192.168.20.228/24"
         routes:
-          - network: 0.0.0.0/0
+          - network: "0.0.0.0/0"
             gateway: "192.168.20.1"
         mtu: 1500
         vip:
@@ -51,21 +53,15 @@ nodes:
 
 # Global patches
 patches:
-  - "@./patches/global/cluster-discovery.yaml"
-  - "@./patches/global/containerd.yaml"
-  - "@./patches/global/disable-search-domain.yaml"
-  - "@./patches/global/dns.yaml"
-  - "@./patches/global/hostdns.yaml"
-  - "@./patches/global/kubelet.yaml"
-  - "@./patches/global/ntp.yaml"
-  - "@./patches/global/openebs-local.yaml"
-  - "@./patches/global/sysctl.yaml"
+  - "@./patches/global/machine-files.yaml"
+  - "@./patches/global/machine-kubelet.yaml"
+  - "@./patches/global/machine-network.yaml"
+  - "@./patches/global/machine-sysctls.yaml"
+  - "@./patches/global/machine-time.yaml"
 
 # Controller patches
 controlPlane:
   patches:
-    - "@./patches/controller/api-access.yaml"
+    - "@./patches/controller/admission-controller-patch.yaml"
     - "@./patches/controller/cluster.yaml"
-    - "@./patches/controller/disable-admission-controller.yaml"
-    - "@./patches/controller/etcd.yaml"
 
