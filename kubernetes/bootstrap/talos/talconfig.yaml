@@ -15,8 +15,7 @@ clusterSvcNets:
 
 additionalApiServerCertSans: &sans
   - "192.168.20.6"
-  - "100.112.26.65"
-  - "100.93.47.95"
+  - "100.67.118.115"
   - "127.0.0.1"
 additionalMachineCertSans: *sans
 
