@@ -1,0 +1,68 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+vars:
+  UTILS_RESOURCES_DIR: '{{.ROOT_DIR}}/.taskfiles/utils/resources'
+
+tasks:
+
+  pre-commit-validation:
+    desc: Encrypt "*.sops.*" files + Validate configuration files
+    prompt: Any conflicting files in the kubernetes directory will be overwritten... continue?
+    cmds:
+      - task: encrypt-secrets
+      - task: validate-kubernetes-config
+      - task: validate-talos-config
+    preconditions:
+      - msg: |
+          An existing Age key interferes with age key in this repository.
+          Rename or delete ~/.config/sops/age/keys.txt
+        sh: '! test -f ~/.config/sops/age/keys.txt'
+
+  decrypt-secrets:
+    desc: Decrypt secrets with Sops
+    prompt: All sops files will be decrypted and secrets will be in plaintext... continue?
+    cmds:
+      - for: { var: SECRET_FILES }
+        cmd: |
+          if sops filestatus "{{.ITEM}}" | jq --exit-status ".encrypted == true" &>/dev/null; then
+              sops --decrypt --in-place "{{.ITEM}}"
+          fi
+    vars:
+      SECRET_FILES:
+        sh: find "{{.KUBERNETES_DIR}}" -type f -name "*.sops.*"
+    preconditions:
+      - test -f {{.SOPS_AGE_KEY_FILE}}
+      - test -f {{.SOPS_CONFIG_FILE}}
+      - which sops
+
+  encrypt-secrets:
+    desc: Encrypt secrets with Sops
+    cmds:
+      - for: { var: SECRET_FILES }
+        cmd: |
+          if sops filestatus "{{.ITEM}}" | jq --exit-status ".encrypted == false" &>/dev/null; then
+              sops --encrypt --in-place "{{.ITEM}}"
+          fi
+    vars:
+      SECRET_FILES:
+        sh: find "{{.KUBERNETES_DIR}}" -type f -name "*.sops.*"
+    preconditions:
+      - test -f {{.SOPS_AGE_KEY_FILE}}
+      - test -f {{.SOPS_CONFIG_FILE}}
+      - which sops
+
+  validate-kubernetes-config:
+    desc: Validate Kubernetes manifests with kubeconform
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/kubeconform.sh {{.KUBERNETES_DIR}}
+    preconditions:
+      - test -f {{.UTILS_RESOURCES_DIR}}/kubeconform.sh
+      - which kubeconform
+
+  validate-talos-config:
+    desc: Validate the Talhelper config
+    cmd: talhelper validate talconfig {{.TALHELPER_CONFIG_FILE}}
+    preconditions:
+      - test -f {{.TALHELPER_CONFIG_FILE}}
+      - which talhelper

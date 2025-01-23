@@ -23,6 +23,7 @@ includes:
   bootstrap: .taskfiles/bootstrap
   kubernetes: .taskfiles/kubernetes
   talos: .taskfiles/talos
+  utils: .taskfiles/utils
 
 tasks:
 
