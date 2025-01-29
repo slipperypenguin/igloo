@@ -7,6 +7,26 @@ vars:
 
 tasks:
 
+  debug:
+    desc: Gather common resources in your cluster, useful when asking for support
+    cmds:
+      - for: { var: RESOURCE }
+        cmd: kubectl get {{.ITEM}} {{.CLI_ARGS | default "-A"}}
+    vars:
+      RESOURCE: >-
+        nodes
+        gitrepositories
+        kustomizations
+        helmrepositories
+        helmreleases
+        certificates
+        certificaterequests
+        ingresses
+        pods
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which kubectl
+
   pre-commit-validation:
     desc: Encrypt "*.sops.*" files + Validate configuration files
     prompt: Any conflicting files in the kubernetes directory will be overwritten... continue?
