@@ -54,7 +54,7 @@ releases:
     values:
       - ../apps/external-secrets/external-secrets/app/helm-values.yaml
     needs:
-      - kube-system/coredns
+      - cert-manager/cert-manager
 
   - name: flux-operator
     namespace: flux-system
