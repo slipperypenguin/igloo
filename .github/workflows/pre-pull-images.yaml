@@ -72,7 +72,7 @@ jobs:
   pre-pull-images:
     if: ${{ needs.compare-images.outputs.images != '[]' }}
     name: Pre-pull Images
-    runs-on: ubuntu-latest
+    runs-on: ["home-ops-runner"]
     needs: ["compare-images"]
     strategy:
       matrix:
