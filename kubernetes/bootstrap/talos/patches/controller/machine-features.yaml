@@ -1,0 +1,7 @@
+machine:
+  features:
+    # feature Kubernetes Talos API Access can only be enabled on control plane machines
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles: ["os:admin"]
+      allowedKubernetesNamespaces: ["actions-runner-system", "kube-system"]
