@@ -7,12 +7,12 @@ _Work in Progress_
 
 
 
-### k8s based home network 🐧
+### Kubernetes based home network 🐧
 <br/>
 <br/>
 <br/>
 
-[![k3s](https://img.shields.io/badge/k3s-v1.27.3-blue?style=flat-square&?logo=kubernetes)](https://k3s.io/)
+[![k8s](https://img.shields.io/badge/k8s-v1.32.1-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
 <br/>
 
 
