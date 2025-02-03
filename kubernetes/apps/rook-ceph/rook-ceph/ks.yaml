@@ -4,14 +4,14 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app rook-ceph
-  namespace: &namespace rook-ceph
+  namespace: flux-system
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: onepassword-store
-      namespace: external-secrets
+      namespace: flux-system
   interval: 30m
   path: ./kubernetes/apps/rook-ceph/rook-ceph/app
   prune: false
@@ -19,7 +19,7 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: rook-ceph
   timeout: 5m
   wait: false
 ---
@@ -28,7 +28,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app rook-ceph-cluster
-  namespace: &namespace rook-ceph
+  namespace: flux-system
 spec:
   commonMetadata:
     labels:
@@ -37,7 +37,7 @@ spec:
     - ../../../../flux/components/gatus/guarded
   dependsOn:
     - name: onepassword-store
-      namespace: external-secrets
+      namespace: flux-system
   interval: 30m
   path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
   postBuild:
@@ -49,6 +49,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: rook-ceph
   timeout: 15m
   wait: false
