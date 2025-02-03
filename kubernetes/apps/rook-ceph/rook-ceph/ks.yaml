@@ -33,8 +33,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  components:
-    - ../../../../flux/components/gatus/guarded
   dependsOn:
     - name: onepassword-store
       namespace: flux-system
@@ -43,7 +41,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: rook
   prune: false
   sourceRef:
     kind: GitRepository
