@@ -80,10 +80,6 @@ spec:
               - name: "/dev/sdb"
               - name: "/dev/sdc"
               - name: "/dev/sdd"
-          - name: "mba-node-01"
-            devices:
-              - name: "/dev/sdc"
-              - name: "/dev/sdd"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
