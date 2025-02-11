@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: sops-age
+  namespace: flux-system
 stringData:
   age.agekey: ENC[AES256_GCM,data:uVmysp5USThr7WgCunpVlX3Mrp01zJHNp4i5doXVj1gK+mTjkR0IXKxbzwljhLQXiNfEcpt/Xd4CeLIKFezNCpFGZ5bfMvp38dktm5+yz/1CZUMRo6oy5+ZXGprZvW7mIXDxb8JZlAHpGZXIK44NEvTSKKJdJXbPTyrMBJ0OEl5sUl4YLStcCJYaZFSHde28eoY/CjSHdTHYrsl2nVH82CpmU5bdyOfdP5/Gm6AX65OJtK+/tbbTWMiFrwBi,iv:/nYd5PxQUIq8edNqDzvFMbnKUt7+rr/i03yIIbdYPg8=,tag:H6Pt3+2PhueLawo00v853A==,type:str]
 sops:
