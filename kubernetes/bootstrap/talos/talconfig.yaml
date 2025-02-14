@@ -71,6 +71,28 @@ nodes:
         environment:
           - $TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/12
+  - hostname: "dell-node-01"
+    ipAddress: "192.168.20.129"
+    installDisk: "/dev/nvme0n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "48:4d:7e:eb:43:40"
+        dhcp: false
+        addresses:
+          - "192.168.20.129/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "192.168.20.1"
+        mtu: 1500
+    extensionServices:
+      - name: tailscale
+        environment:
+          - $TS_AUTHKEY
+          - TS_ROUTES=10.96.0.0/12
 
 # Global patches
 patches:
