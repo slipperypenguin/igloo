@@ -47,7 +47,7 @@ nodes:
       - name: tailscale
         configFiles:
         environment:
-          - $TS_AUTHKEY
+          - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/12
   - hostname: "mba-node-01"
     ipAddress: "192.168.20.126"
@@ -69,7 +69,7 @@ nodes:
     extensionServices:
       - name: tailscale
         environment:
-          - $TS_AUTHKEY
+          - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/12
   - hostname: "dell-node-01"
     ipAddress: "192.168.20.129"
@@ -91,7 +91,7 @@ nodes:
     extensionServices:
       - name: tailscale
         environment:
-          - $TS_AUTHKEY
+          - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/12
 
 # Global patches
