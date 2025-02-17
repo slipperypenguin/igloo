@@ -1,5 +1,5 @@
-TS_AUTHKEY: ENC[AES256_GCM,data:D/Ihm6F1FAAJRxPmQ7B8ipxdVMTTPKJ2YhdGYyQ6vPAbBB/yqHaxWUFGu30FgqGbgN7lTlUP3b1USaggktLMvPvuSWTlZ1xBdg==,iv:OjaXErYp18NZqnCFp3QAcugjktT+CnDBCGGMtZ8nv04=,tag:7znx0i4q9ij3QjCj+hImPA==,type:str]
-TALOS_EDITOR: ENC[AES256_GCM,data:eEQm6g==,iv:mqu0Mhdgc4s7V7B+oEVUjt1oksqiF/2fySmvzRaj4D4=,tag:JFIslOnbHb4eP18T4Fc1zQ==,type:str]
+TS_AUTHKEY: ENC[AES256_GCM,data:gCHwBl5Cn5ELelxfqAPQxn1Xhsc4gTYtKeBsnlRiD1PKFEETWZRPmeTmJ1pDu/vXKaMGKnqIt1MQrReCHg==,iv:1ZfA6c4zpALeu/GsbpHPP8y/JecUgfbvZ2x+Ci4DCzw=,tag:yXQIfN9RBWhXwGDEcx0fSw==,type:str]
+TALOS_EDITOR: ENC[AES256_GCM,data:oKVhVg==,iv:lI6h9gKAmBR8a43eoj3XM3PgmSzRnvn4BeQ+ZgvEdgQ=,tag:KSKE5hay74zF5TVee7QIWw==,type:str]
 sops:
   kms: []
   gcp_kms: []
@@ -9,15 +9,15 @@ sops:
     - recipient: age1w2sz2tk9h82n8g0cygzet8q6h0z2xrs4r8jjym268sudgjwpqd3shvrvzm
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAxdXo2UHQyQjdqTlFLeHhy
-        NXUwbmlmOCtHejB0S0UyTzRBWkU5WVlNVER3CldIc1lEenFzdU11SjYyRGlVai9N
-        RkRLT24yK2xLNlNpZXdVcmptUDRVVUEKLS0tIHFNUFVxdEw4ZFFkc2c2NnlKWTMy
-        c3J3bmpsTzE0Rzh1ckRhcStURVEvV00KRqqgCASlVNAKe6E3KgeXcUw6tBb1/eAq
-        9RRslWN6IQnKa5m3Z1FWrHAvplirLFlXI5KFmhhNlAeTNUFipKlJMQ==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6dUVDdTBmUW5nV3hDQVNT
+        ZDdockhBOFZQSG1INjB5T3VseGZMbkxXMFE0CkJLV09iS05hcGdMR3FzUmlsdFFw
+        dzlYTWZ4eU9hMm9RSURZTEl3MEt4bGcKLS0tICtXekprZTVVcFRRc0Myd3g0R29n
+        VU5Mc0xTRC9lWVd5elVyRmwxTk1QK1EK+uJG6cCrFGKJGKRqx1nuwMCxjCB6hem0
+        uMF4soK+AdSg+tZ4plLpOBiiUajRaIj+Xae5SFZMsu5TXvUfdQnbqg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-01-29T15:52:32Z"
-  mac: ENC[AES256_GCM,data:R2HfYhrJTiwDk/8hVL9a9iWJPPtOPPHdbwFcZ953ETZqWGUwS9egGu2n3/jEB64EC4TZkuBnto+/cZY1nEe0ryvCiRI9Nzw9RS/d81lzE7Qyf5KbZ7bVV8n5IGhym++Je1oBU/KjKHw/vQAVUeC9lbKxh/k7kFXech1Q0HCj+L4=,iv:Ht7xXg+XMnyWCFE0rwFlLZbAVm9B3Y21iwWcKs5yUGk=,tag:TimEqTpce9xZq+yODk7jpA==,type:str]
+  lastmodified: "2025-02-15T07:41:52Z"
+  mac: ENC[AES256_GCM,data:ecXwvWKGzAo5NLEjzcx03cTZrF+8Vc3cJ8LIZGXB9EHWVIQKzNDfwrsDjNVXqpmuZQ+M9O37Dr4osI0lucdVfQ0dLVu8t9Li/xWEYwEbqCO+Fj6dxcbO/nUBWlFopPUzFiNklosbouUQbJs78ZOnhaANF2q7vyZBBc+rZaB0aQs=,iv:300WmEHrMhXlektjKpw0AOAkoJzsBRIj3bVszH1h+Ww=,tag:Y/HfJysKyF/wPTUR+RlJIQ==,type:str]
   pgp: []
   unencrypted_suffix: _unencrypted
   mac_only_encrypted: true
-  version: 3.9.3
+  version: 3.9.4
