@@ -42,6 +42,12 @@ spec:
           path: /
     toolbox:
       enabled: true
+      resources:
+        limits:
+          memory: "256Mi"
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
     configOverride: |
       [global]
       bdev_enable_discard = true
@@ -50,6 +56,7 @@ spec:
     cephClusterSpec:
       crashCollector:
         disable: false
+        daysToRetain: 30
       csi:
         readAffinity:
           enabled: true
@@ -58,7 +65,10 @@ spec:
         urlPrefix: /
         ssl: false
         prometheusEndpoint: http://prometheus-operated.observability.svc.cluster.local:9090
+      mon:
+        count: 1
       mgr:
+        count: 1
         modules:
           - name: insights
             enabled: true
@@ -76,7 +86,7 @@ spec:
             cpu: 100m
             memory: 512Mi
           limits:
-            memory: 2Gi
+            memory: 1Gi
         mon:
           requests:
             cpu: 50m
@@ -88,13 +98,19 @@ spec:
             cpu: 500m
             memory: 2Gi
           limits:
-            memory: 4Gi
+            memory: 2Gi
         mgr-sidecar:
           requests:
             cpu: 50m
-            memory: 128Mi
+            memory: 40Mi
           limits:
-            memory: 256Mi
+            memory: 100Mi
+        logcollector:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
       storage:
         useAllNodes: false
         useAllDevices: false
