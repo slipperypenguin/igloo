@@ -131,7 +131,11 @@ function apply_helm_releases() {
 }
 
 function main() {
-    check_cli helmfile kubectl kustomize sops talhelper yq
+    check_cli helmfile kubectl kustomize op sops talhelper yq
+
+    if ! op user get --me &>/dev/null; then
+        log error "Failed to authenticate with 1Password CLI"
+    fi
 
     # Apply resources and Helm releases
     wait_for_nodes

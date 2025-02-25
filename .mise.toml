@@ -1,12 +1,13 @@
 [env]
 _.python.venv = { path = "{{config_root}}/.venv", create = true }
-BOOTSTRAP_DIR = '{{config_root}}/bootstrap'
+BOOTSTRAP_DIR = "{{config_root}}/bootstrap"
 KUBECONFIG = "{{config_root}}/kubeconfig"
-KUBERNETES_DIR = '{{config_root}}/kubernetes'
+KUBERNETES_DIR = "{{config_root}}/kubernetes"
 ROOT_DIR = "{{config_root}}"
-SCRIPTS_DIR = '{{config_root}}/scripts'
+SCRIPTS_DIR = "{{config_root}}/scripts"
+SOPS_EDITOR = "nano"
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
-TALOS_DIR = '{{config_root}}/talos'
+TALOS_DIR = "{{config_root}}/talos"
 TALOSCONFIG = "{{config_root}}/talos/clusterconfig/talosconfig"
 
 [tasks.deps]
@@ -21,7 +22,7 @@ uv = "latest"
 "aqua:budimanjojo/talhelper" = "3.0.19"
 "aqua:cloudflare/cloudflared" = "2025.2.0"
 "aqua:FiloSottile/age" = "1.2.1"
-"aqua:fluxcd/flux2" = "2.4.0"
+"aqua:fluxcd/flux2" = "2.5.0"
 "aqua:getsops/sops" = "3.9.4"
 "aqua:go-task/task" = "3.41.0"
 "aqua:helm/helm" = "3.17.1"

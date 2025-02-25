@@ -1,5 +1,6 @@
 TS_AUTHKEY: ENC[AES256_GCM,data:gCHwBl5Cn5ELelxfqAPQxn1Xhsc4gTYtKeBsnlRiD1PKFEETWZRPmeTmJ1pDu/vXKaMGKnqIt1MQrReCHg==,iv:1ZfA6c4zpALeu/GsbpHPP8y/JecUgfbvZ2x+Ci4DCzw=,tag:yXQIfN9RBWhXwGDEcx0fSw==,type:str]
 TALOS_EDITOR: ENC[AES256_GCM,data:oKVhVg==,iv:lI6h9gKAmBR8a43eoj3XM3PgmSzRnvn4BeQ+ZgvEdgQ=,tag:KSKE5hay74zF5TVee7QIWw==,type:str]
+prometheusOperatorVersion_unencrypted: v0.80.0
 sops:
   kms: []
   gcp_kms: []
@@ -15,8 +16,8 @@ sops:
         VU5Mc0xTRC9lWVd5elVyRmwxTk1QK1EK+uJG6cCrFGKJGKRqx1nuwMCxjCB6hem0
         uMF4soK+AdSg+tZ4plLpOBiiUajRaIj+Xae5SFZMsu5TXvUfdQnbqg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-02-15T07:41:52Z"
-  mac: ENC[AES256_GCM,data:ecXwvWKGzAo5NLEjzcx03cTZrF+8Vc3cJ8LIZGXB9EHWVIQKzNDfwrsDjNVXqpmuZQ+M9O37Dr4osI0lucdVfQ0dLVu8t9Li/xWEYwEbqCO+Fj6dxcbO/nUBWlFopPUzFiNklosbouUQbJs78ZOnhaANF2q7vyZBBc+rZaB0aQs=,iv:300WmEHrMhXlektjKpw0AOAkoJzsBRIj3bVszH1h+Ww=,tag:Y/HfJysKyF/wPTUR+RlJIQ==,type:str]
+  lastmodified: "2025-02-22T11:03:43Z"
+  mac: ENC[AES256_GCM,data:NWsRek988LUnPe6ai8ydT00j5IYpRGbq7NpgRsU9sJgIELC7kIkZ+qvjSDnndCfi5+gvGcZNr/q5uirTiJGgglbvazJNg9k6xag0gK2t/hMP7D58Zl0I3VR7uX385/zJ06RS1ZtxIlFO2aGPYEXm4FYsGy81GzCCh/oIwKwKW0I=,iv:8bu8LDBCABPOu5/3smV5qgovJoRyPOjg3gUPNK4Ky9A=,tag:YhlSw/7ePmFSB+ZDX5P58A==,type:str]
   pgp: []
   unencrypted_suffix: _unencrypted
   mac_only_encrypted: true
