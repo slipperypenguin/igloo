@@ -35,7 +35,8 @@ My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically syncs ingress DNS records to a DNS provider.
 - [external-secrets](https://github.com/external-secrets/external-secrets): Managed Kubernetes secrets using [1Password Connect](https://github.com/1Password/connect).
 - [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller using NGINX as a reverse proxy and load balancer.
-- [rook](https://github.com/rook/rook): Distributed block storage for persistent storage.
+- [openebs](https://github.com/openebs/openebs)
+  - [rook](https://github.com/rook/rook): Distributed block storage for persistent storage.
 - [sops](https://github.com/getsops/sops): Managed secrets for Kubernetes and Terraform which are committed to Git.
 - [spegel](https://github.com/spegel-org/spegel): Stateless cluster local OCI registry mirror.
 - [volsync](https://github.com/backube/volsync): Backup and recovery of persistent volume claims.
@@ -78,28 +79,25 @@ This cluster uses two instances of [ExternalDNS](https://github.com/kubernetes-s
 
 ## ⚙&nbsp; Hardware
 
-| Device                          | Count | OS Disk Size    | Data Disk Size       | Ram  | Purpose                       | Alias         | OS                   |
-|---------------------------------|-------|-----------------|----------------------|------|-------------------------------|---------------|----------------------|
-| raspberry pi 3B+                | 1     | 64GB Flash      | N/A                  | 1GB  | Kubernetes k3s Master         | rpi-node-01   | rasbian lite         |
-| raspberry pi 3B+                | 1     | 64GB Flash      | N/A                  | 1GB  | Kubernetes k3s Workers        | rpi-node-02   | rasbian lite         |
-| MacBook Pro 2012                | 1     | 250GB SSD       | N/A                  | 8GB  | Kubernetes k3s Worker         | mbp-node-03   | MacOS Big Sur        |
-| raspberry pi 3B+ compute module | 2     | 32GB eMMC Flash | N/A                  | 1GB  | Kubernetes k3s Workers        | tpi-node-04/5 | Raspberry Pi OS Lite |
-| Helios64 NAS                    | 1     | N/A             | 8x4TB RAID6          | 4GB  | Media and shared file storage | glacier       | Debian GNU/Linux     |
-| MacBook Air 2013                | 1     | 250GB SSD       | N/A                  | 8GB  | Kubernetes k3s Master         | mba-node-01   | Debian 12 |
+| Device             | Count | OS Disk Size   | Data Disk Size | Ram  | Purpose                       | Alias       | OS               |
+|--------------------|-------|----------------|----------------|------|-------------------------------|-------------|------------------|
+| Dell Optiplex 7040 | 1     | 256GB NVMe SSD | N/A            | 16GB | Kubernetes Worker             | mbp-node-01 | Talos Linux      |
+| Helios64 NAS       | 1     | N/A            | 8x4TB RAID6    | 4GB  | Media and shared file storage | glacier     | Debian GNU/Linux |
+| MacBook Air 2013   | 1     | 250GB SSD      | N/A            | 4GB  | Kubernetes Worker             | mba-node-01 | Talos Linux      |
+| MacBook Pro 2012   | 1     | 250GB SSD      | N/A            | 8GB  | Kubernetes Control-Plane      | mbp-node-01 | Talos Linux      |
 
 
 ## Software
 
 ### 🔧&nbsp; Tools
-_Below are some of the tools I'm experimenting with, while working with my cluster_
 
 | Tool                                                   | Purpose                                                                                                   |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| [direnv](https://github.com/direnv/direnv)             | Set `KUBECONFIG` environment variable based on present working directory                                  |
+| [mise](https://mise.jdx.dev/)             | Set `KUBECONFIG` environment variable based on present working directory                                  |
 | [sops](https://github.com/mozilla/sops)                | Encrypt secrets                                                                                           |
 | [go-task](https://github.com/go-task/task)             | Replacement for make and makefiles                                                                        |
-| [pre-commit](https://github.com/pre-commit/pre-commit) | Ensure the YAML and shell script in my repo are consistent                                                |
-| [Debian 12](https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/) (for raspi/arm64 use the [tested images](https://raspi.debian.net/tested-images/)) | Operating System to install on nodes                                                |
+| [talos](https://www.talos.dev) | Operating System to install on nodes           |
+| [uv](https://docs.astral.sh/uv/) | python package + virtualenv manager         |
 
 
 ### 🛎&nbsp; Cloud Services
@@ -116,15 +114,6 @@ While most of my infrastructure and workloads are self-hosted I do rely upon the
 
 
 
-Here's a list of third-party applications I'm evaluating alongside custom applications:
-- [concourse](https://github.com/concourse/concourse) - container-based continuous thing-doer
-- [minio](https://github.com/minio/minio) - High Performance, Kubernetes Native Object Storage.
-- [jellyfin](https://github.com/jellyfin/jellyfin)
-- [monitoror](https://github.com/monitoror/monitoror)
-- [heimdall](https://github.com/linuxserver/Heimdall)
-- [k8s-fah](https://github.com/richstokes/k8s-fah)
-
-
 ## Cluster Notes
 
 ### 🌱 Environment
@@ -134,6 +123,38 @@ Here's a list of third-party applications I'm evaluating alongside custom applic
   ```
   mise trust && mise install && mise run deps
   ```
+
+
+### 🛠️ Talos and Kubernetes Maintenance
+  
+#### ⚙️ Updating Talos node configuration
+> [!TIP]
+> Ensure you have updated `talconfig.yaml` and any patches with your updated configuration. In some cases you **not only need to apply the configuration but also upgrade talos** to apply new configuration.
+
+```sh
+# (Re)generate the Talos config
+task talos:generate-config
+# Apply the config to the node
+task talos:apply-node IP=? MODE=?
+# e.g. task talos:apply-node IP=10.10.10.10 MODE=auto
+```
+
+#### ⬆️ Updating Talos and Kubernetes versions
+> [!TIP]
+> Ensure the `talosVersion` and `kubernetesVersion` in `talconfig.yaml` are up-to-date with the version you wish to upgrade to.
+
+```sh
+# Upgrade node to a newer Talos version
+task talos:upgrade-node IP=?
+# e.g. task talos:upgrade-node IP=10.10.10.10
+```
+
+```sh
+# Upgrade cluster to a newer Kubernetes version
+task talos:upgrade-k8s
+# e.g. task talos:upgrade-k8s
+```
+
 
 ### 🐛 Debugging
 Below is a general guide on trying to debug an issue with an resource or application. For example, if a workload/resource is not showing up or a pod has started but in a `CrashLoopBackOff` or `Pending` state.
