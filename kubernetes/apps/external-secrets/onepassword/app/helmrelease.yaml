@@ -69,9 +69,11 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources: &resources
               requests:
+                memory: 256M
                 cpu: 10m
               limits:
                 memory: 256M
+                cpu: 10m
           sync:
             image:
               repository: docker.io/1password/connect-sync
