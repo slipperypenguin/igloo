@@ -6,18 +6,19 @@ metadata:
   name: &app flux-operator
   namespace: flux-system
 spec:
-  targetNamespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  interval: 1h
   path: ./kubernetes/apps/flux-system/flux-operator/app
   prune: false # never should be deleted
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: false
-  interval: 30m
+  targetNamespace: flux-system
   timeout: 5m
+  wait: false
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -29,9 +30,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 30m
+  interval: 1h
   path: ./kubernetes/apps/flux-system/flux-operator/instance
   prune: false # never should be deleted
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system

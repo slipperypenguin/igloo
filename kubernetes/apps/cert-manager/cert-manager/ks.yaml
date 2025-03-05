@@ -9,9 +9,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 30m
+  interval: 1h
   path: ./kubernetes/apps/cert-manager/cert-manager/app
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -30,9 +31,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 30m
+  interval: 1h
   path: ./kubernetes/apps/cert-manager/cert-manager/issuers
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -54,9 +56,10 @@ spec:
   dependsOn:
     - name: cert-manager-issuers
       namespace: cert-manager
-  interval: 30m
+  interval: 1h
   path: ./kubernetes/apps/cert-manager/cert-manager/tls
   prune: true
+  retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
