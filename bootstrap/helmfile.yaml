@@ -15,15 +15,19 @@ repositories:
     url: ghcr.io/coredns/charts
     oci: true
 
+  - name: cilium
+    url: https://helm.cilium.io
+
   - name: external-secrets
     url: ghcr.io/external-secrets/external-secrets
     oci: true
 
-  - name: cilium
-    url: https://helm.cilium.io
-
   - name: jetstack
     url: https://charts.jetstack.io
+
+  - name: spegel
+    url: ghcr.io/spegel-org/helm-charts/spegel
+    oci: true
 
 releases:
   - name: cilium
@@ -41,13 +45,21 @@ releases:
     values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/coredns/app/helm-values.yaml']
     needs: ['kube-system/cilium']
 
+  - name: spegel
+    namespace: kube-system
+    atomic: true
+    chart: spegel/spegel
+    version: v0.0.30
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/spegel/app/helm/values.yaml']
+    needs: ['kube-system/coredns']
+
   - name: cert-manager
     namespace: cert-manager
     atomic: true
     chart: jetstack/cert-manager
     version: v1.17.1
     values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm-values.yaml']
-    needs: ['kube-system/coredns']
+    needs: ['kube-system/spegel']
 
   - name: external-secrets
     namespace: external-secrets
@@ -63,7 +75,7 @@ releases:
     chart: controlplaneio/flux-operator
     version: 0.17.0
     values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/app/helm-values.yaml']
-    needs: ['cert-manager/cert-manager']
+    needs: ['external-secrets/external-secrets']
 
   - name: flux-instance
     namespace: flux-system
