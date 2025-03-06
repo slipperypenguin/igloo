@@ -35,14 +35,14 @@ releases:
     atomic: true
     chart: cilium/cilium
     version: 1.16.7
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/cilium/app/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/cilium/app/helm/values.yaml']
 
   - name: coredns
     namespace: kube-system
     atomic: true
     chart: coredns/coredns
     version: 1.39.1
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/coredns/app/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/kube-system/coredns/app/helm/values.yaml']
     needs: ['kube-system/cilium']
 
   - name: spegel
@@ -58,7 +58,7 @@ releases:
     atomic: true
     chart: jetstack/cert-manager
     version: v1.17.1
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/cert-manager/cert-manager/app/helm/values.yaml']
     needs: ['kube-system/spegel']
 
   - name: external-secrets
@@ -66,7 +66,7 @@ releases:
     atomic: true
     chart: external-secrets/external-secrets
     version: 0.14.3
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/external-secrets/external-secrets/app/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/external-secrets/external-secrets/app/helm/values.yaml']
     needs: ['cert-manager/cert-manager']
 
   - name: flux-operator
@@ -74,7 +74,7 @@ releases:
     atomic: true
     chart: controlplaneio/flux-operator
     version: 0.17.0
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/app/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/app/helm/values.yaml']
     needs: ['external-secrets/external-secrets']
 
   - name: flux-instance
@@ -83,5 +83,5 @@ releases:
     chart: controlplaneio/flux-instance
     version: 0.17.0
     wait: false
-    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/instance/helm-values.yaml']
+    values: ['{{ requiredEnv "ROOT_DIR" }}/kubernetes/apps/flux-system/flux-operator/instance/helm/values.yaml']
     needs: ['flux-system/flux-operator']
