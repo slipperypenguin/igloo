@@ -8,13 +8,18 @@ on:
     branches: ["main"]
     paths: [".github/labels.yaml"]
 
+permissions:
+  issues: write
+
 jobs:
   label-sync:
-    name: Label Sync
+    name: Label Sync - Sync Labels
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/labels.yaml
 
       - name: Sync Labels
         uses: EndBug/label-sync@v2
