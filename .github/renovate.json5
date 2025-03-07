@@ -42,10 +42,28 @@
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
+      "description": ["1Password Connect Group"],
+      "groupName": "1Password Connnect",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/1password/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      }
+    },
+    {
+      "description": ["Actions Runner Controller Group"],
+      "groupName": "Actions Runner Controller",
+      "matchDatasources": ["docker", "helm"],
+      "matchPackageNames": ["/gha-runner-scale-set/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      }
+    },
+    {
       "description": ["Flux Operator Group"],
       "groupName": "Flux Operator",
-      "matchPackagePatterns": ["flux-operator", "flux-instance"],
       "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["flux-operator", "flux-instance"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
@@ -103,6 +121,10 @@
     {
       "matchUpdateTypes": ["patch"],
       "labels": ["type/patch"]
+    },
+    {
+      "matchUpdateTypes": ["digest"],
+      "labels": ["type/digest"]
     },
     {
       "matchDatasources": ["docker"],
