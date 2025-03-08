@@ -1,0 +1,23 @@
+---
+env: {}
+  # PASSWORD: ""
+
+ingress:
+  main:
+    enabled: true
+    className: external
+    annotations:
+      external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hosts:
+      - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        paths:
+          - path: /
+            service:
+              identifier: main
+              port: http
+
+
+
+
+serviceMonitor:
+  enabled: true
