@@ -1,6 +1,7 @@
 ---
-env: {}
-  # PASSWORD: ""
+envFrom:
+  - secretRef:
+      name: flame-secret
 
 ingress:
   main:
@@ -15,9 +16,12 @@ ingress:
             service:
               identifier: main
               port: http
-
-
-
-
+persistence:
+  data:
+    enabled: true
+    mountPath: /app/data
+    retain: true
+    config:
+      existingClaim: flame
 serviceMonitor:
   enabled: true
