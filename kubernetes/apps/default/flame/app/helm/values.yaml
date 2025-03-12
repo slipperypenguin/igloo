@@ -20,3 +20,9 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5005
