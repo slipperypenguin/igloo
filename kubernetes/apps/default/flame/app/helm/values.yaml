@@ -1,12 +1,24 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
-envFrom:
-  - secretRef:
-      name: flame-secret
-ingressClassName: external
+controllers:
+  flame:
+    strategy: Recreate
+    containers:
+      app:
+        envFrom:
+          - secretRef:
+              name: flame-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            memory: 128Mi
 ingress:
-  main:
-    enabled: true
+  app:
     className: external
     annotations:
       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
@@ -15,16 +27,16 @@ ingress:
         paths:
           - path: /
             service:
-              identifier: main
+              identifier: app
               port: &port 5005
 persistence:
   config:
     enabled: true
     existingClaim: flame
 service:
-  main:
-    controller: main
+  app:
+    controller: flame
     ports:
       http:
         port: *port
-        targetPort: *port
+
