@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
+envFrom:
+  - secretRef:
+      name: flame-secret
+ingress:
+  main:
+    enabled: true
+    className: external
+    annotations:
+      external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hosts:
+      - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        paths:
+          - path: /
+            service:
+              identifier: main
+              port: http
+persistence:
+  config:
+    enabled: true
+    existingClaim: flame
