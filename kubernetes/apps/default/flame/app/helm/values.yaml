@@ -25,4 +25,5 @@ service:
     controller: main
     ports:
       http:
-        port: 5005
+        port: &port 5005
+        targetPort: *port
