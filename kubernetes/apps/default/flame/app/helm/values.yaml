@@ -3,6 +3,7 @@
 envFrom:
   - secretRef:
       name: flame-secret
+ingressClassName: external
 ingress:
   main:
     enabled: true
