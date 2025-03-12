@@ -2,7 +2,6 @@
 envFrom:
   - secretRef:
       name: flame-secret
-
 ingress:
   main:
     enabled: true
