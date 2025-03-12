@@ -1,12 +1,8 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
-controllers:
-  main:
-    enabled: true
-    defaultContainerOptions:
-      envFrom:
-        - secretRef:
-            name: flame-secret
+envFrom:
+  - secretRef:
+      name: flame-secret
 ingress:
   main:
     enabled: true
