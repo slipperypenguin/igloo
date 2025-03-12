@@ -12,5 +12,3 @@ spec:
   url: oci://ghcr.io/gabe565/charts/flame
   ref:
     tag: 0.6.0
-  verify:
-    provider: cosign
