@@ -17,6 +17,9 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
   valuesFrom:
     - kind: ConfigMap
       name: flame-values
