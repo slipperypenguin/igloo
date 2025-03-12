@@ -15,7 +15,7 @@ ingress:
           - path: /
             service:
               identifier: main
-              port: http
+              port: &port 5005
 persistence:
   config:
     enabled: true
@@ -25,5 +25,5 @@ service:
     controller: main
     ports:
       http:
-        port: &port 5005
+        port: *port
         targetPort: *port
