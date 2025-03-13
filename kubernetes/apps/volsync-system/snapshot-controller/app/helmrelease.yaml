@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: snapshot-controller
 spec:
-  interval: 30m
+  interval: 1h
   chart:
     spec:
       chart: snapshot-controller
@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: piraeus
-        namespace: flux-system
+        namespace: volsync-system
   install:
     crds: CreateReplace
     remediation:
