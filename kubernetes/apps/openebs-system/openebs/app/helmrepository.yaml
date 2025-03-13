@@ -6,5 +6,5 @@ metadata:
   name: openebs
   namespace: openebs-system
 spec:
-  interval: 1h
+  interval: 12h
   url: https://openebs.github.io/openebs

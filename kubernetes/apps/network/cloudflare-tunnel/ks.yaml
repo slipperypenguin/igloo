@@ -3,23 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app gatus
-  namespace: &namespace observability
+  name: &app cloudflare-tunnel
+  namespace: &namespace network
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: onepassword-store
-      namespace: external-secrets
-    - name: openebs
-      namespace: openebs-system
+    - name: cloudflare-dns
+      namespace: *namespace
   interval: 1h
-  path: ./kubernetes/apps/observability/gatus/app
-  postBuild:
-    substitute:
-      APP: *app
-      GATUS_SUBDOMAIN: status
+  path: ./kubernetes/apps/network/cloudflare-tunnel/app
   prune: true
   retryInterval: 2m
   sourceRef:
