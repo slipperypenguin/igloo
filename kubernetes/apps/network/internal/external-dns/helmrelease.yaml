@@ -24,6 +24,9 @@ spec:
       retries: 3
   values:
     fullnameOverride: *app
+    image: # TODO: https://github.com/kubernetes-sigs/external-dns/pull/4943
+      repository: ghcr.io/buroa/external-dns
+      tag: 631b84da
     provider:
       name: webhook
       webhook:
@@ -32,7 +35,7 @@ spec:
           tag: v0.4.3@sha256:1a58193c2c1985f4ce5ef4031be38d740daa4b1c54b0edbd2299524504e8d60e
         env:
           - name: UNIFI_HOST
-            value: https://192.168.1.1
+            value: https://unifi.internal
           - name: UNIFI_API_KEY
             valueFrom:
               secretKeyRef:
@@ -50,11 +53,9 @@ spec:
             port: http-webhook
           initialDelaySeconds: 10
           timeoutSeconds: 5
-    extraArgs:
-      - --ignore-ingress-tls-spec
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["ingress", "service"]
+    sources: ["gateway-httproute", "service"]
     txtOwnerId: main
     txtPrefix: k8s.main.
     domainFilters: ["${SECRET_DOMAIN}"]

@@ -3,19 +3,14 @@
 envFrom:
   - secretRef:
       name: flame-secret
-ingress:
+route:
   main:
     enabled: true
-    className: external
-    annotations:
-      external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-    hosts:
-      - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
-        paths:
-          - path: /
-            service:
-              identifier: main
-              port: &port 5005
+    hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+    parentRefs:
+      - name: external
+        namespace: kube-system
+        sectionName: https
 persistence:
   config:
     enabled: true
@@ -25,5 +20,5 @@ service:
     controller: main
     ports:
       http:
-        port: *port
+        port: &port 5005
         targetPort: *port
