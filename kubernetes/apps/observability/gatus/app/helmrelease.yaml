@@ -93,9 +93,11 @@ spec:
             port: *port
     route:
       app:
-        hostnames: ["status.${SECRET_DOMAIN}"]
+        hostnames:
+          - "{{ .Release.Name }}.igloo.sh"
+          - status.igloo.sh
         parentRefs:
-          - name: internal
+          - name: external
             namespace: kube-system
             sectionName: https
         rules:
