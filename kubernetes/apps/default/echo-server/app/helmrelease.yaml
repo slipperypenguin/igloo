@@ -17,8 +17,8 @@ spec:
     remediation:
       retries: 3
   dependsOn:
-  - name: cloudflared
-    namespace: network
+    - name: cloudflare-tunnel
+      namespace: network
   values:
     controllers:
       echo-server:
