@@ -1,4 +1,5 @@
 ---
+MTU: 1500 # ref: https://github.com/cilium/cilium/issues/37529
 autoDirectNodeRoutes: true
 bpf:
   masquerade: true
