@@ -19,7 +19,7 @@ gatewayAPI:
   enabled: true
   enableAlpn: true
   gatewayClass:
-    create: true
+    create: 'true'
 dashboards:
   enabled: true
 hubble:
