@@ -18,6 +18,8 @@ endpointRoutes:
 gatewayAPI:
   enabled: true
   enableAlpn: true
+  gatewayClass:
+    create: true
 dashboards:
   enabled: true
 hubble:
