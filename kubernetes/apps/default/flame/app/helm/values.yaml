@@ -19,7 +19,7 @@ persistence:
     existingClaim: flame
 service:
   app:
-    controller: flame
+    controller: &app flame
     ports:
       http:
         port: &port 5005
@@ -32,5 +32,5 @@ route:
         sectionName: https
     rules:
       - backendRefs:
-        - name: flame
+        - name: *app
           port: *port
