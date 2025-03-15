@@ -22,11 +22,17 @@ service:
     controller: flame
     ports:
       http:
-        port: 5005
+        port: &port 5005
+        targetPort: *port
 route:
   app:
+    enabled: true
     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
     parentRefs:
       - name: external
         namespace: kube-system
         sectionName: https
+    rules:
+      - backendRefs:
+        - name: flame
+          port: *port
