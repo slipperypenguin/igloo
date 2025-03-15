@@ -17,6 +17,12 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
+service:
+  app:
+    controller: flame
+    ports:
+      http:
+        port: 5005
 route:
   app:
     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
@@ -24,7 +30,3 @@ route:
       - name: external
         namespace: kube-system
         sectionName: https
-    rules:
-      - backendRefs:
-        - name: flame
-          port: 5005
