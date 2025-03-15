@@ -17,12 +17,6 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
-service:
-  app:
-    controller: &app flame
-    ports:
-      http:
-        port: &port 5005
 route:
   app:
     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
@@ -32,5 +26,5 @@ route:
         sectionName: https
     rules:
       - backendRefs:
-        - name: *app
-          port: *port
+        - name: flame
+          port: 5005
