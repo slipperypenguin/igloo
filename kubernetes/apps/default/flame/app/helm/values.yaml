@@ -1,19 +1,31 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
-env:
-  PASSWORD: "${FLAME_PASSWORD}"
+controllers:
+  flame:
+    strategy: Recreate
+    containers:
+      app:
+        envFrom:
+          - secretRef:
+              name: flame-secret
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            memory: 128Mi
 persistence:
   config:
     enabled: true
     existingClaim: flame
 service:
-  main:
-    controller: main
+  app:
+    controller: flame
     ports:
       http:
-        port: 5005
+        port: &port 5005
+        targetPort: *port
 route:
-  main:
+  app:
     enabled: true
     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
     parentRefs:
