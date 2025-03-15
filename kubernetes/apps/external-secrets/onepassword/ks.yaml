@@ -11,6 +11,10 @@ spec:
       app.kubernetes.io/name: *app
   interval: 1h
   path: ./kubernetes/apps/external-secrets/onepassword/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   retryInterval: 2m
   sourceRef:
@@ -36,6 +40,10 @@ spec:
       namespace: external-secrets
   interval: 1h
   path: ./kubernetes/apps/external-secrets/onepassword/store
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   retryInterval: 2m
   sourceRef:
