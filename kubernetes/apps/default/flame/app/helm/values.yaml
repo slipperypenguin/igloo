@@ -32,3 +32,7 @@ route:
       - name: external
         namespace: kube-system
         sectionName: https
+    rules:
+      - backendRefs:
+        - name: flame
+          port: *port
