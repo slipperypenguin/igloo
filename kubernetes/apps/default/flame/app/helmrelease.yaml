@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: flame
+  name: &app flame
 spec:
   interval: 1h
   chartRef:
@@ -23,13 +23,15 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: flame-values
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              kind: HTTPRoute
-              version: gateway.networking.k8s.io/v1alpha2
-            patch: |-
-              - op: replace
-                path: /apiVersion
-                value: gateway.networking.k8s.io/v1
+  values:
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+            - name: *app
+              port: 5005

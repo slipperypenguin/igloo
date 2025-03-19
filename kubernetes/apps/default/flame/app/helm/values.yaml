@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.3/charts/library/common/values.schema.json
 controllers:
   flame:
     strategy: Recreate
@@ -24,15 +24,3 @@ service:
       http:
         port: &port 5005
         targetPort: *port
-route:
-  app:
-    enabled: true
-    hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
-    parentRefs:
-      - name: external
-        namespace: kube-system
-        sectionName: https
-    rules:
-      - backendRefs:
-        - name: flame
-          port: *port
