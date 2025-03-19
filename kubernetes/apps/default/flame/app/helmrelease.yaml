@@ -8,7 +8,7 @@ spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: flame
+    name: app-template
   install:
     remediation:
       retries: 3
@@ -20,6 +20,8 @@ spec:
   dependsOn:
     - name: openebs
       namespace: openebs-system
+    - name: cloudflare-tunnel
+      namespace: network
   valuesFrom:
     - kind: ConfigMap
       name: flame-values
