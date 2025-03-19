@@ -40,6 +40,8 @@ service:
       http:
         port: &port 5005
         targetPort: *port
+serviceAccount:
+  create: true
 serviceMonitor:
   app:
     serviceName: flame
