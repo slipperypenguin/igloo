@@ -17,6 +17,18 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
+route:
+  app:
+    enabled: true
+    hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+    parentRefs:
+      - name: external
+        namespace: kube-system
+        sectionName: https
+    rules:
+      - backendRefs:
+        - name: flame
+          port: 5005
 service:
   app:
     controller: flame
