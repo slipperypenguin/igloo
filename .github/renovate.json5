@@ -34,21 +34,13 @@
   },
   "packageRules": [
     {
-      "description": ["Auto-merge GitHub Actions for minor and patch"],
+      "description": ["Auto-merge GitHub Actions"],
       "matchManagers": ["github-actions"],
       "automerge": true,
       "automergeType": "branch",
       "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "description": ["1Password Connect Group"],
-      "groupName": "1Password Connnect",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/1password/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      }
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "minimumReleaseAge": "3 days"
     },
     {
       "description": ["Actions Runner Controller Group"],
@@ -60,6 +52,24 @@
       }
     },
     {
+      "description": "Cert-Manager Group",
+      "groupName": "Cert-Manager",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/cert-manager/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group",
+      },
+    },
+    {
+      "description": "Cilium Group",
+      "groupName": "Cilium",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/cilium/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group",
+      },
+    },
+    {
       "description": ["CoreDNS Group"],
       "groupName": "CoreDNS",
       "matchDatasources": ["docker"],
@@ -67,6 +77,15 @@
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
+    },
+    {
+      "description": "External Secrets Operator Group",
+      "groupName": "External Secrets Operator",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/external-secrets/", "/1password/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group",
+      },
     },
     {
       "description": ["Flux Operator Group"],
