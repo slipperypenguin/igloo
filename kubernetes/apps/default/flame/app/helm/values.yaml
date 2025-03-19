@@ -1,24 +1,11 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.3/charts/library/common/values.schema.json
-controllers:
-  flame:
-    strategy: Recreate
-    containers:
-      app:
-        envFrom:
-          - secretRef:
-              name: flame-secret
-        resources:
-          requests:
-            cpu: 10m
-          limits:
-            memory: 128Mi
 persistence:
   config:
     enabled: true
     existingClaim: flame
 route:
-  app:
+  main:
     enabled: true
     hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
     parentRefs:
@@ -30,8 +17,8 @@ route:
         - name: flame
           port: 5005
 service:
-  app:
-    controller: flame
+  main:
+    controller: main
     ports:
       http:
         port: &port 5005
