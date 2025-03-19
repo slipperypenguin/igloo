@@ -26,6 +26,7 @@ spec:
   values:
     route:
       app:
+        enabled: true
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: external
