@@ -23,7 +23,7 @@ spec:
       hostname: "*.igloo.sh"
       allowedRoutes:
         namespaces:
-          from: All
+          from: Same
     - name: https
       protocol: HTTPS
       port: 443
