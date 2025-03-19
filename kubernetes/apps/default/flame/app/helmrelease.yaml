@@ -25,5 +25,3 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: flame-values
-    - kind: Secret
-      name: flame-secret
