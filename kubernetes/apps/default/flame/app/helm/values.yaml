@@ -1,10 +1,14 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.0/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.3/charts/library/common/values.schema.json
 controllers:
   flame:
-    strategy: Recreate
+    strategy: RollingUpdate
     containers:
       app:
+        image:
+          repository: pawelmalak/flame
+          tag: multiarch2.3.1
+          pullPolicy: IfNotPresent
         envFrom:
           - secretRef:
               name: flame-secret
@@ -17,13 +21,6 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
-service:
-  app:
-    controller: flame
-    ports:
-      http:
-        port: &port 5005
-        targetPort: *port
 route:
   app:
     enabled: true
@@ -35,4 +32,22 @@ route:
     rules:
       - backendRefs:
         - name: flame
-          port: *port
+          port: 5005
+service:
+  app:
+    controller: flame
+    ports:
+      http:
+        port: &port 5005
+        targetPort: *port
+serviceAccount:
+  create: true
+serviceMonitor:
+  app:
+    serviceName: flame
+    endpoints:
+      - port: http
+        scheme: http
+        path: /metrics
+        interval: 1m
+        scrapeTimeout: 10s
