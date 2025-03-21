@@ -9,3 +9,15 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: openebs-hostpath
+---
+# TODO: move configuration volume to volsync when rook-ceph is live
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: home-assistant
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: openebs-hostpath
