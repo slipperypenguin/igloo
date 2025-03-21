@@ -19,4 +19,4 @@ spec:
       retries: 3
   valuesFrom:
     - kind: ConfigMap
-      name: haas-values
+      name: home-assistant-values
