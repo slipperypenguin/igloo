@@ -9,3 +9,4 @@ components:
 resources:
   - ./echo-server/ks.yaml
   - ./flame/ks.yaml
+  - ./home-assistant/ks.yaml
