@@ -1,0 +1,74 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.3/charts/library/common/values.schema.json
+controllers:
+  home-assistant:
+    annotations:
+      reloader.stakater.com/auto: "true"
+    containers:
+      app:
+        image:
+          repository: ghcr.io/home-operations/home-assistant
+          tag: 2025.3.3@sha256:6a0f0a8f7eaebaf4751ddc0e90c4b931121adf4ac6f4e869d648d4cb996b7f70
+        env:
+          TZ: America/Los_Angeles
+          HASS_HTTP_TRUSTED_PROXY_1: 192.168.20.0/24
+          HASS_HTTP_TRUSTED_PROXY_2: 10.69.0.0/16
+        envFrom:
+          - secretRef:
+              name: home-assistant-secret
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: { drop: ["ALL"] }
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            memory: 2Gi
+defaultPodOptions:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    fsGroupChangePolicy: OnRootMismatch
+service:
+  app:
+    controller: home-assistant
+    ports:
+      http:
+        port: &port 8123
+route:
+  app:
+    hostnames:
+      - "{{ .Release.Name }}.igloo.sh"
+      - hass.igloo.sh
+    parentRefs:
+      - name: external
+        namespace: kube-system
+        sectionName: https
+    rules:
+      - backendRefs:
+          - name: *app
+            port: *port
+persistence:
+  config:
+    existingClaim: home-assistant
+    globalMounts:
+      - path: /config
+  config-cache:
+    existingClaim: home-assistant-cache
+    globalMounts:
+      - path: /config/.venv
+  config-logs:
+    type: emptyDir
+    globalMounts:
+      - path: /config/logs
+  config-tts:
+    type: emptyDir
+    globalMounts:
+      - path: /config/tts
+  tmp:
+    type: emptyDir
+    globalMounts:
+      - path: /tmp
