@@ -6,4 +6,5 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./helmrepository.yaml
+  - ./prometheusrule.yaml
   - ./secret.sops.yaml
