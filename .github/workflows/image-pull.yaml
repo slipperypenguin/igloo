@@ -108,7 +108,7 @@ jobs:
 
   status:
     name: Image Pull - Success
-    if: ${{ always() }}
+    if: ${{ !cancelled() }}
     needs: pull
     runs-on: ubuntu-latest
     steps:

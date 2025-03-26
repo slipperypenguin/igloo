@@ -113,7 +113,7 @@ jobs:
     name: Flux Local - Success
     needs: ["test", "diff"]
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ !cancelled() }}
     steps:
       - name: Any jobs failed?
         if: ${{ contains(needs.*.result, 'failure') }}
