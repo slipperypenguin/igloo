@@ -48,7 +48,7 @@ nodes:
         configFiles:
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/12
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
   - hostname: "mba-node-01"
     ipAddress: "192.168.20.126"
     installDisk: "/dev/sdb"
@@ -70,7 +70,7 @@ nodes:
       - name: tailscale
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/12
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
   - hostname: "dell-node-01"
     ipAddress: "192.168.20.129"
     installDisk: "/dev/nvme0n1"
@@ -92,7 +92,7 @@ nodes:
       - name: tailscale
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/12
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
 
 # Global patches
 patches:
