@@ -102,8 +102,8 @@ spec:
             readOnly: true
       media:
         type: nfs
-        server: expanse.internal
-        path: /mnt/eros/Media
+        server: helios64.shark-tone.ts.net
+        path: /export/Glacier02
         globalMounts:
           - path: /media
       tmp:
