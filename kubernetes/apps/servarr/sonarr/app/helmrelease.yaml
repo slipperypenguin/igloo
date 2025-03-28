@@ -109,7 +109,7 @@ spec:
             readOnly: true
       media:
         type: nfs
-        server: helios64.shark-tone.ts.net
+        server: 100.68.189.69  # helios64.shark-tone.ts.net
         path: /export/Glacier02/Media
         globalMounts:
           - path: /data/nas-media
