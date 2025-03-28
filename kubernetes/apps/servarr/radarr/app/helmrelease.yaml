@@ -58,9 +58,10 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 20m
+                memory: 384Mi
               limits:
-                memory: 4Gi
+                memory: 2Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -103,8 +104,8 @@ spec:
       media:
         type: nfs
         server: helios64.shark-tone.ts.net
-        path: /export/Glacier02
+        path: /export/Glacier02/Media
         globalMounts:
-          - path: /media
+          - path: /data/nas-media
       tmp:
         type: emptyDir
