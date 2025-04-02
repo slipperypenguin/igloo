@@ -31,7 +31,7 @@ spec:
               QBT_WEBUI_PORT: &port 8080
               QBT_TORRENTING_PORT: 50413
               CROSS_SEED_ENABLED: false
-              CROSS_SEED_HOST: cross-seed.default.svc.cluster.local
+              CROSS_SEED_HOST: cross-seed.servarr.svc.cluster.local
               CROSS_SEED_PORT: 2468
               CROSS_SEED_SLEEP_INTERVAL: 0
               PUSHOVER_ENABLED: true
