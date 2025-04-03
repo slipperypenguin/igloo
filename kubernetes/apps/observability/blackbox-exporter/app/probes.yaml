@@ -8,3 +8,7 @@ spec:
   module: icmp
   prober:
     url: blackbox-exporter.observability.svc.cluster.local:9115
+  targets:
+    staticConfig:
+      static:
+      - 100.68.189.69  # helios64.shark-tone.ts.net
