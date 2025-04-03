@@ -7,9 +7,6 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
 configMapGenerator:
-  - name: sonarr-configmap
-    files:
-      - codec-tagger.sh=./resources/codec-tagger.sh
   - name: sonarr-loki-rules
     files:
       - sonarr.yaml=./lokirule.yaml
