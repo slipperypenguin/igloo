@@ -49,6 +49,7 @@ nodes:
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ACCEPT_DNS=true
   - hostname: "mba-node-01"
     ipAddress: "192.168.20.126"
     installDisk: "/dev/sdb"
@@ -71,6 +72,7 @@ nodes:
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ACCEPT_DNS=true
   - hostname: "dell-node-01"
     ipAddress: "192.168.20.129"
     installDisk: "/dev/nvme0n1"
@@ -93,6 +95,7 @@ nodes:
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ACCEPT_DNS=true
 
 # Global patches
 patches:
