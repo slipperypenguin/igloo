@@ -6,21 +6,16 @@ metadata:
   name: cert-manager
 spec:
   interval: 1h
-  chart:
-    spec:
-      chart: cert-manager
-      version: v1.17.1
-      sourceRef:
-        kind: HelmRepository
-        name: jetstack
-        namespace: cert-manager
+  chartRef:
+    kind: OCIRepository
+    name: cert-manager
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
   valuesFrom:
-  - kind: ConfigMap
-    name: cert-manager-values
+    - kind: ConfigMap
+      name: cert-manager-values
