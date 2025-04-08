@@ -19,8 +19,6 @@ spec:
   values:
     controllers:
       qbittorrent:
-        annotations:
-          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
@@ -30,14 +28,6 @@ spec:
               TZ: America/Los_Angeles
               QBT_WEBUI_PORT: &port 8080
               QBT_TORRENTING_PORT: 50413
-              CROSS_SEED_ENABLED: false
-              CROSS_SEED_HOST: cross-seed.servarr.svc.cluster.local
-              CROSS_SEED_PORT: 2468
-              CROSS_SEED_SLEEP_INTERVAL: 0
-              PUSHOVER_ENABLED: true
-            envFrom:
-              - secretRef:
-                  name: qbittorrent-secret
             probes:
               liveness:
                 enabled: true
@@ -87,12 +77,6 @@ spec:
     persistence:
       config:
         existingClaim: qbittorrent
-      scripts:
-        type: configMap
-        name: qbittorrent-scripts
-        defaultMode: 0775
-        globalMounts:
-          - readOnly: true
       downloads:
         type: nfs
         server: 100.68.189.69  # helios64.shark-tone.ts.net
