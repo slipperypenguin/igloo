@@ -50,6 +50,29 @@ nodes:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
           - TS_ACCEPT_DNS=true
+  - hostname: "mbp-node-02"
+    ipAddress: "192.168.20.176"
+    installDisk: "/dev/nvme0n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/240f33ba108b4418f67b9f69c9246178a8bc06228b9064d815e20da4c837b4b4
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "00:e0:4c:b3:4b:f6"
+        dhcp: false
+        addresses:
+          - "192.168.20.176/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "192.168.20.1"
+        mtu: 1500
+    extensionServices:
+      - name: tailscale
+        environment:
+          - TS_AUTHKEY=$TS_AUTHKEY
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ACCEPT_DNS=true
   - hostname: "mba-node-01"
     ipAddress: "192.168.20.126"
     installDisk: "/dev/sdb"

@@ -85,6 +85,7 @@ This cluster uses two instances of [ExternalDNS](https://github.com/kubernetes-s
 | Helios64 NAS       | 1     | N/A            | 8x4TB RAID6    | 4GB  | Media and shared file storage | glacier     | Debian GNU/Linux |
 | MacBook Air 2013   | 1     | 250GB SSD      | N/A            | 4GB  | Kubernetes Worker             | mba-node-01 | Talos Linux      |
 | MacBook Pro 2012   | 1     | 250GB SSD      | N/A            | 8GB  | Kubernetes Control-Plane      | mbp-node-01 | Talos Linux      |
+| MacBook Pro 2016   | 1     | 500GB SSD      | N/A            | 16GB  | Kubernetes Worker      | mbp-node-02 | Talos Linux      |
 
 
 ## Software
