@@ -37,7 +37,7 @@ spec:
                 spec:
                   httpGet:
                     path: /
-                    port: http
+                    port: 8096
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -78,6 +78,7 @@ spec:
         ports:
           http:
             port: &port 8096
+            targetPort: *port
     route:
       app:
         hostnames:
