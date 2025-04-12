@@ -14,5 +14,5 @@ if [[ -n "$section" ]]; then
         --data-urlencode "path=$(dirname "$1")" \
         --data-urlencode "X-Jellyfin-Token=${PLEX_TOKEN}" \
         --no-progress-meter \
-            "http://jellyfin.default.svc.cluster.local:32400/library/sections/${section}/refresh"
+            "http://jellyfin.servarr.svc.cluster.local:32400/library/sections/${section}/refresh"
 fi
