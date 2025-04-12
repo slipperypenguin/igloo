@@ -1,0 +1,13 @@
+---
+groups:
+  - name: jellyfin
+    rules:
+      - alert: JellyfinDatabaseIsBusy
+        expr: |
+          sum by (app) (count_over_time({app="jellyfin"} |~ "(?i)retry busy DB"[5m])) > 0
+        for: 5m
+        annotations:
+          summary: >-
+            {{ $labels.app }} is experiencing database issues
+        labels:
+          severity: critical
