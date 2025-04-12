@@ -31,18 +31,10 @@ spec:
               JELLYFIN_PublishedServerUrl: https://{{ .Release.Name }}.igloo.sh
               DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
             probes:
-              liveness: &probes
+              liveness:
                 enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /identity
-                    port: &port 8096
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
-              readiness: *probes
+              readiness:
+                enabled: true
               startup:
                 enabled: true
                 spec:
