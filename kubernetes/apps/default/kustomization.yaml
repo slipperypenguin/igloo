@@ -10,4 +10,5 @@ resources:
   - ./echo-server/ks.yaml
   - ./flame/ks.yaml
   - ./home-assistant/ks.yaml
+  - ./readeck/ks.yaml
   - ./webhook/ks.yaml

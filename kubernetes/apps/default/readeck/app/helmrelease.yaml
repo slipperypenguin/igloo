@@ -1,0 +1,86 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app readeck
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      readeck:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: codeberg.org/readeck/readeck
+              tag: 0.17.1@sha256:dc56023858e4ee5879a5e28519d4d9a20ae575a2057963c9eee3ae2f611ee45c
+            env:
+              TZ: America/Los_Angeles
+              READECK_LOG_LEVEL: info
+              READECK_DEV_MODE: "false"
+              READECK_SERVER_HOST: 0.0.0.0
+              READECK_SERVER_PORT: &port 8080
+              READECK_SERVER_PREFIX: /
+              READECK_USE_X_FORWARDED: "true"
+              READECK_ALLOWED_HOSTS: >-
+                readeck.igloo.sh,
+                read.igloo.sh
+            probes:
+              liveness: &probes
+                enabled: true
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - read.igloo.sh
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
+    persistence:
+      config:
+        existingClaim: readeck
+        globalMounts:
+          - path: /readeck
+
+
