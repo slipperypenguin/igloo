@@ -85,7 +85,7 @@ spec:
         nodes:
           - name: dell-node-01
             devices:
-              - name: sda  # external HD, usb transport
+              - name: /dev/disk/by-id/usb-Seagate_BUP_Slim_BK_NA4T6VGM-0:0
         config:
           osdsPerDevice: "1"
     cephBlockPools:
