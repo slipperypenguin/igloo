@@ -85,7 +85,7 @@ spec:
         nodes:
           - name: mba-node-01
             devices:
-              - name: /dev/sda  # external HD, usb transport
+              - name: sda  # external HD, usb transport
         config:
           osdsPerDevice: "1"
     cephBlockPools:
