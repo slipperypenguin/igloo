@@ -73,29 +73,6 @@ nodes:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
           - TS_ACCEPT_DNS=true
-  - hostname: "mba-node-01"
-    ipAddress: "192.168.20.126"
-    installDisk: "/dev/sdb"
-    machineSpec:
-      secureboot: false
-    talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
-    controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "44:f0:9e:ab:e3:f4"
-        dhcp: false
-        addresses:
-          - "192.168.20.126/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
-    extensionServices:
-      - name: tailscale
-        environment:
-          - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
-          - TS_ACCEPT_DNS=true
   - hostname: "dell-node-01"
     ipAddress: "192.168.20.129"
     installDisk: "/dev/nvme0n1"
