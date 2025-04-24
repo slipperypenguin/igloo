@@ -84,6 +84,8 @@ spec:
         useAllDevices: false
         nodes:
           - name: dell-node-01
+            devices:
+              - name: sda
         config:
           osdsPerDevice: "1"
     cephBlockPools:
