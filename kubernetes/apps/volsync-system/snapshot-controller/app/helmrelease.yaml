@@ -6,14 +6,9 @@ metadata:
   name: snapshot-controller
 spec:
   interval: 1h
-  chart:
-    spec:
-      chart: snapshot-controller
-      version: 4.0.2
-      sourceRef:
-        kind: HelmRepository
-        name: piraeus
-        namespace: volsync-system
+  chartRef:
+    kind: OCIRepository
+    name: snapshot-controller
   install:
     crds: CreateReplace
     remediation:
@@ -22,10 +17,9 @@ spec:
     cleanupOnFail: true
     crds: CreateReplace
     remediation:
-      strategy: rollback
       retries: 3
   values:
     controller:
-      replicaCount: 1
+      replicaCount: 2
       serviceMonitor:
         create: true
