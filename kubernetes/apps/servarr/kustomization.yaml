@@ -5,7 +5,6 @@ kind: Kustomization
 namespace: servarr
 components:
   - ../../components/common
-  - ../../components/repos/app-template
 resources:
   - ./autobrr/ks.yaml
   - ./bazarr/ks.yaml
