@@ -98,8 +98,8 @@ spec:
               value: Object.spec.template.spec.volumes{
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
-                  server: "expanse.internal",
-                  path: "/mnt/eros/Volsync"
+                  server: "100.68.189.69",
+                  path: "/export/Glacier02/Backup/Volsync"
                 }
               }
             }
