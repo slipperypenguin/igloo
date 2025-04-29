@@ -11,11 +11,13 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
+    - ../../../../components/volsync
   interval: 1h
   path: ./kubernetes/apps/default/flame/app
   postBuild:
     substitute:
       APP: *app
+      VOLSYNC_CAPACITY: 1Gi
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
