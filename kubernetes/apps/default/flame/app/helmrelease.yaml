@@ -18,8 +18,8 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: openebs
-      namespace: openebs-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: cloudflare-tunnel
       namespace: network
   valuesFrom:
