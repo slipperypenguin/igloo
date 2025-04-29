@@ -20,7 +20,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: read
       VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - name: cluster-secrets
