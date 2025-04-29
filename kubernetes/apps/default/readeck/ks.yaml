@@ -11,14 +11,16 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
+    - ../../../../components/volsync
   dependsOn:
-    - name: openebs
-      namespace: openebs-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   interval: 1h
   path: ./kubernetes/apps/default/readeck/app
   postBuild:
     substitute:
       APP: *app
+      VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
