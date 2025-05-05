@@ -11,15 +11,20 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/external
+    - ../../../../components/volsync
   dependsOn:
     - name: openebs
       namespace: openebs-system
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   interval: 1h
   path: ./kubernetes/apps/servarr/jellyfin/app
   postBuild:
     substitute:
       APP: *app
       GATUS_PATH: /web/index.html
+      VOLSYNC_CACHE_CAPACITY: 25Gi
+      VOLSYNC_CAPACITY: 50Gi
   prune: true
   retryInterval: 2m
   sourceRef:

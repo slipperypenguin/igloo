@@ -9,14 +9,3 @@ spec:
     requests:
       storage: 100Gi
   storageClassName: openebs-hostpath
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyfin
-spec:
-  accessModes: ["ReadWriteOnce"]
-  resources:
-    requests:
-      storage: 50Gi
-  storageClassName: openebs-hostpath
