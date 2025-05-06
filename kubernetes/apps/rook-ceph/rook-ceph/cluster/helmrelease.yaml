@@ -86,6 +86,7 @@ spec:
           - name: dell-node-01
             devices:
               - name: sda
+              - name: sdb
           - name: dell-node-02
             devices:
               - name: sda
