@@ -21,6 +21,8 @@ persistence:
   config:
     enabled: true
     existingClaim: flame
+    globalMounts:
+      - path: /app/data
 route:
   app:
     enabled: true
