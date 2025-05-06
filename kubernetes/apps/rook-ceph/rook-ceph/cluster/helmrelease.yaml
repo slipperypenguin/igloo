@@ -86,6 +86,9 @@ spec:
           - name: dell-node-01
             devices:
               - name: sda
+          - name: dell-node-02
+            devices:
+              - name: sda
         config:
           osdsPerDevice: "1"
     cephBlockPools:
