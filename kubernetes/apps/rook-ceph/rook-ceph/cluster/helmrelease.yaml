@@ -97,7 +97,7 @@ spec:
         spec:
           failureDomain: host
           replicated:
-            size: 1 # TODO: set to 3, when disks added
+            size: 3
         storageClass:
           enabled: true
           name: ceph-block
