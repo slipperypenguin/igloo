@@ -11,7 +11,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
     - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: openebs
       namespace: openebs-system
     - name: onepassword-store
@@ -21,6 +24,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      VOLSYNC_CAPACITY: 5Gi
   prune: true
   retryInterval: 2m
   sourceRef:
