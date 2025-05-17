@@ -11,7 +11,7 @@ spec:
     name: app-template
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
@@ -33,8 +33,8 @@ spec:
               repository: ghcr.io/buroa/qbtools
               tag: v0.21.0@sha256:3a60f001c3f5fd068ff38960fbf9db726fa59edf135b18cd50294230366c284e
             env:
-              QBITTORRENT_HOST: qbittorrent.servarr.svc.cluster.local
-              QBITTORRENT_PORT: 8080
+              QBITTORRENT_HOST: &qbittorrent_host qbittorrent.servarr.svc.cluster.local
+              QBITTORRENT_PORT: &qbittorrent_port "8080"
               SABNZBD_HOST: sabnzbd.servarr.svc.cluster.local
               SABNZBD_PORT: 8080
             envFrom:
@@ -47,6 +47,12 @@ spec:
               - --last-activity
               - --sites
               - --unregistered
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
+              - --config
+              - /config/config.yaml
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -73,7 +79,10 @@ spec:
               - --include-tag
               - expired
               - --with-data
-              # - --dry-run
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
           unregistered:
             <<: *container
             args:
@@ -89,14 +98,17 @@ spec:
               - --include-tag
               - unregistered
               - --with-data
-              # - --dry-run
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
         pod:
           restartPolicy: Never
       orphaned:
         type: cronjob
         cronjob:
           <<: *cronJobSpec
-          schedule: 0 0 * * 0
+          schedule: "@daily"
           suspend: true
         containers:
           app:
@@ -109,7 +121,10 @@ spec:
               - "*/cross-seed/*"
               - --exclude-pattern
               - "*_unpackerred*"
-              # - --dry-run
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
         pod:
           restartPolicy: Never
       reannounce:
@@ -119,6 +134,10 @@ spec:
             args:
               - reannounce
               - --process-seeding
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
       limiter:
         containers:
           app:
@@ -133,6 +152,10 @@ spec:
               - "0.4"
               - --interval
               - "5"
+              - --server
+              - *qbittorrent_host
+              - --port
+              - *qbittorrent_port
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
