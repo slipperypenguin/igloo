@@ -34,7 +34,7 @@ spec:
               tag: v0.21.0@sha256:3a60f001c3f5fd068ff38960fbf9db726fa59edf135b18cd50294230366c284e
             env:
               QBITTORRENT_HOST: &qbittorrent_host qbittorrent.servarr.svc.cluster.local
-              QBITTORRENT_PORT: &qbittorrent_port 8080
+              QBITTORRENT_PORT: &qbittorrent_port "8080"
               SABNZBD_HOST: sabnzbd.servarr.svc.cluster.local
               SABNZBD_PORT: 8080
             envFrom:
