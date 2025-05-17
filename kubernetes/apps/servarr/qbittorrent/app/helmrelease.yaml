@@ -117,7 +117,7 @@ spec:
               QBITTORRENT_HOST: localhost
               QBITTORRENT_WEBUI_PORT: *port
               CRON_ENABLED: true
-              CRON_SCHEDULE: "*/5 * * * *"
+              CRON_SCHEDULE: "*/5 * * * *"  # sync every 5min
               LOG_TIMESTAMP: false
             envFrom:
               - secretRef:
