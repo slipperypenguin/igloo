@@ -6,14 +6,9 @@ metadata:
   name: &name home-ops-runner
 spec:
   interval: 1h
-  chart:
-    spec:
-      chart: gha-runner-scale-set
-      version: 0.11.0
-      sourceRef:
-        kind: HelmRepository
-        name: actions-runner-controller
-        namespace: actions-runner-system
+  chartRef:
+    kind: OCIRepository
+    name: gha-runner-scale-set
   install:
     remediation:
       retries: -1
@@ -59,7 +54,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ghcr.io/home-operations/actions-runner:2.323.0@sha256:3d4ddadb661a179b973a45e253ebc4f349de571ba4d1f637ed99e279f475a482
+            image: ghcr.io/home-operations/actions-runner:2.324.0@sha256:a8a54cd667ca1e12d05a3933b6c8b56dc84b35cdb1538db37a6623ef93ed789c
             command: ["/home/runner/run.sh"]
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER

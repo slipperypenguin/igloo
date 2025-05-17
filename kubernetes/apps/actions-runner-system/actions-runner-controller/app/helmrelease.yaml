@@ -5,15 +5,10 @@ kind: HelmRelease
 metadata:
   name: &name actions-runner-controller
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: gha-runner-scale-set-controller
-      version: 0.11.0
-      sourceRef:
-        kind: HelmRepository
-        name: actions-runner-controller
-        namespace: actions-runner-system
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: gha-runner-scale-set-controller
   install:
     crds: CreateReplace
     remediation:
@@ -22,7 +17,6 @@ spec:
     cleanupOnFail: true
     crds: CreateReplace
     remediation:
-      strategy: rollback
       retries: 3
   values:
     fullnameOverride: *name
