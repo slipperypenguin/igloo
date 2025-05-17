@@ -71,7 +71,6 @@ spec:
               capabilities:
                 add:
                   - NET_ADMIN
-              allowPrivilegeEscalation: false
               privileged: true
         containers:
           app:
