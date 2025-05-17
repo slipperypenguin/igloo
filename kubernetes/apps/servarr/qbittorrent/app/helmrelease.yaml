@@ -19,6 +19,9 @@ spec:
   values:
     controllers:
       qbittorrent:
+        type: statefulset
+        annotations:
+          secret.reloader.stakater.com/reload: qbittorrent-secret,qbittorrent-gluetun-secret
         initContainers:
           coredns:
             image:
@@ -58,8 +61,11 @@ spec:
                     - -c
                     - (ip rule del table 51820; ip -6 rule del table 51820) || true
             resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
               limits:
-                squat.ai/tun: "1"
+                memory: 256Mi
             restartPolicy: Always
             securityContext:
               capabilities:
@@ -73,8 +79,14 @@ spec:
               tag: 5.1.0@sha256:fe26058628e9eb57b542204b76443b7304ed8820151d51b5c285e1828ca175a0
             env:
               TZ: America/Los_Angeles
+              UMASK: "022"
               QBT_WEBUI_PORT: &port 8080
               QBT_TORRENTING_PORT: 50413
+              XSEED_HOST: cross-seed.servarr.svc.cluster.local
+              XSEED_PORT: 2468
+            envFrom:
+              - secretRef:
+                  name: qbittorrent-secret
             probes:
               liveness:
                 enabled: true
@@ -85,16 +97,38 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 10
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 100m
                 memory: 2Gi
               limits:
                 memory: 4Gi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+          port-forward:
+            image:
+              repository: ghcr.io/bjw-s-labs/gluetun-qb-port-sync
+              tag: 0.0.4@sha256:5fd1da9f2d6509c00b6d6f4b3b7ada6fa097b8134040fc8965b6c1dc8584dc6b
+            env:
+              GLUETUN_CONTROL_SERVER_HOST: localhost
+              GLUETUN_CONTROL_SERVER_PORT: 8000
+              QBITTORRENT_HOST: localhost
+              QBITTORRENT_WEBUI_PORT: *port
+              CRON_ENABLED: true
+              CRON_SCHEDULE: "*/5 * * * *"
+              LOG_TIMESTAMP: false
+            envFrom:
+              - secretRef:
+                  name: qbittorrent-secret
+            securityContext:
+              runAsUser: 1000
+              runAsGroup: 1000
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -131,5 +165,30 @@ spec:
         globalMounts:
           - path: /data/nas-media/Downloads/qbittorrent
             subPath: Downloads/qbittorrent
+      gluetun-auth:
+        type: secret
+        name: qbittorrent-gluetun-secret
+        advancedMounts:
+          qbittorrent:
+            gluetun:
+              - path: *gluetunAuthPath
+                subPath: auth.toml
+      coredns:
+        type: configMap
+        name: qbittorrent-coredns
+        advancedMounts:
+          qbittorrent:
+            coredns:
+              - path: /etc/coredns/Corefile
+                subPath: Corefile
+                readOnly: true
+      scripts:
+        type: configMap
+        name: qbittorrent-scripts
+        defaultMode: 0775
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /config/scripts
       tmp:
         type: emptyDir
