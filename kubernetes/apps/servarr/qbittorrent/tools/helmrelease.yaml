@@ -47,6 +47,7 @@ spec:
               - --last-activity
               - --sites
               - --unregistered
+              - --not-linked
               - --server
               - *qbittorrent_host
               - --port
@@ -173,8 +174,6 @@ spec:
         type: nfs
         server: 100.68.189.69  # helios64.shark-tone.ts.net
         path: /export/Glacier02/Media
-        advancedMounts:
-          orphaned:
-            app:
-              - path: /data/nas-media/Downloads/qbittorrent
-                subPath: Downloads/qbittorrent
+        globalMounts:
+          - path: /data/nas-media/Downloads/qbittorrent
+            subPath: Downloads/qbittorrent
