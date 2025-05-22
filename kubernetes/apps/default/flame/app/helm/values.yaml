@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.7.3/charts/library/common/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.0.1/charts/library/common/values.schema.json
 controllers:
   flame:
     strategy: RollingUpdate
@@ -17,6 +17,8 @@ controllers:
             cpu: 10m
           limits:
             memory: 128Mi
+    serviceAccount:
+      identifier: flame
 persistence:
   config:
     enabled: true
@@ -33,7 +35,7 @@ route:
         sectionName: https
     rules:
       - backendRefs:
-        - name: flame
+        - identifier: app
           port: 5005
 service:
   app:
@@ -43,4 +45,4 @@ service:
         port: &port 5005
         targetPort: *port
 serviceAccount:
-  create: true
+  flame: {}
