@@ -92,11 +92,28 @@ spec:
         ports:
           http:
             port: *port
+    serviceAccount:
+      gatus: {}
     serviceMonitor:
       app:
         serviceName: gatus
         endpoints:
           - port: http
+    rbac:
+      roles:
+        gatus:
+          type: Role
+          rules:
+            - apiGroups: [""]
+              resources: ["configmaps", "secrets"]
+              verbs: ["get", "watch", "list"]
+      bindings:
+        gatus:
+          type: RoleBinding
+          roleRef:
+            identifier: gatus
+          subjects:
+            - identifier: gatus
     route:
       app:
         hostnames:
@@ -110,8 +127,6 @@ spec:
           - backendRefs:
             - identifier: app
               port: *port
-    serviceAccount:
-      gatus: {}
     persistence:
       config:
         existingClaim: gatus
