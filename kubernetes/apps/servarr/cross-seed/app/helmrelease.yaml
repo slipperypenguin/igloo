@@ -11,7 +11,7 @@ spec:
     name: app-template
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
@@ -69,10 +69,6 @@ spec:
     persistence:
       config:
         existingClaim: cross-seed
-      config-cross-seeds:
-        type: emptyDir
-        globalMounts:
-          - path: /config/cross-seeds
       secret-file:
         type: secret
         name: cross-seed-secret
