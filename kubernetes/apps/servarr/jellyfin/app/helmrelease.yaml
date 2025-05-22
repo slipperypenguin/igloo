@@ -96,12 +96,12 @@ spec:
     persistence:
       config:
         existingClaim: jellyfin
+        globalMounts:
+          - path: /config
       config-cache:
         existingClaim: jellyfin-cache
-      config-logs:
-        type: emptyDir
-      transcode:
-        type: emptyDir
+        globalMounts:
+          - path: /config/metadata
       media:
         type: nfs
         server: 100.68.189.69  # helios64.shark-tone.ts.net
@@ -109,5 +109,14 @@ spec:
         globalMounts:
           - path: /data/nas-media
             readOnly: true
-      tmp:
+      tmpfs:
         type: emptyDir
+        advancedMounts:
+          jellyfin:
+            app:
+              - path: /cache
+                subPath: cache
+              - path: /config/log
+                subPath: log
+              - path: /tmp
+                subPath: tmp
