@@ -16,7 +16,7 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   interval: 1h
-  path: ./kubernetes/apps/default/jellyseerr/app
+  path: ./kubernetes/apps/servarr/jellyseerr/app
   postBuild:
     substitute:
       APP: *app
