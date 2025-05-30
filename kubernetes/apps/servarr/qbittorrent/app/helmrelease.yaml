@@ -85,8 +85,6 @@ spec:
               UMASK: "022"
               QBT_WEBUI_PORT: &port 8080
               QBT_TORRENTING_PORT: 50413
-              XSEED_HOST: cross-seed.servarr.svc.cluster.local
-              XSEED_PORT: 2468
             envFrom:
               - secretRef:
                   name: qbittorrent-secret
@@ -185,13 +183,5 @@ spec:
               - path: /etc/coredns/Corefile
                 subPath: Corefile
                 readOnly: true
-      scripts:
-        type: configMap
-        name: qbittorrent-scripts
-        defaultMode: 0775
-        advancedMounts:
-          qbittorrent:
-            app:
-              - path: /config/scripts
       tmp:
         type: emptyDir
