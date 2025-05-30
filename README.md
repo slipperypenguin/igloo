@@ -8,7 +8,7 @@
 <br/>
 <br/>
 
-[![k8s](https://img.shields.io/badge/k8s-v1.32.1-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
+[![k8s](https://img.shields.io/badge/k8s-v1.33.1-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
 <br/>
 
 
@@ -24,7 +24,7 @@ This is a mono repository for my home infrastructure and Kubernetes cluster. I t
 ---
 
 ## 💻&nbsp; Kubernetes
-My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server with ZFS for NFS/SMB shares, bulk file storage and backups.
+My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate NAS server for NFS/SMB shares, bulk file storage and backups.
 
 
 ### Core Components
@@ -35,7 +35,7 @@ My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically syncs ingress DNS records to a DNS provider.
 - [external-secrets](https://github.com/external-secrets/external-secrets): Managed Kubernetes secrets using [1Password Connect](https://github.com/1Password/connect).
 - [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller using NGINX as a reverse proxy and load balancer.
-- [openebs](https://github.com/openebs/openebs)
+- [openebs](https://github.com/openebs/openebs): local storage provisioner
   - [rook](https://github.com/rook/rook): Distributed block storage for persistent storage.
 - [sops](https://github.com/getsops/sops): Managed secrets for Kubernetes and Terraform which are committed to Git.
 - [spegel](https://github.com/spegel-org/spegel): Stateless cluster local OCI registry mirror.
@@ -74,6 +74,7 @@ graph TD
 ```
 
 ### 🌐&nbsp; Networking
+The [Kube gateway api](https://gateway-api.sigs.k8s.io) is utilized through cilium to manage routes.
 This cluster uses two instances of [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) running. One for syncing private DNS records to my `UDM Pro` using [ExternalDNS webhook provider for UniFi](https://github.com/kashalls/external-dns-unifi-webhook), while another instance syncs public DNS to `Cloudflare`. This setup is managed by creating ingresses with two specific classes: `internal` for private DNS and `external` for public DNS. The `external-dns` instances then syncs the DNS records to their respective platforms accordingly.
 
 
@@ -81,9 +82,9 @@ This cluster uses two instances of [ExternalDNS](https://github.com/kubernetes-s
 
 | Device             | Count | OS Disk Size   | Data Disk Size | Ram  | Purpose                       | Alias       | OS               |
 |--------------------|-------|----------------|----------------|------|-------------------------------|-------------|------------------|
-| Dell Optiplex 7040 | 1     | 256GB NVMe SSD | N/A            | 16GB | Kubernetes Worker             | mbp-node-01 | Talos Linux      |
+| Dell Optiplex 7040 | 1     | 256GB NVMe SSD | 1TB SATA SSD        | 16GB | Kubernetes Worker             | dell-node-01 | Talos Linux      |
+| Dell Optiplex 7060   | 1     | 512GB NVMe SSD      | 1TB SATA SSD         | 32GB  | Kubernetes Control-Plane        | dell-node-02 | Talos Linux      |
 | Helios64 NAS       | 1     | N/A            | 8x4TB RAID6    | 4GB  | Media and shared file storage | glacier     | Debian GNU/Linux |
-| MacBook Air 2013   | 1     | 250GB SSD      | N/A            | 4GB  | Kubernetes Worker             | mba-node-01 | Talos Linux      |
 | MacBook Pro 2012   | 1     | 250GB SSD      | N/A            | 8GB  | Kubernetes Control-Plane      | mbp-node-01 | Talos Linux      |
 | MacBook Pro 2016   | 1     | 500GB SSD      | N/A            | 16GB  | Kubernetes Worker      | mbp-node-02 | Talos Linux      |
 
@@ -113,6 +114,25 @@ While most of my infrastructure and workloads are self-hosted I do rely upon the
 | [Tailscale](https://tailscale.com)        | Device VPN                                                     | Free          |
 |                                           |                                                                | Total: ~$8/mo |
 
+
+### Media Stack
+The [servarr](https://wiki.servarr.com) stack supports torrent and Usenet-based automation and is integrated for high performance, privacy, and seed ratio maximization:
+- Indexers:
+  - [Prowlarr](https://github.com/Prowlarr/Prowlarr)
+- Downloaders:
+  - [qBittorrent](https://github.com/qbittorrent/qBittorrent) (via [Gluetun](https://github.com/qdm12/gluetun) + [ProtonVPN provider](https://github.com/qdm12/gluetun-wiki/blob/main/setup/providers/protonvpn.md))
+  - [sabnzbd](https://github.com/sabnzbd/sabnzbd) (for Usenet)
+- Organizers:
+  - [Sonarr](https://github.com/Sonarr/Sonarr) (TV)
+  - [Radarr](https://github.com/Radarr/Radarr) (Movies)
+  - [Bazarr](https://github.com/morpheus65535/bazarr) (Subtitles)
+  - [Recyclarr](https://github.com/recyclarr/recyclarr) (auto-syncs indexer/tracker settings)
+- Automation:
+  - [Cross-seed](https://github.com/cross-seed/cross-seed) – uses hardlink watch and injects back into qBittorrent to boost sharing ratios
+  - [Autobrr](https://github.com/autobrr/autobrr) – filters and pushes releases to qBittorrent and/or Radarr via custom webhook integration
+- Frontends:
+  - [Jellyfin](https://github.com/jellyfin/jellyfin) – main media frontend
+  - [Jellyseerr](https://github.com/Fallenbagel/jellyseerr) – request management for Jellyfin users
 
 
 ## Cluster Notes
