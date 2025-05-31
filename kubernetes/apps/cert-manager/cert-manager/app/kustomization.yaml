@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - ./clusterissuer.yaml
   - ./helmrelease.yaml
-  - ./helmrepository.yaml
+  - ./ocirepository.yaml
   - ./prometheusrule.yaml
   - ./secret.sops.yaml
 configMapGenerator:
