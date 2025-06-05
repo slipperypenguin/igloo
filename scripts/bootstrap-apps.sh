@@ -110,9 +110,9 @@ function apply_crds() {
     done
 }
 
-# Apply Helm releases using helmfile
-function apply_helm_releases() {
-    log debug "Applying Helm releases with helmfile"
+# Sync Helm releases
+function sync_helm_releases() {
+    log debug "Syncing Helm releases"
 
     local -r helmfile_file="${ROOT_DIR}/bootstrap/helmfile.yaml"
 
@@ -120,14 +120,15 @@ function apply_helm_releases() {
         log error "File does not exist" "file=${helmfile_file}"
     fi
 
-    if ! helmfile --file "${helmfile_file}" apply --hide-notes --skip-diff-on-install --suppress-diff --suppress-secrets; then
-        log error "Failed to apply Helm releases"
+    if ! helmfile --file "${helmfile_file}" sync --hide-notes; then
+        log error "Failed to sync Helm releases"
     fi
 
-    log info "Helm releases applied successfully"
+    log info "Helm releases synced successfully"
 }
 
 function main() {
+    check_env KUBECONFIG TALOSCONFIG
     check_cli helmfile kubectl kustomize op sops talhelper yq
 
     if ! op user get --me &>/dev/null; then
@@ -139,7 +140,7 @@ function main() {
     apply_namespaces
     apply_sops_secrets
     apply_crds
-    apply_helm_releases
+    sync_helm_releases
 
     log info "Congrats! The cluster is bootstrapped and Flux is syncing the Git repository"
 }
