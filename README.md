@@ -203,3 +203,10 @@ Note: If a resource exists, running `kubectl -n <namespace> describe <resource> 
 
 ## 🤝 Thanks
 Huge shout out to [@onedr0p](https://github.com/onedr0p) and the k8s@Home community!
+
+### References
+- https://kubesearch.dev
+- https://bjw-s-labs.github.io/helm-charts/docs/
+- https://github.com/bjw-s-labs/home-ops
+- https://github.com/onedr0p/cluster-template
+- https://github.com/onedr0p/home-ops
