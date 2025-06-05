@@ -3,7 +3,7 @@
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.10.3
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.33.1
+kubernetesVersion: v1.32.3
 
 clusterName: "igloo"
 endpoint: https://192.168.20.6:6443
@@ -55,7 +55,19 @@ nodes:
     installDisk: "/dev/nvme0n1"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/240f33ba108b4418f67b9f69c9246178a8bc06228b9064d815e20da4c837b4b4
+    # talosImageURL: factory.talos.dev/installer/685b2c2298b7b5b1d4c923fda7f114e636f610b455b5b9758e6c244c05a7f7c8
+    schematic:
+      customization:
+        extraKernelArgs:
+          - intel_iommu=on   # PCI Passthrough
+          - iommu=pt         # PCI Passthrough
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/amdgpu
+            - siderolabs/intel-ucode
+            - siderolabs/tailscale
+            - siderolabs/thunderbolt
+            - siderolabs/util-linux-tools
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
