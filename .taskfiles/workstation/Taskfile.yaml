@@ -3,7 +3,7 @@
 version: '3'
 
 vars:
-  UTILS_RESOURCES_DIR: '{{.ROOT_DIR}}/.taskfiles/utils/resources'
+  WORKSTATION_RESOURCES_DIR: '{{.ROOT_DIR}}/.taskfiles/workstation/resources'
 
 tasks:
 
@@ -75,9 +75,9 @@ tasks:
 
   validate-kubernetes-config:
     desc: Validate Kubernetes manifests with kubeconform
-    cmd: bash {{.UTILS_RESOURCES_DIR}}/kubeconform.sh {{.KUBERNETES_DIR}}
+    cmd: bash {{.WORKSTATION_RESOURCES_DIR}}/kubeconform.sh {{.KUBERNETES_DIR}}
     preconditions:
-      - test -f {{.UTILS_RESOURCES_DIR}}/kubeconform.sh
+      - test -f {{.WORKSTATION_RESOURCES_DIR}}/kubeconform.sh
       - which kubeconform
 
   validate-talos-config:
@@ -87,3 +87,25 @@ tasks:
     preconditions:
       - test -f {{.TALOS_DIR}}/talconfig.yaml
       - which talhelper
+
+  brew:
+    desc: Set up Homebrew tools
+    cmds:
+      - brew bundle --file {{.WORKSTATION_RESOURCES_DIR}}/Brewfile
+    sources:
+      - '{{.WORKSTATION_RESOURCES_DIR}}/Brewfile'
+    generates:
+      - '{{.WORKSTATION_RESOURCES_DIR}}/Brewfile.lock.json'
+    preconditions:
+      - which brew
+      - test -f {{.WORKSTATION_RESOURCES_DIR}}/Brewfile
+
+  krew:
+    desc: Set up Krew tools
+    deps: [brew]
+    cmds:
+      - kubectl krew install cert-manager browse-pvc rook-ceph view-secret
+    preconditions:
+      - kubectl krew version
+      - which kubectl
+
