@@ -3,6 +3,7 @@
 *.icloud
 Thumbs.db
 .idea
+.goose
 
 # k8s
 kubeconfig
