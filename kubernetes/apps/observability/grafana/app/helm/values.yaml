@@ -197,6 +197,9 @@ plugins:
   - natel-discrete-panel
   - pr0ps-trackmap-panel
   - vonage-status-panel
+service:
+  annotations:
+    tailscale.com/expose: "true"
 serviceMonitor:
   enabled: true
 route:
