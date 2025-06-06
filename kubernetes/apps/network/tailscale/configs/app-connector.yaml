@@ -1,0 +1,13 @@
+---
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: app-connector
+spec:
+  appConnector:
+    routes:
+      - 192.168.10.0/24
+      - 192.168.20.0/24
+      - 10.69.0.0/16
+      - 10.96.0.0/16
+  hostname: tailscale-k8s
