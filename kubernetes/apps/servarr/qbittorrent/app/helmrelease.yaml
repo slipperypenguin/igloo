@@ -139,6 +139,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        annotations:
+          tailscale.com/expose: "true"
         controller: qbittorrent
         ports:
           http:

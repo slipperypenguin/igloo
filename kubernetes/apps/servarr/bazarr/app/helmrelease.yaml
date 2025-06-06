@@ -60,6 +60,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        annotations:
+          tailscale.com/expose: "true"
         controller: bazarr
         ports:
           http:

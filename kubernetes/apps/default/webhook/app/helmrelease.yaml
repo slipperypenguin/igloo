@@ -52,6 +52,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        annotations:
+          tailscale.com/expose: "true"
         controller: webhook
         ports:
           http:

@@ -71,6 +71,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
+        annotations:
+          tailscale.com/expose: "true"
         controller: sonarr
         ports:
           http:
