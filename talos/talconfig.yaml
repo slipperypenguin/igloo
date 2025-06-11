@@ -45,10 +45,9 @@ nodes:
           ip: "192.168.20.6"
     extensionServices:
       - name: tailscale
-        configFiles:
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
           - TS_ACCEPT_DNS=true
   - hostname: "mbp-node-02"
     ipAddress: "192.168.20.176"
@@ -71,7 +70,7 @@ nodes:
       - name: tailscale
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
           - TS_ACCEPT_DNS=true
   - hostname: "dell-node-01"
     ipAddress: "192.168.20.129"
@@ -94,7 +93,7 @@ nodes:
       - name: tailscale
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
           - TS_ACCEPT_DNS=true
   - hostname: "dell-node-02"
     ipAddress: "192.168.20.224"
@@ -117,7 +116,7 @@ nodes:
       - name: tailscale
         environment:
           - TS_AUTHKEY=$TS_AUTHKEY
-          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
           - TS_ACCEPT_DNS=true
 
 # Global patches
