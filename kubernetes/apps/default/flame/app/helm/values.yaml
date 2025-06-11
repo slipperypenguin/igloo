@@ -39,6 +39,8 @@ route:
           port: 5005
 service:
   app:
+    annotations:
+      tailscale.com/expose: "true"
     controller: flame
     ports:
       http:
