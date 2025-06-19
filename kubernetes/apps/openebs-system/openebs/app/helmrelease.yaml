@@ -47,3 +47,9 @@ spec:
         name: openebs-hostpath
         isDefaultClass: false
         basePath: /var/openebs/local
+    alloy:
+      enabled: false
+    loki:
+      enabled: false
+    minio:
+      enabled: false
