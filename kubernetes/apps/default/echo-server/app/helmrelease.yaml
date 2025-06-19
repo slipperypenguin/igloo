@@ -62,7 +62,6 @@ spec:
         runAsGroup: 65534
     service:
       app:
-        controller: echo-server
         ports:
           http:
             port: *port

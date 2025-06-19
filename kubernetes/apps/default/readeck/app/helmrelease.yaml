@@ -60,7 +60,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: readeck
         ports:
           http:
             port: *port

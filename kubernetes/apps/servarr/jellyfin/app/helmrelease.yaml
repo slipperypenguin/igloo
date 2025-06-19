@@ -74,7 +74,6 @@ spec:
         supplementalGroups: [44, 109]
     service:
       app:
-        controller: jellyfin
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.20.13

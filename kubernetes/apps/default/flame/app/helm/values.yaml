@@ -35,7 +35,6 @@ route:
         sectionName: https
 service:
   app:
-    controller: flame
     ports:
       http:
         port: &port 5005
