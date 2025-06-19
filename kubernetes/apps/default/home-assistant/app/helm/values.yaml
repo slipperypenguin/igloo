@@ -37,7 +37,7 @@ service:
     controller: home-assistant
     ports:
       http:
-        port: &port 8123
+        port: 8123
 route:
   app:
     hostnames:
@@ -47,10 +47,6 @@ route:
       - name: external
         namespace: kube-system
         sectionName: https
-    rules:
-      - backendRefs:
-          - identifier: app
-            port: *port
 persistence:
   config:
     existingClaim: home-assistant
