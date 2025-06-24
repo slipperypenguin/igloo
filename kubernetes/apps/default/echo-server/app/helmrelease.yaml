@@ -67,7 +67,6 @@ spec:
             port: *port
     serviceMonitor:
       app:
-        serviceName: echo-server
         endpoints:
           - port: http
             scheme: http

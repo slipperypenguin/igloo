@@ -93,7 +93,6 @@ spec:
       gatus: {}
     serviceMonitor:
       app:
-        serviceName: gatus
         endpoints:
           - port: http
     rbac:
