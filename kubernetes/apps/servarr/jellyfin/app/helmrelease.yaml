@@ -74,13 +74,12 @@ spec:
         supplementalGroups: [44, 109]
     service:
       app:
-        controller: jellyfin
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.20.13
         ports:
           http:
-            port: &port 8096
+            port: 8096
     route:
       app:
         hostnames:
@@ -89,10 +88,6 @@ spec:
           - name: external
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
     persistence:
       config:
         existingClaim: jellyfin

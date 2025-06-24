@@ -33,13 +33,8 @@ route:
       - name: external
         namespace: kube-system
         sectionName: https
-    rules:
-      - backendRefs:
-        - identifier: app
-          port: 5005
 service:
   app:
-    controller: flame
     ports:
       http:
         port: &port 5005

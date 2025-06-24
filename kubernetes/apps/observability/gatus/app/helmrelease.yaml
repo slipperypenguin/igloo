@@ -77,8 +77,6 @@ spec:
                 cpu: 100m
               limits:
                 memory: 256Mi
-        serviceAccount:
-          identifier: gatus
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -88,7 +86,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: gatus
         ports:
           http:
             port: *port
@@ -96,7 +93,6 @@ spec:
       gatus: {}
     serviceMonitor:
       app:
-        serviceName: gatus
         endpoints:
           - port: http
     rbac:
@@ -123,10 +119,6 @@ spec:
           - name: external
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-            - identifier: app
-              port: *port
     persistence:
       config:
         existingClaim: gatus

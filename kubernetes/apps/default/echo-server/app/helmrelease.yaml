@@ -62,13 +62,11 @@ spec:
         runAsGroup: 65534
     service:
       app:
-        controller: echo-server
         ports:
           http:
             port: *port
     serviceMonitor:
       app:
-        serviceName: echo-server
         endpoints:
           - port: http
             scheme: http
@@ -82,7 +80,3 @@ spec:
           - name: external
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-            - identifier: app
-              port: *port

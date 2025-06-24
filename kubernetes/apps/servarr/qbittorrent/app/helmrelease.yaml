@@ -139,7 +139,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: qbittorrent
+        primary: true
         ports:
           http:
             port: *port

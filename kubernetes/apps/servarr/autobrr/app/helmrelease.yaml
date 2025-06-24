@@ -45,7 +45,7 @@ spec:
                   httpGet:
                     path: /api/healthz/liveness
                     port: *port
-                  initialDelaySeconds: 0
+                  initialDelaySeconds: 45
                   periodSeconds: 10
                   timeoutSeconds: 1
                   failureThreshold: 3
@@ -68,7 +68,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: autobrr
         ports:
           http:
             port: *port
@@ -76,7 +75,6 @@ spec:
             port: *metricsPort
     serviceMonitor:
       app:
-        serviceName: autobrr
         endpoints:
           - port: metrics
     route:
@@ -86,10 +84,6 @@ spec:
           - name: internal
             namespace: kube-system
             sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
     persistence:
       config:
         existingClaim: autobrr
