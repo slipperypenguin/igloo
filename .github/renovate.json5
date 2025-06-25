@@ -3,17 +3,28 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
+    "github>slipperypenguin/igloo//.github/renovate/autoMerge.json5",
+    "github>slipperypenguin/igloo//.github/renovate/customManagers.json5",
+    "github>slipperypenguin/igloo//.github/renovate/grafanaDashboards.json5",
+    "github>slipperypenguin/igloo//.github/renovate/groups.json5",
+    "github>slipperypenguin/igloo//.github/renovate/labels.json5",
+    "github>slipperypenguin/igloo//.github/renovate/semanticCommits.json5",
+    "helpers:pinGitHubActionDigests",
     ":automergeBranch",
     ":dependencyDashboard",
     ":disableRateLimiting",
     ":semanticCommits",
-    ":separatePatchReleases"
+    ":separatePatchReleases",
+    ":timezone(America/Los_Angeles)"
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": ["prEditedNotification", "prIgnoreNotification"],
   "schedule": ["every weekend"],
-  "ignorePaths": ["**/*.sops.*"],
+  "ignorePaths": [
+    "**/*.sops.*",
+    "**/resources/**"
+  ],
   "flux": {
     "managerFilePatterns": ["/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"]
   },
@@ -31,228 +42,5 @@
   },
   "pip_requirements": {
     "managerFilePatterns": ["/(^|/)[\\w-]*requirements(-\\w+)?\\.(txt|pip)(?:\\.j2)?$/"]
-  },
-  "packageRules": [
-    {
-      "description": ["Auto-merge GitHub Actions"],
-      "matchManagers": ["github-actions"],
-      "automerge": true,
-      "automergeType": "branch",
-      "ignoreTests": true,
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "minimumReleaseAge": "3 days"
-    },
-    {
-      "description": ["Auto-merge Mise Tools"],
-      "matchManagers": ["mise"],
-      "automerge": true,
-      "automergeType": "branch",
-      "matchUpdateTypes": ["minor", "patch"],
-      "ignoreTests": true
-    },
-    {
-      "description": ["Actions Runner Controller Group"],
-      "groupName": "Actions Runner Controller",
-      "matchDatasources": ["docker", "helm"],
-      "matchPackageNames": ["/gha-runner-scale-set-controller/", "/gha-runner-scale-set/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      }
-    },
-    {
-      "description": "Cert-Manager Group",
-      "groupName": "Cert-Manager",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/cert-manager/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group",
-      },
-    },
-    {
-      "description": "Cilium Group",
-      "groupName": "Cilium",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/cilium/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group",
-      },
-    },
-    {
-      "description": ["CoreDNS Group"],
-      "groupName": "CoreDNS",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["/coredns/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      }
-    },
-    {
-      "description": "External Secrets Operator Group",
-      "groupName": "External Secrets Operator",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/external-secrets/", "/1password/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group",
-      },
-    },
-    {
-      "description": ["Flux Operator Group"],
-      "groupName": "Flux Operator",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["flux-operator", "flux-instance"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      }
-    },
-    {
-      "description": "Rook-Ceph Group",
-      "groupName": "Rook-Ceph",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["/rook-ceph/", "/rook-ceph-cluster/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group",
-      },
-    },
-    {
-      "description": ["Spegel Group"],
-      "groupName": "Spegel",
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["/spegel/"],
-      "group": {
-        "commitMessageTopic": "{{{groupName}}} group"
-      }
-    },
-    {
-      "addLabels": ["renovate/grafana-dashboard"],
-      "automerge": true,
-      "automergeType": "branch",
-      "commitMessageExtra": "({{currentVersion}} → {{newVersion}})",
-      "commitMessageTopic": "dashboard {{depName}}",
-      "matchDatasources": ["custom.grafana-dashboards"],
-      "matchUpdateTypes": ["major"],
-      "semanticCommitScope": "grafana-dashboards",
-      "semanticCommitType": "chore",
-    },
-    {
-      "matchUpdateTypes": ["major"],
-      "semanticCommitType": "feat",
-      "commitMessagePrefix": "{{semanticCommitType}}({{semanticCommitScope}})!:",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
-    },
-    {
-      "matchUpdateTypes": ["minor"],
-      "semanticCommitType": "feat",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
-    },
-    {
-      "matchUpdateTypes": ["patch"],
-      "semanticCommitType": "fix",
-      "commitMessageExtra": "( {{currentVersion}} → {{newVersion}} )"
-    },
-    {
-      "matchUpdateTypes": ["digest"],
-      "semanticCommitType": "chore",
-      "commitMessageExtra": "( {{currentDigestShort}} → {{newDigestShort}} )"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "semanticCommitScope": "container",
-      "commitMessageTopic": "image {{depName}}"
-    },
-    {
-      "matchDatasources": ["helm"],
-      "semanticCommitScope": "helm",
-      "commitMessageTopic": "chart {{depName}}"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "semanticCommitType": "ci",
-      "semanticCommitScope": "github-action",
-      "commitMessageTopic": "action {{depName}}"
-    },
-    {
-      "matchDatasources": ["github-releases"],
-      "semanticCommitScope": "github-release",
-      "commitMessageTopic": "release {{depName}}"
-    },
-    {
-      "matchManagers": ["mise"],
-      "semanticCommitScope": "mise",
-      "commitMessageTopic": "tool {{depName}}"
-    },
-    {
-      "matchUpdateTypes": ["major"],
-      "labels": ["type/major"]
-    },
-    {
-      "matchUpdateTypes": ["minor"],
-      "labels": ["type/minor"]
-    },
-    {
-      "matchUpdateTypes": ["patch"],
-      "labels": ["type/patch"]
-    },
-    {
-      "matchUpdateTypes": ["digest"],
-      "labels": ["type/digest"]
-    },
-    {
-      "matchDatasources": ["docker"],
-      "addLabels": ["renovate/container"]
-    },
-    {
-      "matchDatasources": ["helm"],
-      "addLabels": ["renovate/helm"]
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "addLabels": ["renovate/github-action"]
-    },
-    {
-      "matchDatasources": ["github-releases"],
-      "addLabels": ["renovate/github-release"]
-    }
-  ],
-  "customDatasources": {
-    "grafana-dashboards": {
-      "defaultRegistryUrlTemplate": "https://grafana.com/api/dashboards/{{packageName}}",
-      "format": "json",
-      "transformTemplates": ['{"releases":[{"version": $string(revision)}]}'],
-    },
-  },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "description": ["Process annotated dependencies"],
-      "managerFilePatterns": [
-        "/(^|/).+\\.env(?:\\.j2)?$/",
-        "/(^|/).+\\.sh(?:\\.j2)?$/",
-        "/(^|/).+\\.ya?ml(?:\\.j2)?$/"
-      ],
-      "matchStrings": [
-        // # renovate: datasource=github-releases depName=k3s-io/k3s
-        // k3s_release_version: &version v1.29.0+k3s1
-        // # renovate: datasource=helm depName=cilium repository=https://helm.cilium.io
-        // version: 1.15.1
-        // # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-        // KUBERNETES_VERSION=v1.32.2
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+(:\\s|=)(&\\S+\\s)?(?<currentValue>\\S+)",
-        // # renovate: datasource=docker depName=ghcr.io/prometheus-operator/prometheus-operator
-        // https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)"
-      ],
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
-    },
-    {
-      "customType": "regex",
-      "description": "Process Grafana dashboards",
-      "managerFilePatterns": ["/(^|/)kubernetes/.+\\.ya?ml$/"],
-      "matchStrings": [
-        'depName="(?<depName>.*)"\\n(?<indentation>\\s+)gnetId: (?<packageName>\\d+)\\n.+revision: (?<currentValue>\\d+)'
-      ],
-      "autoReplaceStringTemplate": 'depName="{{{depName}}}"\n{{{indentation}}}gnetId: {{{packageName}}}\n{{{indentation}}}revision: {{{newValue}}}',
-      "datasourceTemplate": "custom.grafana-dashboards",
-      "versioningTemplate": "regex:^(?<major>\\d+)$"
-    }
-  ]
+  }
 }
