@@ -19,11 +19,11 @@ jobs:
       all_changed_and_modified_files: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Get Changed Files
         id: changed-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46
         with:
           files: kubernetes/**/helmrelease.yaml
 
@@ -36,7 +36,7 @@ jobs:
       repos: ${{ steps.extract.outputs.repos }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Extract Repos
         id: extract
