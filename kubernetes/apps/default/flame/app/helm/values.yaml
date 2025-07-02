@@ -34,7 +34,10 @@ route:
     parentRefs:
       - name: external
         namespace: kube-system
-        sectionName: https
+        sectionName: https       # for flame.igloo.sh
+      - name: external
+        namespace: kube-system
+        sectionName: root-https  # for igloo.sh
 service:
   app:
     ports:
