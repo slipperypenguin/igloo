@@ -28,7 +28,9 @@ persistence:
 route:
   app:
     enabled: true
-    hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+    hostnames:
+      - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+      - "${SECRET_DOMAIN}"  # use flame dashboard as root domain path
     parentRefs:
       - name: external
         namespace: kube-system
