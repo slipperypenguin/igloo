@@ -21,7 +21,7 @@ uv = "0.7.19"
 # Operations tools
 "aqua:budimanjojo/talhelper" = "3.0.30"
 "aqua:cilium/cilium-cli" = "0.18.5"
-"aqua:cloudflare/cloudflared" = "2025.6.1"
+"aqua:cloudflare/cloudflared" = "2025.7.0"
 "aqua:FiloSottile/age" = "1.2.1"
 "aqua:fluxcd/flux2" = "2.6.3"
 "aqua:getsops/sops" = "3.10.2"
