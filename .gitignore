@@ -20,7 +20,7 @@ talosconfig
 .private
 .bin
 
-# Ansible
+# Python
 .venv*
 
 # Taskfile
