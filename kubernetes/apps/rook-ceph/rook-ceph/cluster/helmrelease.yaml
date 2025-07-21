@@ -83,6 +83,9 @@ spec:
         useAllNodes: false
         useAllDevices: false
         nodes:
+          - name: asus-node-01
+            devices:
+              - name: nvme0n1
           - name: dell-node-01
             devices:
               - name: sda
