@@ -3,7 +3,6 @@ machine:
     # List of udev rules to apply to the udev system
     rules:
       # allow GID 44 (video) to use AMD/Intel GPU
-      - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660"
       - SUBSYSTEM=="drm", GROUP="44", MODE="0660"
       # Allow ceph to recognize usb devices as scsi via udev custom rules
       # https://github.com/rook/rook/issues/14699#issuecomment-2350953135
