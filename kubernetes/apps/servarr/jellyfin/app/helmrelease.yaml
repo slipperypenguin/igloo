@@ -61,10 +61,10 @@ spec:
                 memory: 4Gi
               limits:
                 memory: 8Gi
+                amd.com/gpu: 1
     defaultPodOptions:
       nodeSelector:
-        # extensions.talos.dev/amdgpu: 20250211-v1.9.5
-        kubernetes.io/hostname: mbp-node-02
+        kubernetes.io/hostname: asus-node-01
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
