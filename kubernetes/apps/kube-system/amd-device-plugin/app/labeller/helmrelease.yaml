@@ -68,9 +68,6 @@ spec:
       app:
         enabled: false
         controller: amd-gpu-node-labeller
-    serviceAccount:
-      amd-gpu-node-labeller:
-        enabled: true
     persistence:
       sys:
         enabled: true
