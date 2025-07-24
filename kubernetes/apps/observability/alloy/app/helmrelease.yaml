@@ -18,8 +18,13 @@ spec:
   values:
     # note: https://grafana.com/docs/alloy/latest/configure/kubernetes/#kustomize-considerations
     fullnameOverride: alloy
-    config:
-      clients:
-        - url: http://loki-headless.observability.svc.cluster.local:3100/loki/api/v1/push
+    alloy:
+      configMap:
+        create: false
+        name: &name alloy-configmap
+        key: config.alloy
+    controller:
+      podAnnotations:
+        configmap.reloader.stakater.com/reload: *name
     serviceMonitor:
       enabled: true
