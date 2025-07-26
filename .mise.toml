@@ -19,7 +19,7 @@ run = "uv pip install -r requirements.txt"
 python = "3.13"
 uv = "0.8.0"
 # Operations tools
-"aqua:budimanjojo/talhelper" = "3.0.30"
+"aqua:budimanjojo/talhelper" = "3.0.31"
 "aqua:cilium/cilium-cli" = "0.18.5"
 "aqua:cloudflare/cloudflared" = "2025.7.0"
 "aqua:FiloSottile/age" = "1.2.1"
