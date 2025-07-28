@@ -28,7 +28,7 @@ spec:
           failedJobsHistory: 1
           ttlSecondsAfterFinished: 3600
         initContainers:
-          tag: &container
+          retag: &container
             image:
               repository: ghcr.io/home-operations/tqm
               tag: 1.15.0@sha256:70545e1a52e5afc4a6474c5b492e127be7b776eb9cea7adea3c6399e67ae2287
