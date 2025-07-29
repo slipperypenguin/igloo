@@ -3,27 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app qbittorrent
+  name: &app tqm
   namespace: &namespace servarr
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  components:
-    - ../../../../components/gatus/guarded
-    - ../../../../components/volsync
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
-    - name: onepassword-store
-      namespace: external-secrets
   interval: 1h
-  path: ./kubernetes/apps/servarr/qbittorrent/app
-  postBuild:
-    substitute:
-      APP: *app
-      GATUS_SUBDOMAIN: qb
-      VOLSYNC_CAPACITY: 2Gi
+  path: ./kubernetes/apps/servarr/tqm/app
   prune: true
   retryInterval: 2m
   sourceRef:
