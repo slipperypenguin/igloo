@@ -52,8 +52,6 @@ spec:
                 cpu: 10m
               limits:
                 memory: 2Gi
-        pod:
-          restartPolicy: Never
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
