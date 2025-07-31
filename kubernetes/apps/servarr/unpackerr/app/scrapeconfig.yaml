@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name unpackerr
+spec:
+  jobName: *name
+  scrapeInterval: 1m
+  staticConfigs:
+    - targets:
+        - unpackerr.servarr.svc.cluster.local:5656
