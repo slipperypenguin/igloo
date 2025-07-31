@@ -60,7 +60,7 @@ datasources:
           httpMethod: GET
           timeout: 30
         secureJsonData:
-          apiKey: ${JELLYFIN_API_TOKEN}
+          apiKey: ${JELLYFIN_API_KEY}
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
