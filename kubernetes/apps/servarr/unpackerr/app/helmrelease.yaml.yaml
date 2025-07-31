@@ -31,10 +31,10 @@ spec:
               UN_WEBSERVER_METRICS: true
               UN_WEBSERVER_LOG_FILE: /logs/webserver.log
               UN_ACTIVITY: true
-              UN_SONARR_0_URL: http://sonarr.servarr.svc.cluster.local
-              UN_SONARR_0_PATHS_0: /media/downloads/qbittorrent/complete/sonarr
-              UN_RADARR_0_URL: http://radarr.servarr.svc.cluster.local
-              UN_RADARR_0_PATHS_0: /media/downloads/qbittorrent/complete/radarr
+              UN_SONARR_0_URL: http://sonarr.servarr.svc.cluster.local:8989
+              UN_SONARR_0_PATHS_0: /media/downloads/qbittorrent/tv-sonarr
+              UN_RADARR_0_URL: http://radarr.servarr.svc.cluster.local:7878
+              UN_RADARR_0_PATHS_0: /media/downloads/qbittorrent/radarr
             envFrom:
               - secretRef:
                   name: unpackerr-secret
