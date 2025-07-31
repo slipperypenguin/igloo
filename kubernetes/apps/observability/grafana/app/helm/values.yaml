@@ -165,6 +165,12 @@ dashboards:
       gnetId: 11312
       revision: 9
       datasource: Prometheus
+    unpackerr:
+      # renovate: depName="Unpackerr"
+      gnetId: 18817
+      revision: 1
+      datasource:
+        - { name: DS_PROMETHEUS, value: Prometheus }
     volsync:
       # renovate: depName="VolSync Dashboard"
       gnetId: 21356
