@@ -12,7 +12,7 @@ env:
   JELLYFIN_API_TOKEN:
     valueFrom:
       secretKeyRef:
-        name: grafana-admin
+        name: grafana-admin-secret
         key: jellyfin-api-key
 grafana.ini:
   analytics:
