@@ -59,14 +59,13 @@ datasources:
         type: marcusolsson-json-datasource
         uid: jellyfin
         access: proxy
-        url: http://jellyfin.servarr.svc.cluster.local:8096/Sessions
+        url: http://jellyfin.servarr.svc.cluster.local:8096
         jsonData:
           httpMethod: GET
           timeout: 30
           httpHeaderName1: Authorization
         secureJsonData:
           httpHeaderValue1: MediaBrowser Token=${JELLYFIN_API_KEY}
-          apiKey: ${JELLYFIN_API_KEY}
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
