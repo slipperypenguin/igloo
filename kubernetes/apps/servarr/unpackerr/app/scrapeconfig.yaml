@@ -10,3 +10,5 @@ spec:
   staticConfigs:
     - targets:
         - unpackerr.servarr.svc.cluster.local:5656
+        - radarr.servarr.svc.cluster.local:7878
+        - sonarr.servarr.svc.cluster.local:8989
