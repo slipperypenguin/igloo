@@ -14,6 +14,10 @@ envValueFrom:
     secretKeyRef:
       name: grafana-admin-secret
       key: jellyfin-api-key
+  JELLYFIN_AUTH_HEADER:
+    secretKeyRef:
+      name: grafana-admin-secret
+      key: jellyfin-auth-header
 grafana.ini:
   analytics:
     check_for_updates: false
@@ -65,7 +69,7 @@ datasources:
           allowed_hosts: ["jellyfin.servarr.svc.cluster.local"]
         secureJsonData:
           httpHeaderName: Authorization
-          httpHeaderValue: MediaBrowser Token=${JELLYFIN_API_KEY}
+          httpHeaderValue: ${JELLYFIN_AUTH_HEADER}
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
