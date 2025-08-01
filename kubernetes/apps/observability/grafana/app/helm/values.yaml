@@ -59,7 +59,7 @@ datasources:
         type: marcusolsson-json-datasource
         uid: jellyfin
         access: proxy
-        url: http://jellyfin.servarr.svc.cluster.local:8096
+        url: http://jellyfin.servarr.svc.cluster.local:8096/Sessions
         jsonData:
           httpMethod: GET
           timeout: 30
