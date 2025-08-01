@@ -56,16 +56,16 @@ datasources:
         jsonData:
           implementation: prometheus
       - name: Jellyfin
-        type: marcusolsson-json-datasource
+        type: yesoreyeram-infinity-datasource
         uid: jellyfin
         access: proxy
         url: http://jellyfin.servarr.svc.cluster.local:8096
         jsonData:
-          httpMethod: GET
-          timeout: 30
-          httpHeaderName1: Authorization
+          auth_method: header
+          allowed_hosts: ["jellyfin.servarr.svc.cluster.local"]
         secureJsonData:
-          httpHeaderValue1: MediaBrowser Token=${JELLYFIN_API_KEY}
+          httpHeaderName: Authorization
+          httpHeaderValue: MediaBrowser Token=${JELLYFIN_API_KEY}
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
@@ -221,10 +221,10 @@ plugins:
   - grafana-clock-panel
   - grafana-piechart-panel
   - grafana-worldmap-panel
-  - marcusolsson-json-datasource
   - natel-discrete-panel
   - pr0ps-trackmap-panel
   - vonage-status-panel
+  - yesoreyeram-infinity-datasource
 serviceMonitor:
   enabled: true
 route:
