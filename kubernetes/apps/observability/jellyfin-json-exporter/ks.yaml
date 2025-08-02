@@ -16,6 +16,10 @@ spec:
       namespace: observability
   interval: 1h
   path: ./kubernetes/apps/observability/jellyfin-json-exporter/app
+  postBuild:
+    substituteFrom:
+      - name: jellyfin-json-exporter-secret
+        kind: Secret
   prune: true
   retryInterval: 2m
   sourceRef:
