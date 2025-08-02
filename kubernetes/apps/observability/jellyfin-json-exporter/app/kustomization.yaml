@@ -10,3 +10,5 @@ configMapGenerator:
   - name: jellyfin-json-exporter-config
     files:
       - jje.yaml=./resources/config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
