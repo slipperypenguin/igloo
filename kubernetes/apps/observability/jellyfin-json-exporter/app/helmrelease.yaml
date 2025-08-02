@@ -27,7 +27,7 @@ spec:
               repository: quay.io/prometheuscommunity/json-exporter
               tag: v0.7.0@sha256:3a777171d39ad435cb39519e84e0a8b5c63c7e716cc06011f8140cfaabfc1baf
             args:
-              - --config.file=/config/config.yml
+              - --config.file=/config/jje.yaml
             env:
               TZ: America/Los_Angeles
             envFrom:
@@ -78,36 +78,6 @@ spec:
         type: configMap
         name: jellyfin-json-exporter-config
         globalMounts:
-          - path: /config
+          - path: /config/jje.yaml
+            subPath: jje.yaml
             readOnly: true
-    configMaps:
-      config:
-        enabled: true
-        data:
-          config.yaml: |
-            modules:
-              jellyfin_sessions:
-                headers:
-                  Authorization: "MediaBrowser Token={{ .Values.JELLYFIN_API_KEY }}"
-                  Content-Type: "application/json"
-                  Accept: "application/json"
-                metrics:
-                  - name: jellyfin_session_info
-                    type: object
-                    help: "Jellyfin session information"
-                    path: "{ [?(@.NowPlayingItem)] }"
-                    labels:
-                      user_name: "{ .UserName }"
-                      item_type: "{ .NowPlayingItem.Type }"
-                      item_name: "{ .NowPlayingItem.Name }"
-                      item_path: "{ .NowPlayingItem.Path }"
-                      series_name: "{ .NowPlayingItem.SeriesName }"
-                      episode_index: "{ .NowPlayingItem.IndexNumber }"
-                      season_index: "{ .NowPlayingItem.ParentIndexNumber }"
-                      client_name: "{ .Client }"
-                      device_name: "{ .DeviceName }"
-                      session_id: "{ .Id }"
-                    values:
-                      is_paused: "{ .PlayState.IsPaused }"
-                      position_ticks: "{ .PlayState.PositionTicks }"
-                      volume_level: "{ .PlayState.VolumeLevel }"
