@@ -6,3 +6,7 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./scrapeconfig.yaml
+configMapGenerator:
+  - name: jellyfin-json-exporter-config
+    files:
+      - jje.yaml=./resources/config.yaml

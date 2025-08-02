@@ -1,0 +1,26 @@
+modules:
+  jellyfin_sessions:
+    headers:
+      Authorization: "MediaBrowser Token={{ .Values.JELLYFIN_API_KEY }}"
+      Content-Type: "application/json"
+      Accept: "application/json"
+    metrics:
+      - name: jellyfin_session_info
+        type: object
+        help: "User playback metrics from Jellyfin"
+        path: "{ [?(@.NowPlayingItem)] }"
+        labels:
+          user_name: "{ .UserName }"
+          item_type: "{ .NowPlayingItem.Type }"
+          item_name: "{ .NowPlayingItem.Name }"
+          item_path: "{ .NowPlayingItem.Path }"
+          series_name: "{ .NowPlayingItem.SeriesName }"
+          episode_index: "{ .NowPlayingItem.IndexNumber }"
+          season_index: "{ .NowPlayingItem.ParentIndexNumber }"
+          client_name: "{ .Client }"
+          device_name: "{ .DeviceName }"
+          session_id: "{ .Id }"
+        values:
+          is_paused: "{ .PlayState.IsPaused }"
+          position_ticks: "{ .PlayState.PositionTicks }"
+          volume_level: "{ .PlayState.VolumeLevel }"
