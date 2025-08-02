@@ -9,15 +9,6 @@ env:
   GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
   GF_SECURITY_ANGULAR_SUPPORT_ENABLED: true
   GF_SERVER_ROOT_URL: https://grafana.igloo.sh
-envValueFrom:
-  JELLYFIN_API_KEY:
-    secretKeyRef:
-      name: grafana-admin-secret
-      key: jellyfin-api-key
-  JELLYFIN_AUTH_HEADER:
-    secretKeyRef:
-      name: grafana-admin-secret
-      key: jellyfin-auth-header
 grafana.ini:
   analytics:
     check_for_updates: false
@@ -37,7 +28,6 @@ datasources:
       - { name: Alertmanager, orgId: 1 }
       - { name: Loki, orgId: 1 }
       - { name: Prometheus, orgId: 1 }
-      - { name: Jellyfin, orgId: 1 }
     datasources:
       - name: Prometheus
         type: prometheus
@@ -59,17 +49,6 @@ datasources:
         url: http://alertmanager-operated.observability.svc.cluster.local:9093
         jsonData:
           implementation: prometheus
-      - name: Jellyfin
-        type: yesoreyeram-infinity-datasource
-        uid: jellyfin
-        access: proxy
-        url: http://jellyfin.servarr.svc.cluster.local:8096
-        jsonData:
-          auth_method: header
-          allowed_hosts: ["jellyfin.servarr.svc.cluster.local"]
-        secureJsonData:
-          httpHeaderName: Authorization
-          httpHeaderValue: ${JELLYFIN_AUTH_HEADER}
 dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
@@ -115,10 +94,6 @@ dashboards:
       gnetId: 15038
       revision: 3
       datasource: Prometheus
-    jellyfin-sessions:
-      # renovate: depName="Jellyfin"
-      url: https://gist.githubusercontent.com/dfsnow/aad4ec99afb413968c49efb03bdb1ab9/raw/33b8d1652bdecf72ca6b9fc24fe14a41717816cd/state-timeline-grafana-panel.json
-      datasource: Jellyfin
     kubernetes-api-server:
       # renovate: depName="Kubernetes / System / API Server"
       gnetId: 15761

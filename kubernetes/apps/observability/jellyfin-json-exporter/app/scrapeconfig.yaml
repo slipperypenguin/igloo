@@ -1,0 +1,25 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: jellyfin-json-exporter
+spec:
+  metricsPath: /probe
+  params:
+    module: [jellyfin_sessions]
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+      replacement: http://jellyfin.servarr.svc.cluster.local:8096/Sessions
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: jellyfin-json-exporter.observability.svc.cluster.local:7979
+    - targetLabel: job
+      replacement: jellyfin-sessions
+  scrapeInterval: 30s
+  scrapeTimeout: 25s
+  staticConfigs:
+    - targets:
+        - jellyfin.servarr.svc.cluster.local:8096
