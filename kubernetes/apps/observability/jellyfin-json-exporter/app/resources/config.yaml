@@ -1,7 +1,7 @@
 modules:
   jellyfin_sessions:
     headers:
-      Authorization: "MediaBrowser Token={{ .Values.JELLYFIN_API_KEY }}"
+      Authorization: "MediaBrowser Token=${JELLYFIN_API_KEY}"
       Content-Type: "application/json"
       Accept: "application/json"
     metrics:
