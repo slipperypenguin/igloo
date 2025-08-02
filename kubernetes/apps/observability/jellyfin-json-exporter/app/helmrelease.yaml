@@ -24,8 +24,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/prometheus-community/json-exporter
-              tag: v0.6.0
+              repository: quay.io/prometheuscommunity/json-exporter
+              tag: v0.7.0@sha256:3a777171d39ad435cb39519e84e0a8b5c63c7e716cc06011f8140cfaabfc1baf
             args:
               - --config.file=/config/config.yml
             env:
