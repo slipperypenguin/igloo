@@ -18,8 +18,8 @@ spec:
       replacement: jellyfin-json-exporter.observability.svc.cluster.local:7979
     - targetLabel: job
       replacement: jellyfin-sessions
-  scrapeInterval: 30s
-  scrapeTimeout: 25s
+  scrapeInterval: 1m
+  scrapeTimeout: 45s
   staticConfigs:
     - targets:
         - jellyfin.servarr.svc.cluster.local:8096
