@@ -88,7 +88,7 @@ spec:
               - name: nvme0n1
           - name: dell-node-01
             devices:
-              - name: sdb
+              - name: sda
           - name: dell-node-02
             devices:
               - name: sda
