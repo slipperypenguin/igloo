@@ -38,6 +38,7 @@ spec:
               N8N_HOST: n8n.igloo.sh
               N8N_LOG_LEVEL: info
               N8N_LOG_OUTPUT: console
+              N8N_RUNNERS_ENABLED: true
             envFrom:
               - secretRef:
                   name: n8n-secret
@@ -89,3 +90,7 @@ spec:
           n8n:
             app:
               - path: /home/node/.n8n
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /home/node/.cache
