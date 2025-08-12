@@ -35,6 +35,7 @@ spec:
               UN_SONARR_0_PATHS_0: /data/nas-media/Downloads/qbittorrent/tv-sonarr
               UN_RADARR_0_URL: http://radarr.servarr.svc.cluster.local:7878
               UN_RADARR_0_PATHS_0: /data/nas-media/Downloads/qbittorrent/radarr
+              UN_FOLDER_0_EXTRACT_ISOS: true
             envFrom:
               - secretRef:
                   name: unpackerr-secret
