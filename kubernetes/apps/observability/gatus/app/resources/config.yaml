@@ -39,7 +39,7 @@ endpoints:
       - type: pushover
 external-endpoints:
   - name: alertmanager-watchdog
-    group: guarded
+    group: external
     token: ${WATCHDOG_HEARTBEAT_TOKEN}
     heartbeat:
       interval: 30m
