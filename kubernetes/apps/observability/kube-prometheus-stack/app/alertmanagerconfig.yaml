@@ -17,6 +17,11 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
+      - receiver: gatus-watchdog-heartbeat
+        matchers:
+          - name: alertname
+            value: Watchdog
+            matchType: =
       - receiver: pushover
         matchers:
           - name: severity
@@ -34,6 +39,16 @@ spec:
           matchType: =
   receivers:
     - name: "null"
+    - name: gatus-watchdog-heartbeat
+      webhookConfigs:
+        - url: http://gatus.observability.svc.cluster.local/api/v1/endpoints/alertmanager-watchdog/external
+          httpConfig:
+            authorization:
+              type: Bearer
+              credentials:
+                name: &secret alertmanager-secret
+                key: GATUS_WATCHDOG_HEARTBEAT_TOKEN
+          sendResolved: false
     - name: pushover
       pushoverConfigs:
         - html: true
@@ -65,7 +80,7 @@ spec:
             {{ .CommonLabels.alertname }}
           ttl: 86400s
           token:
-            name: &secret alertmanager-secret
+            name: *secret
             key: ALERTMANAGER_PUSHOVER_TOKEN
           userKey:
             name: *secret
