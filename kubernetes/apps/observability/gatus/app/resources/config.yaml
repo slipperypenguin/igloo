@@ -37,3 +37,14 @@ endpoints:
       - "[STATUS] == 404"
     alerts:
       - type: pushover
+external-endpoints:
+  - name: alertmanager-watchdog
+    group: external
+    token: ${WATCHDOG_HEARTBEAT_TOKEN}
+    heartbeat:
+      interval: 30m
+    alerts:
+      - type: pushover
+        description: "AlertManager watchdog heartbeat failed - alerting pipeline may be down"
+        failure-threshold: 1
+        success-threshold: 1
