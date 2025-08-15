@@ -42,9 +42,9 @@ external-endpoints:
     group: external
     token: ${WATCHDOG_HEARTBEAT_TOKEN}
     heartbeat:
-      interval: 30m
+      interval: 14h
     alerts:
       - type: pushover
         description: "AlertManager watchdog heartbeat failed - alerting pipeline may be down"
-        failure-threshold: 1
+        failure-threshold: 2
         success-threshold: 1
