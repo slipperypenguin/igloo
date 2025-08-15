@@ -22,7 +22,6 @@ spec:
           - name: alertname
             value: Watchdog
             matchType: =
-            continue: false
       - receiver: pushover
         matchers:
           - name: severity
