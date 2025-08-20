@@ -1,4 +1,4 @@
-TS_AUTHKEY: ENC[AES256_GCM,data:11SkgiQH4AX4MkMahSyJ3TSeuJy/6ye2Pg2kmLnMzkrQKgdoZt07qBndZkDfIEliob9P/5Aj8oL+v1fmm+o=,iv:XFmIm7jPuMEvLnXMdFLrJS2s8qO7ZnHKADuQzNQyLP4=,tag:YM/Q10hesAY4xlYJ7jBi/g==,type:str]
+TS_AUTHKEY: ENC[AES256_GCM,data:Uzf/CuBxGS77x+mhEQQC/7aI3BL07/YU/x0PJzJE5Gn52jUa5yoYZ+70zKDYntJJi3Okts0A/G7OhzlIcA==,iv:UMjLKzJ6nRLqnmayjIoiZUg5nWh5dmouoEZF8FRS6cM=,tag:4wKepkKCu69ysgQ0uBQS2g==,type:str]
 TALOS_EDITOR: ENC[AES256_GCM,data:oKVhVg==,iv:lI6h9gKAmBR8a43eoj3XM3PgmSzRnvn4BeQ+ZgvEdgQ=,tag:KSKE5hay74zF5TVee7QIWw==,type:str]
 sops:
   age:
@@ -11,8 +11,8 @@ sops:
         VU5Mc0xTRC9lWVd5elVyRmwxTk1QK1EK+uJG6cCrFGKJGKRqx1nuwMCxjCB6hem0
         uMF4soK+AdSg+tZ4plLpOBiiUajRaIj+Xae5SFZMsu5TXvUfdQnbqg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-07-30T00:09:22Z"
-  mac: ENC[AES256_GCM,data:wrdDg+IwkbFru7Kxw0eFbN0yErKJdeBlXHxxmXdNquucTLRK97rkNZA/P4exN8Q29s8ihb6nPigtQ+IxtYblRnGACO9VqF6D1sc8HliEqDgbucuWgSbB4Tp8VmCZihtcgBZ/uXsSZsdQhzIXirUnNB1alElZ/s3Zh3Ses/uF+78=,iv:RqRhrciK1mVy3Pnn6F1Te98INx6Zfc1L9O+PDkILBrQ=,tag:zxrsCoj4Xbk080r9zfg7sw==,type:str]
+  lastmodified: "2025-08-20T22:39:18Z"
+  mac: ENC[AES256_GCM,data:PZnTZ08gH3pXWORAAdMybxjXvPuslf7TGt4JQbXSYD57ZRQ/BcdCLTs06jq16t/lfZ1uA6zjCQpBl3wS+4JkJlRexhFbeudOXKSLQRMMKir7rqkFIjRL1ONSOBkud+1ow3WeNLMUmKr4S2+/k6SpvKlnl3awZ+mEhYvMUrUMrfE=,iv:ryRwfCqZ5ZqhKXpUCE2BqpbP7HIYeS0dgYpq8N6Kwnc=,tag:I0wBa6Mu8aa8ZYXWK5T60g==,type:str]
   unencrypted_suffix: _unencrypted
   mac_only_encrypted: true
   version: 3.10.2
