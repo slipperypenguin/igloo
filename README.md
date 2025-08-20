@@ -8,7 +8,7 @@
 <br/>
 <br/>
 
-[![k8s](https://img.shields.io/badge/k8s-v1.33.1-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
+[![k8s](https://img.shields.io/badge/k8s-v1.33.3-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
 <br/>
 
 
@@ -34,7 +34,6 @@ My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a
 - [cloudflared](https://github.com/cloudflare/cloudflared): Enables Cloudflare secure access to certain ingresses.
 - [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically syncs ingress DNS records to a DNS provider.
 - [external-secrets](https://github.com/external-secrets/external-secrets): Managed Kubernetes secrets using [1Password Connect](https://github.com/1Password/connect).
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Kubernetes ingress controller using NGINX as a reverse proxy and load balancer.
 - [openebs](https://github.com/openebs/openebs): local storage provisioner
   - [rook](https://github.com/rook/rook): Distributed block storage for persistent storage.
 - [sops](https://github.com/getsops/sops): Managed secrets for Kubernetes and Terraform which are committed to Git.
@@ -82,6 +81,7 @@ This cluster uses two instances of [ExternalDNS](https://github.com/kubernetes-s
 
 | Device             | Count | OS Disk Size   | Data Disk Size | Ram  | Purpose                       | Alias       | OS               |
 |--------------------|-------|----------------|----------------|------|-------------------------------|-------------|------------------|
+| Asus NUC 14 Pro   | 1     | 512GB NVMe SSD      | 2TB SATA SSD         | 64GB  | Kubernetes Control-Plane        | asus-node-01 | Talos Linux      |
 | Dell Optiplex 7040 | 1     | 256GB NVMe SSD | 1TB SATA SSD        | 16GB | Kubernetes Worker             | dell-node-01 | Talos Linux      |
 | Dell Optiplex 7060   | 1     | 512GB NVMe SSD      | 1TB SATA SSD         | 32GB  | Kubernetes Control-Plane        | dell-node-02 | Talos Linux      |
 | Helios64 NAS       | 1     | N/A            | 8x4TB RAID6    | 4GB  | Media and shared file storage | glacier     | Debian GNU/Linux |
