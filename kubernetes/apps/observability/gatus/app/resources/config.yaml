@@ -1,4 +1,5 @@
 ---
+# https://github.com/TwiN/gatus/blob/master/README.md#configuration
 web:
   port: ${WEB_PORT}
 storage:
@@ -10,6 +11,7 @@ debug: false
 ui:
   title: Status | Gatus
   header: Status
+  default-sort-by: group
 alerting:
   pushover:
     title: Gatus
