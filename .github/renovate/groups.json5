@@ -48,7 +48,7 @@
     },
     {
       "description": ["Flux Operator Group"],
-      "groupName": "Flux Operator",
+      "groupName": "flux-operator",
       "matchDatasources": ["docker"],
       "matchPackagePatterns": ["flux-operator", "flux-instance"],
       "group": {
@@ -72,6 +72,12 @@
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
+    },
+    {
+      "description": "Override Helmfile Dependency Name",
+      "matchDatasources": ["docker"],
+      "matchManagers": ["helmfile"],
+      "overrideDepName": "{{packageName}}",
     }
   ]
 }
