@@ -73,11 +73,5 @@
         "commitMessageTopic": "{{{groupName}}} group"
       }
     },
-    {
-      "description": "Override Helmfile Dependency Name",
-      "matchDatasources": ["docker"],
-      "matchManagers": ["helmfile"],
-      "overrideDepName": "{{packageName}}",
-    }
   ]
 }

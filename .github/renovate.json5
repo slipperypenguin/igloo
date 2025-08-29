@@ -8,6 +8,7 @@
     "github>slipperypenguin/igloo//.github/renovate/grafanaDashboards.json5",
     "github>slipperypenguin/igloo//.github/renovate/groups.json5",
     "github>slipperypenguin/igloo//.github/renovate/labels.json5",
+    "github>slipperypenguin/igloo//.github/renovate/overrides.json5",
     "github>slipperypenguin/igloo//.github/renovate/semanticCommits.json5",
     "helpers:pinGitHubActionDigests",
     ":automergeBranch",
