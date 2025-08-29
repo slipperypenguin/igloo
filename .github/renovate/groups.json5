@@ -48,7 +48,7 @@
     },
     {
       "description": ["Flux Operator Group"],
-      "groupName": "Flux Operator",
+      "groupName": "flux-operator",
       "matchDatasources": ["docker"],
       "matchPackagePatterns": ["flux-operator", "flux-instance"],
       "group": {
@@ -72,6 +72,6 @@
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       }
-    }
+    },
   ]
 }
