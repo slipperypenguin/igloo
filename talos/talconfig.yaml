@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.11.0
+talosVersion: v1.10.7
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.34.0
+kubernetesVersion: v1.33.4
 
 clusterName: "igloo"
 endpoint: https://192.168.20.6:6443
@@ -120,7 +120,8 @@ nodes:
           - TS_ACCEPT_DNS=true
   - hostname: "asus-node-01"
     ipAddress: "192.168.20.177"
-    installDisk: "/dev/nvme1n1"
+    installDiskSelector:
+      serial: TY250220B512G0217
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/a7a9e0525f0e4a61c52c256439ea2870134ada53fbba6fe10ed17b12e5b44a0c
