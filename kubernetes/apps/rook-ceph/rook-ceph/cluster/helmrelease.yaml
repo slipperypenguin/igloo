@@ -82,7 +82,7 @@ spec:
         nodes:
           - name: asus-node-01
             devices:
-              - name: nvme0n1
+              - name: /dev/disk/by-id/nvme-KINGSTON_SKC3000D2048G_50026B76872804C3
           - name: dell-node-01
             devices:
               - name: sda
