@@ -34,13 +34,6 @@ spec:
           - kind: Secret
             name: igloo-sh-production-tls
     # listeners to handle root domain
-    - name: root-http
-      protocol: HTTP
-      port: 80
-      hostname: "igloo.sh"
-      allowedRoutes:
-        namespaces:
-          from: Same
     - name: root-https
       protocol: HTTPS
       port: 443
