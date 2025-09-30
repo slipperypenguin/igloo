@@ -118,7 +118,7 @@ spec:
       app:
         hostnames: ["{{ .Release.Name }}.igloo.sh"]
         parentRefs:
-          - name: internal # external
+          - name: external
             namespace: kube-system
             sectionName: https
         rules:
