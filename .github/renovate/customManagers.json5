@@ -33,6 +33,17 @@
       "autoReplaceStringTemplate": "depName='{{{depName}}}'\n{{{indentation}}}gnetId: {{{packageName}}}\n{{{indentation}}}revision: {{{newValue}}}",
       "datasourceTemplate": "custom.grafana-dashboards",
       "versioningTemplate": "regex:^(?<major>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Process OCI dependencies",
+      "managerFilePatterns": [
+        "/\\.yaml(?:\\.j2)?$/"
+      ],
+      "matchStrings": [
+        "oci://(?<depName>[^:]+):(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "docker"
     }
   ]
 }
