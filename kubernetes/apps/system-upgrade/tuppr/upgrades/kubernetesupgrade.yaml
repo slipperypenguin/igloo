@@ -9,6 +9,10 @@ spec:
     # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
     version: v1.34.0
   healthChecks:
+    - apiVersion: v1
+      kind: Node
+      expr: status.conditions.exists(c, c.type == "Ready" && c.status == "True")
+      timeout: 10m
     - apiVersion: volsync.backube/v1alpha1
       kind: ReplicationSource
       expr: |-

@@ -11,6 +11,9 @@ spec:
   policy:
     rebootMode: powercycle
   healthChecks:
+    - apiVersion: v1
+      kind: Node
+      expr: status.conditions.exists(c, c.type == "Ready" && c.status == "True")
     - apiVersion: volsync.backube/v1alpha1
       kind: ReplicationSource
       expr: |-
