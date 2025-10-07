@@ -18,7 +18,7 @@ run = "uv pip install -r requirements.txt"
 [tools]
 # Template tools
 python = "3.13"
-uv = "0.8.23"
+uv = "0.8.24"
 # Operations tools
 "aqua:budimanjojo/talhelper" = "3.0.37"
 "aqua:cilium/cilium-cli" = "0.18.7"
