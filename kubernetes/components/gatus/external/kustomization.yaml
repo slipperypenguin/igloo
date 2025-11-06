@@ -7,6 +7,8 @@ configMapGenerator:
     files:
       - config.yaml=./config.yaml
     options:
+      annotations:
+        gatus.home-operations.com/enabled: "true"
       labels:
         gatus.io/enabled: "true"
 generatorOptions:
