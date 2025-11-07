@@ -95,8 +95,11 @@ spec:
           type: ClusterRole
           rules:
             - apiGroups: [""]
-              resources: ["configmaps", "secrets"]
-              verbs: ["get", "watch", "list"]
+              resources: ["services"]
+              verbs: ["get", "list", "watch"]
+            - apiGroups: ["gateway.networking.k8s.io"]
+              resources: ["gateways", "httproutes"]
+              verbs: ["get", "list", "watch"]
       bindings:
         gatus:
           type: ClusterRoleBinding
@@ -106,6 +109,8 @@ spec:
             - identifier: gatus
     route:
       app:
+        annotations:
+          gatus.home-operations.com/enabled: "false"
         hostnames:
           - "{{ .Release.Name }}.igloo.sh"
           - status.igloo.sh

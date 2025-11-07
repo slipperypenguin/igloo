@@ -9,8 +9,6 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  components:
-    - ../../../../components/gatus/guarded
   dependsOn:
     - name: openebs
       namespace: openebs-system
@@ -19,9 +17,6 @@ spec:
   interval: 1h
   path: ./kubernetes/apps/observability/kube-prometheus-stack/app
   postBuild:
-    substitute:
-      APP: kube-prometheus-stack
-      GATUS_SUBDOMAIN: prometheus
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
