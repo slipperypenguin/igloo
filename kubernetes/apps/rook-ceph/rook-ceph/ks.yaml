@@ -29,8 +29,6 @@ metadata:
   name: &app rook-ceph-cluster
   namespace: &namespace rook-ceph
 spec:
-  components:
-    - ../../../../components/gatus/guarded
   dependsOn:
     - name: rook-ceph
       namespace: *namespace
@@ -41,10 +39,6 @@ spec:
       namespace: *namespace
   interval: 1h
   path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
-  postBuild:
-    substitute:
-      APP: *app
-      GATUS_SUBDOMAIN: rook
   prune: true
   retryInterval: 2m
   sourceRef:
