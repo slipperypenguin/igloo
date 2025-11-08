@@ -74,6 +74,9 @@ spec:
             namespace: kube-system
             sectionName: https
       webhooks:
+        annotations:
+          gatus.home-operations.com/endpoint: |-
+            group: external
         hostnames:
           - n8n-webhook.igloo.sh
         parentRefs:

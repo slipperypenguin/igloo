@@ -27,6 +27,9 @@ persistence:
       - path: /app/data
 route:
   app:
+    annotations:
+      gatus.home-operations.com/endpoint: |-
+        group: external
     enabled: true
     hostnames:
       - "{{ .Release.Name }}.${SECRET_DOMAIN}"

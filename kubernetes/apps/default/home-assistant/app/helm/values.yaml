@@ -42,6 +42,7 @@ route:
     annotations:
       gatus.home-operations.com/endpoint: |-
         conditions: ["[STATUS] == 200"]
+        group: external
     hostnames:
       - "{{ .Release.Name }}.igloo.sh"
       - hass.igloo.sh

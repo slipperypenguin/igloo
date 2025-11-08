@@ -82,6 +82,9 @@ spec:
             port: 8096
     route:
       app:
+        annotations:
+          gatus.home-operations.com/endpoint: |-
+            group: external
         hostnames:
           - "{{ .Release.Name }}.igloo.sh"
           - watch.igloo.sh
