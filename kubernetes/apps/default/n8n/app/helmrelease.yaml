@@ -76,6 +76,7 @@ spec:
       webhooks:
         annotations:
           gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 404"]
             group: external
         hostnames:
           - n8n-webhook.igloo.sh
