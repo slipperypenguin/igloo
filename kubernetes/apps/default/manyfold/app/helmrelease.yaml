@@ -116,9 +116,6 @@ spec:
             port: 6379
     route:
       app:
-        annotations:
-          gatus.home-operations.com/endpoint: |-
-            group: external
         hostnames: ["{{ .Release.Name }}.igloo.sh"]
         parentRefs:
           - name: external

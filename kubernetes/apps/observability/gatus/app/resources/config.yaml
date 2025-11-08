@@ -30,7 +30,7 @@ connectivity:
     interval: 1m
 external-endpoints:
   - name: alertmanager-watchdog
-    group: guarded
+    group: internal
     token: ${WATCHDOG_HEARTBEAT_TOKEN}
     heartbeat:
       interval: 14h

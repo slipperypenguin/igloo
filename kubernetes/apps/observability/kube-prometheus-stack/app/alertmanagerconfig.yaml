@@ -41,7 +41,7 @@ spec:
     - name: "null"
     - name: gatus-watchdog-heartbeat
       webhookConfigs:
-        - url: http://gatus.observability.svc.cluster.local/api/v1/endpoints/guarded_alertmanager-watchdog/external?success=true
+        - url: http://gatus.observability.svc.cluster.local/api/v1/endpoints/internal_alertmanager-watchdog/external?success=true
           httpConfig:
             authorization:
               type: Bearer
