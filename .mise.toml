@@ -21,7 +21,7 @@ python = "3.14.1"
 uv = "0.9.14"
 # Operations tools
 "aqua:budimanjojo/talhelper" = "3.0.41"
-"aqua:cilium/cilium-cli" = "0.18.8"
+"aqua:cilium/cilium-cli" = "0.18.9"
 "aqua:cloudflare/cloudflared" = "2025.11.1"
 "aqua:FiloSottile/age" = "1.2.1"
 "aqua:fluxcd/flux2" = "2.7.5"
