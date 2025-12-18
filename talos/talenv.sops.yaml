@@ -1,18 +1,18 @@
-TS_AUTHKEY: ENC[AES256_GCM,data:Uzf/CuBxGS77x+mhEQQC/7aI3BL07/YU/x0PJzJE5Gn52jUa5yoYZ+70zKDYntJJi3Okts0A/G7OhzlIcA==,iv:UMjLKzJ6nRLqnmayjIoiZUg5nWh5dmouoEZF8FRS6cM=,tag:4wKepkKCu69ysgQ0uBQS2g==,type:str]
-TALOS_EDITOR: ENC[AES256_GCM,data:oKVhVg==,iv:lI6h9gKAmBR8a43eoj3XM3PgmSzRnvn4BeQ+ZgvEdgQ=,tag:KSKE5hay74zF5TVee7QIWw==,type:str]
+TS_AUTHKEY: ENC[AES256_GCM,data:5Nj0weTnyZKvxGpmCc7bO18btBUdrHytv4qs79O38DmjtOBrmtJp6wsOCyXjqEsCw9saA6woK4Xo/XjEAA==,iv:xUEQNyCar41L+pWazzEVMeHlGZQI+85TilPNe3uXz6M=,tag:y6FgZX/3yjnXhFLje7uJuA==,type:str]
+TALOS_EDITOR: ENC[AES256_GCM,data:xoxRzQ==,iv:0OH8TKCyee6p12BTFjW6y/bcIEjaXK3Vbra6nXETDw4=,tag:BUhFl7q2KM+7N/NbXv7v4A==,type:str]
 sops:
   age:
     - recipient: age1w2sz2tk9h82n8g0cygzet8q6h0z2xrs4r8jjym268sudgjwpqd3shvrvzm
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6dUVDdTBmUW5nV3hDQVNT
-        ZDdockhBOFZQSG1INjB5T3VseGZMbkxXMFE0CkJLV09iS05hcGdMR3FzUmlsdFFw
-        dzlYTWZ4eU9hMm9RSURZTEl3MEt4bGcKLS0tICtXekprZTVVcFRRc0Myd3g0R29n
-        VU5Mc0xTRC9lWVd5elVyRmwxTk1QK1EK+uJG6cCrFGKJGKRqx1nuwMCxjCB6hem0
-        uMF4soK+AdSg+tZ4plLpOBiiUajRaIj+Xae5SFZMsu5TXvUfdQnbqg==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNM21rMFZJQnRJL3lVdFhT
+        azFvcGFpaXBONG5OSUthelNwdU95ZG51Z1NrCjdMNGk4MVBxUUkxY2s4UjBDVHpI
+        aW85YmRLMG9vVnFEQUhRQUtXRmsralkKLS0tIHV0M2lxRmdacSt5Z0J3Y3VyTXl5
+        TTJGUVNzNExlVUF5VzdKOWFESXkyZlUKB3lngl7WiLBg5kC4MHCl+la5uY5fTSRS
+        MiVTVkNj0vcwH73lMQvHPDZPQZ+U7yob5UY2yqn8vDKN/nO5vr86LA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-08-20T22:39:18Z"
-  mac: ENC[AES256_GCM,data:PZnTZ08gH3pXWORAAdMybxjXvPuslf7TGt4JQbXSYD57ZRQ/BcdCLTs06jq16t/lfZ1uA6zjCQpBl3wS+4JkJlRexhFbeudOXKSLQRMMKir7rqkFIjRL1ONSOBkud+1ow3WeNLMUmKr4S2+/k6SpvKlnl3awZ+mEhYvMUrUMrfE=,iv:ryRwfCqZ5ZqhKXpUCE2BqpbP7HIYeS0dgYpq8N6Kwnc=,tag:I0wBa6Mu8aa8ZYXWK5T60g==,type:str]
+  lastmodified: "2025-12-18T06:46:55Z"
+  mac: ENC[AES256_GCM,data:GlujHCfeiP77bMUx/BKkKo4ZoLnEkHH/SCj3FnFS5NeTCuIq9e9yIJ0kVoNf9tiPGxSo+irETc5ZNqyhQ/smHCQ4guk6GAhCa6hVj1h6NeGT2/TLfkOWxukD1x4t5pn/pbnQ0Ii+IHlyldKkWHKKTMgu6ksZcFrlwf5UkqJfkwQ=,iv:eVq8hJRebnrOzXU1pQnzI/q7HFpkYqpG/80SS9t7MtA=,tag:3rKqD5H7RVfZv5Kqptq/YA==,type:str]
   unencrypted_suffix: _unencrypted
   mac_only_encrypted: true
-  version: 3.10.2
+  version: 3.11.0
