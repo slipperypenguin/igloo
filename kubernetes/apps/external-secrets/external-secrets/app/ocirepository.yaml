@@ -11,6 +11,6 @@ spec:
     operation: copy
   url: oci://ghcr.io/external-secrets/charts/external-secrets
   ref:
-    tag: 1.1.1
+    tag: 1.2.1
   verify:
     provider: cosign
