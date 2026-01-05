@@ -13,7 +13,8 @@ machine:
       permissions: 0o644
       content: |
         [ NFSMount_Global_Options ]
-        nfsvers=4.2
+        # nfsvers=4.2
         hard=True
-        nconnect=16
+        lock=False
+        nconnect=8
         noatime=True
