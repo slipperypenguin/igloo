@@ -90,7 +90,8 @@ spec:
               op: "add", path: "/spec/template/spec/containers/0/volumeMounts/-",
               value: Object.spec.template.spec.containers.volumeMounts{
                 name: "repository",
-                mountPath: "/repository"
+                mountPath: "/repository",
+                subPath: "Backup/Volsync"
               }
             },
             JSONPatch{
@@ -99,7 +100,7 @@ spec:
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
                   server: "100.68.189.69",
-                  path: "/export/Glacier02/Backup/Volsync"
+                  path: "/export/Glacier02"
                 }
               }
             }
