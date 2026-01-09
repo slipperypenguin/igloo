@@ -86,4 +86,3 @@ spec:
         globalMounts:
           - path: /data/nas-media/Downloads
             subPath: Downloads
-
