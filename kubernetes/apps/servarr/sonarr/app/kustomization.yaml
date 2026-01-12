@@ -7,6 +7,10 @@ resources:
   - ./helmrelease.yaml
   - ./pvc.yaml
 configMapGenerator:
+  - name: sonarr-configmap
+    files:
+      - refresh-series.sh=./resources/refresh-series.sh
+      - tag-codecs.sh=./resources/tag-codecs.sh
   - name: sonarr-loki-rules
     files:
       - sonarr.yaml=./lokirule.yaml
