@@ -11,7 +11,7 @@ sonarr:
         rename: true
         standard: default
       season: default
-      series: jellyfin-imdb
+      series: jellyfin-tvdb
     quality_definition:
       type: series
     quality_profiles:
@@ -37,10 +37,10 @@ radarr:
     api_key: !env_var RADARR_API_KEY
     delete_old_custom_formats: true
     media_naming:
-      folder: jellyfin-imdb
+      folder: jellyfin-tvdb
       movie:
         rename: true
-        standard: jellyfin-imdb
+        standard: jellyfin-tvdb
     quality_definition:
       type: sqp-uhd
     quality_profiles:
