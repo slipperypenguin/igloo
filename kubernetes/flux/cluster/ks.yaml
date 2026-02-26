@@ -6,6 +6,8 @@ metadata:
   name: cluster-apps
   namespace: flux-system
 spec:
+  decryption:
+    provider: sops
   interval: 1h
   path: ./kubernetes/apps
   prune: true
@@ -21,6 +23,9 @@ spec:
         kind: Kustomization
         metadata:
           name: not-used
+        spec:
+          decryption:
+            provider: sops
       target:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
