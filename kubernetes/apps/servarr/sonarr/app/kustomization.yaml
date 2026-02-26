@@ -10,7 +10,7 @@ configMapGenerator:
   - name: sonarr-configmap
     files:
       - refresh-series.sh=./resources/refresh-series.sh
-      - tag-codecs.sh=./resources/tag-codecs.sh
+      - tag-resolution.sh=./resources/tag-resolution.sh
   - name: sonarr-loki-rules
     files:
       - sonarr.yaml=./lokirule.yaml
