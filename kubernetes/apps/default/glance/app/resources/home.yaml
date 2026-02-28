@@ -1,0 +1,38 @@
+- name: Home
+  width: slim
+  hide-desktop-navigation: true
+  center-vertically: true
+  columns:
+    - size: full
+      widgets:
+        - type: search
+          autofocus: true
+
+        - type: monitor
+          cache: 1m
+          title: Services
+          sites:
+            - title: Jellyfin
+              url: https://google.com/
+              icon: sh:jellyfin
+            - title: qBittorrent # only for Linux ISOs
+              url: https://google.com/
+              icon: si:qbittorrent
+        - type: bookmarks
+          groups:
+            - title: General
+              links:
+                - title: PlainTextSports
+                  url: https://plaintextsports.com
+                - title: Gmail
+                  url: https://mail.google.com/mail/u/0/
+                - title: Github
+                  url: https://github.com/
+            - title: Entertainment
+              links:
+                - title: YouTube
+                  url: https://www.youtube.com/
+            - title: Social
+              links:
+                - title: Reddit
+                  url: https://www.reddit.com/
