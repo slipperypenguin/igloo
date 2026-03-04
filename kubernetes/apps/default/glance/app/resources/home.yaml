@@ -10,13 +10,15 @@
 
         - type: bookmarks
           title: Services
-          sites:
-            - title: Jellyfin
-              url: https://google.com/
-              icon: sh:jellyfin
-            - title: qBittorrent # only for Linux ISOs
-              url: https://google.com/
-              icon: si:qbittorrent
+          groups:
+            - title: Internal Services
+              links:
+                - title: Jellyfin
+                  url: https://google.com/
+                  icon: sh:jellyfin
+                - title: qBittorrent
+                  url: https://google.com/
+                  icon: si:qbittorrent
         - type: bookmarks
           groups:
             - title: General
