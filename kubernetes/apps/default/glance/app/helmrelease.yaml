@@ -79,8 +79,3 @@ spec:
         name: glance-configmap
         globalMounts:
           - path: /app/config
-      secret-files:
-        type: secret
-        name: glance-config-secret
-        globalMounts:
-          - path: /app/config/secrets
