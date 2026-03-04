@@ -8,8 +8,7 @@
         - type: search
           autofocus: true
 
-        - type: monitor
-          cache: 1m
+        - type: bookmarks
           title: Services
           sites:
             - title: Jellyfin
