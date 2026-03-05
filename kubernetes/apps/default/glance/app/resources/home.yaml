@@ -1,3 +1,4 @@
+# ref: https://github.com/glanceapp/glance/blob/main/docs/configuration.md
 - name: Home
   width: slim
   hide-desktop-navigation: true
@@ -50,9 +51,11 @@
                 - title: Alertmanager
                   url: https://alertmanager.igloo.sh
                   icon: sh:prometheus-light
+                  hide-arrow: true
                 - title: Prometheus
                   url: https://prometheus.igloo.sh
                   icon: sh:prometheus
+                  hide-arrow: true
                 - title: Grafana
                   url: https://grafana.igloo.sh
                   icon: sh:grafana
