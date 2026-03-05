@@ -11,29 +11,111 @@
         - type: bookmarks
           title: Services
           groups:
-            - title: Internal Services
+            - title: External
               links:
+                - title: Gatus
+                  url: https://status.igloo.sh
+                  icon: sh:gatus
+                  hide-arrow: true
+                - title: Echo-Server
+                  url: https://echo-server.igloo.sh
+                  icon: sh:meshping
+                  hide-arrow: true
+                - title: Home Assistant
+                  url: https://hass.igloo.sh
+                  icon: sh:home-assistant
+                  hide-arrow: true
                 - title: Jellyfin
-                  url: https://google.com/
+                  url: https://jellyfin.igloo.sh
                   icon: sh:jellyfin
+                  hide-arrow: true
+                - title: JellySeerr
+                  url: https://requests.igloo.sh
+                  icon: sh:jellyseerr
+                  hide-arrow: true
+                - title: Readeck
+                  url: https://readeck.igloo.sh
+                  icon: sh:readeck
+                  hide-arrow: true
+                - title: n8n
+                  url: https://n8n.igloo.sh
+                  icon: sh:n8n
+                  hide-arrow: true
+                - title: Manyfold
+                  url: https://manyfold.igloo.sh
+                  icon: sh:manyfold
+                  hide-arrow: true
+            - title: Internal
+              links:
+                - title: Alertmanager
+                  url: https://alertmanager.igloo.sh
+                  icon: sh:prometheus-light
+                - title: Prometheus
+                  url: https://prometheus.igloo.sh
+                  icon: sh:prometheus
+                - title: Grafana
+                  url: https://grafana.igloo.sh
+                  icon: sh:grafana
+                  hide-arrow: true
+                - title: Open Media Vault
+                  url: https://helios64.shark-tone.ts.net
+                  icon: sh:openmediavault
+                  hide-arrow: true
+                - title: Prowlarr
+                  url: https://prowlarr.igloo.sh
+                  icon: sh:prowlarr
+                  hide-arrow: true
+                - title: Radarr
+                  url: https://radarr.igloo.sh
+                  icon: sh:radarr
+                  hide-arrow: true
+                - title: Sonarr
+                  url: https://sonarr.igloo.sh
+                  icon: sh:sonarr
+                  hide-arrow: true
+                - title: Bazarr
+                  url: https://bazarr.igloo.sh
+                  icon: sh:bazarr
+                  hide-arrow: true
+                - title: Autobrr
+                  url: https://autobrr.igloo.sh
+                  icon: sh:autobrr
+                  hide-arrow: true
+                - title: QUI
+                  url: https://qui.igloo.sh
+                  icon: sh:qui
+                  hide-arrow: true
                 - title: qBittorrent
-                  url: https://google.com/
-                  icon: si:qbittorrent
+                  url: https://qb.igloo.sh
+                  icon: sh:qbittorrent
+                  hide-arrow: true
+                - title: SABnzbd
+                  url: https://sab.igloo.sh
+                  icon: sh:sabnzbd
+                  hide-arrow: true
+                - title: Rook-Ceph
+                  url: https://rook.igloo.sh
+                  icon: sh:ceph
+                  hide-arrow: true
+                - title: The Lounge
+                  url: https://thelounge.igloo.sh
+                  icon: sh:the-lounge
+                  hide-arrow: true
         - type: bookmarks
           groups:
             - title: General
               links:
                 - title: PlainTextSports
                   url: https://plaintextsports.com
-                - title: Gmail
-                  url: https://mail.google.com/mail/u/0/
-                - title: Github
-                  url: https://github.com/
-            - title: Entertainment
+                - title: Astral
+                  url: https://app.astralapp.com/
+                - title: Homelabfinder
+                  url: https://homelabfinder.com/
+            - title: Cloud
               links:
-                - title: YouTube
-                  url: https://www.youtube.com/
-            - title: Social
-              links:
-                - title: Reddit
-                  url: https://www.reddit.com/
+                - title: Cloudflare
+                  url: https://dash.cloudflare.com/
+                - title: Porkbun
+                  url: https://porkbun.com/
+                - title: Tailscale
+                  url: https://login.tailscale.com/admin
