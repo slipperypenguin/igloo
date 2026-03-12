@@ -18,7 +18,7 @@ spec:
       retries: 3
   values:
     controllers:
-      unpoller:
+      unifi-client-check:
         containers:
           app:
             image:
