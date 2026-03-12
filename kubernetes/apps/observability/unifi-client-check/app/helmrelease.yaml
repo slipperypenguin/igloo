@@ -31,11 +31,6 @@ spec:
             envFrom:
               - secretRef:
                   name: unifi-client-check-secret
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
