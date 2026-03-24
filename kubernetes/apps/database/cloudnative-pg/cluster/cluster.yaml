@@ -1,0 +1,93 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/cluster_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: igloo-pg
+spec:
+  instances: 2
+  imageName: ghcr.io/cloudnative-pg/postgresql:17-bookworm
+
+  primaryUpdateStrategy: unsupervised
+
+  postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
+    parameters:
+      # Connection limits
+      max_connections: "200"
+      # Memory — tuned for dell-node-02 (32GB total, ~2GB for PG)
+      shared_buffers: "512MB"
+      effective_cache_size: "1536MB"
+      maintenance_work_mem: "128MB"
+      work_mem: "16MB"
+      # WAL settings for streaming replication performance
+      wal_buffers: "16MB"
+      min_wal_size: "512MB"
+      max_wal_size: "1GB"
+      # Checkpointing
+      checkpoint_completion_target: "0.9"
+      # Logging
+      log_min_duration_statement: "1000"  # log queries > 1s
+
+    # Enable pgvector extension via ImageVolume (CNPG plugin system)
+    # Requires Kubernetes ImageVolume feature gate (already enabled in Talos)
+  plugins:
+    - name: pgvector
+      image: ghcr.io/cloudnative-pg/pgvector:0.8.0-pg17
+      isWALPlugin: false
+
+  # Bootstrap: create superuser with 1Password credentials
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS vector
+        - CREATE EXTENSION IF NOT EXISTS pg_trgm
+        - CREATE EXTENSION IF NOT EXISTS btree_gin
+
+  # Superuser secret
+  superuserSecret:
+    name: cloudnative-pg-secret
+
+  # Storage — Rook-Ceph block
+  storage:
+    size: 50Gi
+    storageClass: ceph-block
+
+  # Resource limits
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      memory: 2Gi
+
+  # Monitoring
+  monitoring:
+    enablePodMonitor: true
+
+  # Backup to Cloudflare R2
+  backup:
+    barmanObjectStore:
+      destinationPath: "s3://igloo-cnpg-backup/igloo-pg"
+      endpointURL: "https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg-secret
+          key: R2_ACCESS_KEY_ID
+        secretAccessKey:
+          name: cloudnative-pg-secret
+          key: R2_SECRET_ACCESS_KEY
+      wal:
+        compression: gzip
+        maxParallel: 2
+      data:
+        compression: gzip
+    retentionPolicy: "30d"
+
+  # Node affinity — prefer dell-node-02 for database workloads
+  affinity:
+    nodeSelector:
+      kubernetes.io/hostname: dell-node-02
