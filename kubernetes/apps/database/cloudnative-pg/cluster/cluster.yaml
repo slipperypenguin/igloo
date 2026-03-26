@@ -72,7 +72,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: "s3://igloo-cnpg-backup/igloo-pg"
-      endpointURL: "https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com"
+      endpointURL: "https://1fc36582b12a3d0edc5938328921ef34.r2.cloudflarestorage.com"
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
