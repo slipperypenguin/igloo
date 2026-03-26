@@ -1,18 +1,18 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/cluster_v1.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/postgresql.cnpg.io/cluster_v1.json
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: igloo-pg
 spec:
   instances: 2
-  imageName: ghcr.io/cloudnative-pg/postgresql:17-bookworm
-
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.3-minimal-trixie
   primaryUpdateStrategy: unsupervised
-
   postgresql:
-    shared_preload_libraries:
-      - "vectors.so"
+    extensions:
+      - name: pgvector
+        image:
+          reference: ghcr.io/cloudnative-pg/pgvector:0.8.1-18-trixie
     parameters:
       # Connection limits
       max_connections: "200"
@@ -30,14 +30,6 @@ spec:
       # Logging
       log_min_duration_statement: "1000"  # log queries > 1s
 
-    # Enable pgvector extension via ImageVolume (CNPG plugin system)
-    # Requires Kubernetes ImageVolume feature gate (already enabled in Talos)
-  plugins:
-    - name: pgvector
-      image: ghcr.io/cloudnative-pg/pgvector:0.8.0-pg17
-      isWALPlugin: false
-
-  # Bootstrap: create superuser with 1Password credentials
   bootstrap:
     initdb:
       database: app
@@ -47,16 +39,13 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS pg_trgm
         - CREATE EXTENSION IF NOT EXISTS btree_gin
 
-  # Superuser secret
   superuserSecret:
     name: cloudnative-pg-secret
 
-  # Storage — Rook-Ceph block
   storage:
     size: 50Gi
     storageClass: ceph-block
 
-  # Resource limits
   resources:
     requests:
       cpu: 500m
@@ -64,11 +53,9 @@ spec:
     limits:
       memory: 2Gi
 
-  # Monitoring
   monitoring:
     enablePodMonitor: true
 
-  # Backup to Cloudflare R2
   backup:
     barmanObjectStore:
       destinationPath: "s3://igloo-cnpg-backup/igloo-pg"
@@ -88,6 +75,6 @@ spec:
     retentionPolicy: "30d"
 
   # Node affinity — prefer dell-node-02 for database workloads
-  affinity:
-    nodeSelector:
-      kubernetes.io/hostname: dell-node-02
+  # affinity:
+  #   nodeSelector:
+  #     kubernetes.io/hostname: dell-node-02
