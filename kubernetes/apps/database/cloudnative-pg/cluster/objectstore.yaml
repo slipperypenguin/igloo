@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://github.com/datreeio/CRDs-catalog/blob/main/barmancloud.cnpg.io/objectstore_v1.json
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: igloo-pg-r2
+spec:
+  configuration:
+    destinationPath: s3://igloo-cnpg-backup/igloo-pg
+    endpointURL: "https://1fc36582b12a3d0edc5938328921ef34.r2.cloudflarestorage.com"
+    s3Credentials:
+      accessKeyId:
+        key: R2_ACCESS_KEY_ID
+        name: cloudnative-pg-secret
+      secretAccessKey:
+        key: R2_SECRET_ACCESS_KEY
+        name: cloudnative-pg-secret
+    data:
+      compression: gzip
+    wal:
+      compression: gzip
+      maxParallel: 2
+    retentionPolicy: "30d"
