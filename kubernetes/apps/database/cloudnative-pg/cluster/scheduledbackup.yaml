@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/postgresql.cnpg.io/scheduledbackup_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: igloo-pg-daily
+spec:
+  cluster:
+    name: igloo-pg
+  schedule: "0 0 2 * * *"  # 2 AM daily (6-field cron, seconds included)
+  backupOwnerReference: self
+  immediate: true  # take an initial backup on creation
+  method: barmanObjectStore
