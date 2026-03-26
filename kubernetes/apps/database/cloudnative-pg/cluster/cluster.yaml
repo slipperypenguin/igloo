@@ -56,23 +56,11 @@ spec:
   monitoring:
     enablePodMonitor: true
 
-  backup:
-    barmanObjectStore:
-      destinationPath: "s3://igloo-cnpg-backup/igloo-pg"
-      endpointURL: "https://1fc36582b12a3d0edc5938328921ef34.r2.cloudflarestorage.com"
-      s3Credentials:
-        accessKeyId:
-          name: cloudnative-pg-secret
-          key: R2_ACCESS_KEY_ID
-        secretAccessKey:
-          name: cloudnative-pg-secret
-          key: R2_SECRET_ACCESS_KEY
-      wal:
-        compression: gzip
-        maxParallel: 2
-      data:
-        compression: gzip
-    retentionPolicy: "30d"
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: igloo-pg-r2
 
   # Node affinity — prefer dell-node-02 for database workloads
   # affinity:
