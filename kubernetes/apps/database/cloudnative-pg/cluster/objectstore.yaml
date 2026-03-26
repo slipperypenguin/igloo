@@ -20,4 +20,3 @@ spec:
     wal:
       compression: gzip
       maxParallel: 2
-    retentionPolicy: "30d"
