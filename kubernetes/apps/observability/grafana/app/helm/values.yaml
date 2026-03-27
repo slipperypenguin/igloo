@@ -110,7 +110,7 @@ dashboards:
       url: https://grafana.com/api/dashboards/1860/revisions/42/download
     prometheus:
       datasource: Prometheus
-      url: https://grafana.com/api/dashboards/19105/revisions/8/download
+      url: https://grafana.com/api/dashboards/19105/revisions/9/download
     unpackerr:
       datasource:
         - name: DS_PROMETHEUS
