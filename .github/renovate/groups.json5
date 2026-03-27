@@ -29,6 +29,15 @@
       },
     },
     {
+      "description": "CloudNativePG Group",
+      "groupName": "CloudNativePG",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["/cloudnative-pg/"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}} group"
+      }
+    },
+    {
       "description": ["CoreDNS Group"],
       "groupName": "CoreDNS",
       "matchDatasources": ["docker"],
