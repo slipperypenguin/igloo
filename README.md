@@ -10,12 +10,10 @@
 
 [![k8s](https://img.shields.io/badge/k8s-v1.35.3-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
 
-[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Ftalos_version%3Fformat%3Dendpoint&style=flat-square&logo=talos&logoColor=white)](https://talos.dev)
-[![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fkubernetes_version%3Fformat%3Dendpoint&style=flat-square&logo=kubernetes&logoColor=white)](https://kubernetes.io)
+[![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Ftalos_version%3Fformat%3Dendpoint&style=flat-square&logo=talos&logoColor=orange)](https://talos.dev)
+[![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fkubernetes_version%3Fformat%3Dendpoint&style=flat-square&logo=kubernetes&logoColor=blue)](https://kubernetes.io)
 [![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fflux_version%3Fformat%3Dendpoint&style=flat-square&logo=flux&logoColor=white)](https://fluxcd.io)
 [![Nodes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fcluster_node_count%3Fformat%3Dendpoint&style=flat-square&logo=linux&logoColor=white)](https://github.com/slipperypenguin/igloo)
-[![Age](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fcluster_age_days%3Fformat%3Dendpoint&style=flat-square&logo=clock&logoColor=white)](https://github.com/slipperypenguin/igloo)
-[![Alerts](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fcluster_alert_count%3Fformat%3Dendpoint&style=flat-square&logo=prometheus&logoColor=white)](https://prometheus.igloo.sh)
 <br/>
 
 
@@ -43,7 +41,7 @@ My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a
 - [external-secrets](https://github.com/external-secrets/external-secrets): Managed Kubernetes secrets using [1Password Connect](https://github.com/1Password/connect).
 - [openebs](https://github.com/openebs/openebs): local storage provisioner
   - [rook](https://github.com/rook/rook): Distributed block storage for persistent storage.
-- [sops](https://github.com/getsops/sops): Managed secrets for Kubernetes and Terraform which are committed to Git.
+- [sops](https://github.com/getsops/sops): Managed secrets for Kubernetes and CI which are committed to Git.
 - [spegel](https://github.com/spegel-org/spegel): Stateless cluster local OCI registry mirror.
 - [volsync](https://github.com/backube/volsync): Backup and recovery of persistent volume claims.
 
