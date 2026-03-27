@@ -8,7 +8,7 @@
 <br/>
 <br/>
 
-[![k8s](https://img.shields.io/badge/k8s-v1.33.3-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
+[![k8s](https://img.shields.io/badge/k8s-v1.35.3-blue?style=flat-square&logo=kubernetes)](https://github.com/siderolabs/kubelet/pkgs/container/kubelet)
 
 [![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Ftalos_version%3Fformat%3Dendpoint&style=flat-square&logo=talos&logoColor=white)](https://talos.dev)
 [![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.igloo.sh%2Fkubernetes_version%3Fformat%3Dendpoint&style=flat-square&logo=kubernetes&logoColor=white)](https://kubernetes.io)
