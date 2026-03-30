@@ -1,0 +1,174 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: open-webui
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      open-webui:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        initContainers:
+          # Create the open_webui role and database via the CNPG superuser
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.3.0@sha256:6fa1f331cddd2eb0b6afa7b8d3685c864127a81ab01c3d9400bc3ff5263a51cf
+            envFrom:
+              - secretRef:
+                  name: open-webui-secret
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
+          # Enable pgvector and full-text search extensions in open_webui
+          #    postgres-init only does CREATE ROLE/DATABASE — extensions require a separate superuser step. Idempotent via IF NOT EXISTS.
+          init-ext:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.3.0@sha256:6fa1f331cddd2eb0b6afa7b8d3685c864127a81ab01c3d9400bc3ff5263a51cf
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                psql "${SUPERUSER_DATABASE_URL}" \
+                  -c "CREATE EXTENSION IF NOT EXISTS vector;" \
+                  -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;" \
+                  -c "CREATE EXTENSION IF NOT EXISTS btree_gin;"
+            env:
+              SUPERUSER_DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-secret
+                    key: SUPERUSER_DATABASE_URL
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/open-webui/open-webui
+              tag: v0.8.12@sha256:8113fa5510020ef05a44afc0c42d33eabeeb2524a996e3e3fb8c437c00f0d792
+            env:
+              TZ: America/Los_Angeles
+              WEBUI_NAME: "igloo AI"
+              WEBUI_URL: "https://open-webui.${SECRET_DOMAIN}"
+              CORS_ALLOW_ORIGIN: "https://open-webui.${SECRET_DOMAIN}"
+              # ── PostgreSQL backend
+              DATABASE_TYPE: postgresql
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-secret
+                    key: DATABASE_URL
+              # ── pgvector (same CNPG instance, same database)
+              VECTOR_DB: pgvector
+              PGVECTOR_DB_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-secret
+                    key: DATABASE_URL
+              # ── JWT signing
+              WEBUI_SECRET_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-secret
+                    key: WEBUI_SECRET_KEY
+              # ── AI providers
+              ANTHROPIC_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: open-webui-secret
+                    key: ANTHROPIC_API_KEY
+              ENABLE_OLLAMA_API: "false"
+              ENABLE_OPENAI_API: "false"
+              # ── RAG embeddings (local CPU, no API key needed)
+              # Downloads all-MiniLM-L6-v2 (~90MB) on first startup.
+              RAG_EMBEDDING_ENGINE: ""
+              ENABLE_RAG_HYBRID_SEARCH: "true"  # BM25 + vector, needs pg_trgm
+              # ── Features (disabled until infrastructure exists)
+              ENABLE_RAG_WEB_SEARCH: "false" # TODO: add SearXNG in a later PR
+              ENABLE_IMAGE_GENERATION: "false"
+              ENABLE_VERSION_UPDATE_CHECK: "false" # Renovate handles this
+              # ── Signup / auth
+              # IMPORTANT: Keep "true" for first deploy so admin account can be created.
+              # TODO: After first login, set to "false"
+              ENABLE_SIGNUP: "true"
+              DEFAULT_USER_ROLE: "user"
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8080
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  # 30 × 10s = 5 min ceiling for initial model download
+                  failureThreshold: 30
+
+            securityContext:
+              allowPrivilegeEscalation: false
+              # false required: writes to /app/backend/data and cache dirs
+              readOnlyRootFilesystem: false
+              capabilities: { drop: ["ALL"] }
+
+            resources:
+              requests:
+                cpu: 250m
+                memory: 1Gi
+              limits:
+                memory: 2Gi
+
+    service:
+      app:
+        ports:
+          http:
+            port: 8080
+
+    route:
+      app:
+        hostnames: ["open-webui.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+
+    persistence:
+      data:
+        existingClaim: open-webui
+        globalMounts:
+          - path: /app/backend/data
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
