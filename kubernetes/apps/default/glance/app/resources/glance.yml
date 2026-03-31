@@ -1,4 +1,10 @@
 ---
+auth:
+  secret-key: ${GLANCE_SECRET_KEY}
+  users:
+    admin:
+      password: ${GLANCE_ADMIN_PASS}
+
 branding:
   hide-footer: true
 
