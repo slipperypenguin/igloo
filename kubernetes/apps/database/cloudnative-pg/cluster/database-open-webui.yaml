@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/postgresql.cnpg.io/database_v1.json
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: open-webui
+spec:
+  name: open_webui
+  owner: open_webui
+  cluster:
+    name: igloo-pg
+  extensions:
+    - name: vector
+    - name: pg_trgm
+    - name: btree_gin
+  databaseReclaimPolicy: retain
