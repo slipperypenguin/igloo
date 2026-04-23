@@ -62,6 +62,15 @@ spec:
       parameters:
         barmanObjectName: igloo-pg-r2
 
+  managed:
+    roles:
+    - name: open_webui
+      login: true
+      createdb: false
+      inherit: true
+      passwordSecret:
+        name: open-webui-role-secret
+
   # Node affinity — prefer dell-node-02 for database workloads
   # affinity:
   #   nodeSelector:
