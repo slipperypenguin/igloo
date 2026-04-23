@@ -12,6 +12,7 @@ resources:
   - ./home-assistant/ks.yaml
   - ./manyfold/ks.yaml
   - ./n8n/ks.yaml
+  - ./open-webui/ks.yaml
   - ./readeck/ks.yaml
   - ./thelounge/ks.yaml
   - ./webhook/ks.yaml
