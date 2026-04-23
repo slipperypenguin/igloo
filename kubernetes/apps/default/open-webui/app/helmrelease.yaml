@@ -144,7 +144,7 @@ spec:
 
             resources:
               requests:
-                cpu: 250m
+                cpu: 100m
                 memory: 1Gi
               limits:
                 memory: 2Gi
@@ -157,7 +157,9 @@ spec:
 
     route:
       app:
-        hostnames: ["open-webui.${SECRET_DOMAIN}"]
+        hostnames:
+          - "open-webui.${SECRET_DOMAIN}"
+          - chat.igloo.sh
         parentRefs:
           - name: external
             namespace: kube-system
