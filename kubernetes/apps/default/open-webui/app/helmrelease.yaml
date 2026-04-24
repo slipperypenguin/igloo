@@ -45,11 +45,6 @@ spec:
                     name: open-webui-secret
                     key: WEBUI_SECRET_KEY
               # ── AI providers
-              ANTHROPIC_API_KEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: open-webui-secret
-                    key: ANTHROPIC_API_KEY
               ENABLE_OLLAMA_API: "false"
               ENABLE_OPENAI_API: "false"
               # ── RAG embeddings (local CPU, no API key needed)
@@ -61,9 +56,7 @@ spec:
               ENABLE_IMAGE_GENERATION: "false"
               ENABLE_VERSION_UPDATE_CHECK: "false" # Renovate handles this
               # ── Signup / auth
-              # IMPORTANT: Keep "true" for first deploy so admin account can be created.
-              # TODO: After first login, set to "false"
-              ENABLE_SIGNUP: "true"
+              ENABLE_SIGNUP: "false"
               DEFAULT_USER_ROLE: "user"
 
             probes:
