@@ -99,7 +99,7 @@ spec:
                   failureThreshold: 30
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
@@ -128,11 +128,6 @@ spec:
           - path: /app/config.yaml
             subPath: config.yaml
             readOnly: true
-      # Prisma writes its migration client here at startup
-      prisma-client:
-        type: emptyDir
-        globalMounts:
-          - path: /usr/lib/python3.13/site-packages/litellm_proxy_extras/migrations
       # LiteLLM writes pip/npm cache and tmp files
       cache:
         type: emptyDir
