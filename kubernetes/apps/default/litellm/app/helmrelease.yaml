@@ -1,0 +1,142 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: litellm
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    controllers:
+      litellm:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: ghcr.io/berriai/litellm
+              tag: v1.82.3@sha256:78be9aac7bfb543288b2430d6af8c4cfa573d1c22bbeb6bb1e905eae84637e2a
+            args:
+              - --host
+              - "::"
+              - --port
+              - "4000"
+              - --config
+              - /app/config.yaml
+            env:
+              TZ: America/Los_Angeles
+              LITELLM_MODE: PRODUCTION
+              LITELLM_DONT_SHOW_FEEDBACK_BOX: "True"
+              STORE_MODEL_IN_DB: "True"
+              # Runs prisma migrate deploy on startup — replaces the official chart's pre-deploy Helm hook Job.
+              USE_PRISMA_MIGRATE: "True"
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: litellm-secret
+                    key: DATABASE_URL
+              LITELLM_MASTER_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: litellm-secret
+                    key: LITELLM_MASTER_KEY
+              ANTHROPIC_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: litellm-secret
+                    key: ANTHROPIC_API_KEY
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health/liveliness
+                    port: &port 4000
+                  initialDelaySeconds: 30
+                  periodSeconds: 60
+                  timeoutSeconds: 10
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health/readiness
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health/readiness
+                    port: *port
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  # 30 × 10s = 5 min ceiling covers Prisma migration on first boot
+                  failureThreshold: 30
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 512Mi
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["litellm.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+    persistence:
+      # proxy_config ConfigMap mounted as /app/config.yaml
+      config:
+        type: configMap
+        name: litellm-config
+        globalMounts:
+          - path: /app/config.yaml
+            subPath: config.yaml
+            readOnly: true
+      # Prisma writes its migration client here at startup
+      prisma-client:
+        type: emptyDir
+        globalMounts:
+          - path: /usr/lib/python3.13/site-packages/litellm_proxy_extras/migrations
+      # LiteLLM writes pip/npm cache and tmp files
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /.cache
+          - path: /.npm
+          - path: /tmp

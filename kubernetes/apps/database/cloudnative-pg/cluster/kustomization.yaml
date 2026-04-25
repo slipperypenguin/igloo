@@ -5,7 +5,9 @@ kind: Kustomization
 resources:
   - ./cluster.yaml
   - ./externalsecret.yaml
+  - ./externalsecret-litellm-role.yaml
   - ./externalsecret-open-webui-role.yaml
+  - ./database-litellm.yaml
   - ./database-open-webui.yaml
   - ./objectstore.yaml
   - ./scheduledbackup.yaml
