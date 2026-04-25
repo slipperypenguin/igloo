@@ -70,6 +70,12 @@ spec:
       inherit: true
       passwordSecret:
         name: open-webui-role-secret
+    - name: litellm
+      login: true
+      createdb: false
+      inherit: true
+      passwordSecret:
+        name: litellm-role-secret
 
   # Node affinity — prefer dell-node-02 for database workloads
   # affinity:
