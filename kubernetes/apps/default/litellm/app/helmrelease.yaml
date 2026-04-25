@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/berriai/litellm
-              tag: v1.82.3@sha256:78be9aac7bfb543288b2430d6af8c4cfa573d1c22bbeb6bb1e905eae84637e2a
+              tag: 1.82.3@sha256:78be9aac7bfb543288b2430d6af8c4cfa573d1c22bbeb6bb1e905eae84637e2a
             args:
               - --host
               - "::"
