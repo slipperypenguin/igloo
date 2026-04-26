@@ -132,6 +132,6 @@ spec:
       cache:
         type: emptyDir
         globalMounts:
-          - path: /.cache
+          - path: /root/.cache
           - path: /.npm
           - path: /tmp
