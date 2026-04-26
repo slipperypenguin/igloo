@@ -33,8 +33,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/berriai/litellm
-              tag: v1.83.7-stable@sha256:af0152ca6dfb6703b35c0d4899effa9ac132bce9a4fbcbe1dc6ef145c100db26
+              repository: ghcr.io/berriai/litellm-database
+              tag: v1.83.10-stable@sha256:2dec2d0228b7ad35126e3be5eb8969d8151563dfe5c79a3f25e6ebbd28bf607b
             args:
               - --host
               - "::"
@@ -44,13 +44,11 @@ spec:
               - /app/config.yaml
             env:
               TZ: America/Los_Angeles
-              LITELLM_MIGRATION_DIR: /tmp/litellm-migrations
               LITELLM_MODE: PRODUCTION
               LITELLM_DONT_SHOW_FEEDBACK_BOX: "True"
               STORE_MODEL_IN_DB: "True"
               # Runs prisma migrate deploy on startup — replaces the official chart's pre-deploy Helm hook Job.
               USE_PRISMA_MIGRATE: "False"
-              USE_PRISMA_DB_PUSH: "True"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
