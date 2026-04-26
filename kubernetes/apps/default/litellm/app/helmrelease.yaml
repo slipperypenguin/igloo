@@ -11,7 +11,7 @@ spec:
   install:
     remediation:
       retries: -1
-    timeout: 10m
+    timeout: 20m
   upgrade:
     cleanupOnFail: true
     remediation:
@@ -96,10 +96,9 @@ spec:
                   httpGet:
                     path: /health/readiness
                     port: *port
-                  initialDelaySeconds: 10
-                  periodSeconds: 10
-                  # 30 × 10s = 5 min ceiling covers Prisma migration on first boot
-                  failureThreshold: 30
+                  initialDelaySeconds: 120
+                  periodSeconds: 15
+                  failureThreshold: 60
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
