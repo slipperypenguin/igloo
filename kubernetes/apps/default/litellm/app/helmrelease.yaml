@@ -77,7 +77,7 @@ spec:
       app:
         ports:
           http:
-            port: *port
+            port: 4000
     route:
       app:
         hostnames: ["litellm.${SECRET_DOMAIN}"]
