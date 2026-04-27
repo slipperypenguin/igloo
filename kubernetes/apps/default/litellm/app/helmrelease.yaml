@@ -29,7 +29,7 @@ spec:
               tag: v1.83.10-stable@sha256:2dec2d0228b7ad35126e3be5eb8969d8151563dfe5c79a3f25e6ebbd28bf607b
             args:
               - --host
-              - "::"
+              - "0.0.0.0"
               - --port
               - "4000"
               - --config
