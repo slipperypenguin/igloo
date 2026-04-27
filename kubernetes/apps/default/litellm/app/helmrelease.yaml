@@ -17,14 +17,6 @@ spec:
     remediation:
       retries: 3
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
-        seccompProfile: { type: RuntimeDefault }
     controllers:
       litellm:
         annotations:
@@ -128,10 +120,7 @@ spec:
           - path: /app/config.yaml
             subPath: config.yaml
             readOnly: true
-      # LiteLLM writes pip/npm cache and tmp files
-      cache:
+      tmp:
         type: emptyDir
         globalMounts:
-          - path: /root/.cache
-          - path: /.npm
           - path: /tmp
