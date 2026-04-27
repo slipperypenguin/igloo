@@ -63,6 +63,9 @@ spec:
                 enabled: true
               startup:
                 enabled: true
+                spec:
+                  initialDelaySeconds: 120
+                  failureThreshold: 30
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
