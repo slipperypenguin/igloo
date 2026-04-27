@@ -40,7 +40,7 @@ spec:
               LITELLM_DONT_SHOW_FEEDBACK_BOX: "True"
               STORE_MODEL_IN_DB: "True"
               # Runs prisma migrate deploy on startup — replaces the official chart's pre-deploy Helm hook Job.
-              USE_PRISMA_MIGRATE: "False"
+              DISABLE_SCHEMA_UPDATE: "True"
               DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
