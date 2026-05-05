@@ -56,6 +56,11 @@ spec:
                   secretKeyRef:
                     name: litellm-secret
                     key: ANTHROPIC_API_KEY
+              POOLSIDE_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: litellm-secret
+                    key: POOLSIDE_API_KEY
             probes:
               liveness:
                 enabled: true
