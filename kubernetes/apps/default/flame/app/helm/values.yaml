@@ -7,7 +7,7 @@ controllers:
       app:
         image:
           repository: pawelmalak/flame
-          tag: multiarch2.3.1
+          tag: multiarch2.4.0
           pullPolicy: IfNotPresent
         envFrom:
           - secretRef:
