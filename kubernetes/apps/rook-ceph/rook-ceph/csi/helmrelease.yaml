@@ -28,17 +28,18 @@ spec:
     operatorConfig:
       namespace: rook-ceph
       driverSpecDefaults:
+        controllerPlugin:
+          priorityClassName: system-cluster-critical
         imageSet:
           name: rook-csi-operator-image-set-configmap
         nodePlugin:
           priorityClassName: system-node-critical
-        controllerPlugin:
-          priorityClassName: system-cluster-critical
-          replicas: 2
     drivers:
       rbd:
         enabled: true
         name: rook-ceph.rbd.csi.ceph.com
+        controllerPlugin:
+          replicas: 2
       cephfs:
         enabled: false
         name: rook-ceph.cephfs.csi.ceph.com
