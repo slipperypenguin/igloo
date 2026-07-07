@@ -30,7 +30,7 @@ spec:
               DB_SQLITE_VACUUM_ON_STARTUP: false
               DB_SQLITE_POOL_SIZE: 3
               EXECUTIONS_DATA_PRUNE: true
-              EXECUTIONS_DATA_MAX_AGE: 7
+              EXECUTIONS_DATA_MAX_AGE: 336
               EXECUTIONS_DATA_PRUNE_MAX_COUNT: 50000
               GENERIC_TIMEZONE: "America/Los_Angeles"
               N8N_BLOCK_ENV_ACCESS_IN_NODE: false
