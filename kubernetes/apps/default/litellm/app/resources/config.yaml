@@ -35,3 +35,10 @@ model_list:
       model: openai/poolside/laguna-xs-2.1
       api_base: https://inference.poolside.ai/v1
       api_key: os.environ/POOLSIDE_API_KEY
+
+router_settings:
+  fallbacks:
+    - claude-sonnet-5: ["poolside/laguna-m.1"]
+    - claude-haiku-4-5: ["poolside/laguna-xs-2.1"]
+    - poolside/laguna-xs-2.1: ["claude-haiku-4-5"]
+    - poolside/laguna-m.1: ["claude-sonnet-5"]
