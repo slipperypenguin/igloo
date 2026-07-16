@@ -1,3 +1,4 @@
+# https://docs.litellm.ai/docs/proxy/config_settings
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   database_url: os.environ/DATABASE_URL
@@ -24,8 +25,8 @@ model_list:
       api_base: https://inference.poolside.ai/v1
       api_key: os.environ/POOLSIDE_API_KEY
 
-  - model_name: poolside/laguna-xs.2
+  - model_name: poolside/laguna-xs-2.1
     litellm_params:
-      model: openai/poolside/laguna-xs.2
+      model: openai/poolside/laguna-xs-2.1
       api_base: https://inference.poolside.ai/v1
       api_key: os.environ/POOLSIDE_API_KEY
