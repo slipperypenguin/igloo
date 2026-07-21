@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: zsamuels28/unificlientalerts
-              tag: v3.1.2@sha256:d806eed64800da9c9dc7fa2df96a72ba8f835425364402fe07910d82b837f90c
+              tag: v3.1.4@sha256:6200da99d9971ad3776a634de67d18414ece8c877ddc2f22bba41ef27c8f4e91
             env:
               CHECK_INTERVAL: "300"
               NOTIFICATION_SERVICE: Pushover
