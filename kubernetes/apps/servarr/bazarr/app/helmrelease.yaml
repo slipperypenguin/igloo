@@ -29,6 +29,17 @@ spec:
             env:
               TZ: America/Los_Angeles
             probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 6767
+                  initialDelaySeconds: 5
+                  periodSeconds: 5
+                  failureThreshold: 30
+                  timeoutSeconds: 1
               liveness: &probes
                 enabled: true
                 custom: true
