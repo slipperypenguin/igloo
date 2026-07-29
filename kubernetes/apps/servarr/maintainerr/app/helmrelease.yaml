@@ -65,7 +65,7 @@ spec:
                   failureThreshold: 30
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
@@ -100,12 +100,6 @@ spec:
         existingClaim: maintainerr
         globalMounts:
           - path: /opt/data
-      cache:
-        type: emptyDir
-        advancedMounts:
-          maintainerr:
-            app:
-              - path: /opt/app/ui/.next/cache
       tmpfs:
         type: emptyDir
         advancedMounts:
