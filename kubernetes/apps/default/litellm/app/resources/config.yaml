@@ -24,9 +24,9 @@ model_list:
       model: anthropic/claude-haiku-4-5
       api_key: os.environ/ANTHROPIC_API_KEY
 
-  - model_name: poolside/laguna-m.1
+  - model_name: poolside/laguna-s-2.1
     litellm_params:
-      model: openai/poolside/laguna-m.1
+      model: openai/poolside/laguna-s-2.1
       api_base: https://inference.poolside.ai/v1
       api_key: os.environ/POOLSIDE_API_KEY
 
