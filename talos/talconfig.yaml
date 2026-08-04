@@ -118,6 +118,31 @@ nodes:
           - TS_AUTHKEY=$TS_AUTHKEY
           - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
           - TS_ACCEPT_DNS=true
+  - hostname: "dell-node-03"
+    ipAddress: "192.168.20.122"
+    installDisk: "/dev/nvme0n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "6c:2b:59:cf:2d:39"
+        dhcp: false
+        addresses:
+          - "192.168.20.122/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "192.168.20.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.20.6"
+    extensionServices:
+      - name: tailscale
+        environment:
+          - TS_AUTHKEY=$TS_AUTHKEY
+          - TS_ROUTES=10.96.0.0/16,10.69.0.0/16,192.168.20.0/24,192.168.1.0/24
+          - TS_ACCEPT_DNS=true
   - hostname: "asus-node-01"
     ipAddress: "192.168.20.177"
     installDiskSelector:
