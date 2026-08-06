@@ -30,7 +30,7 @@ nodes:
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
-    controlPlane: true
+    controlPlane: false
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "f4:34:f0:e4:73:46"
@@ -41,8 +41,6 @@ nodes:
           - network: "0.0.0.0/0"
             gateway: "192.168.20.1"
         mtu: 1500
-        vip:
-          ip: "192.168.20.6"
     extensionServices:
       - name: tailscale
         environment:
