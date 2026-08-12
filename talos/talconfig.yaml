@@ -26,7 +26,8 @@ cniConfig:
 nodes:
   - hostname: "mbp-node-01"
     ipAddress: "192.168.20.228"
-    installDisk: "/dev/sda"
+    installDiskSelector:
+      wwid: "naa.5002538043584d30"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/6e810eb45767cfabcdb7a45e389eee803045af7a9467faebde5c91164861883a
