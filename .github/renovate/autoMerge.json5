@@ -11,11 +11,27 @@
       "minimumReleaseAge": "3 days"
     },
     {
+      "description": "Auto-merge Grafana dashboards",
+      "matchDatasources": ["custom.grafana-dashboards"],
+      "matchUpdateTypes": ["major"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true
+    },
+    {
       "description": ["Auto-merge Mise Tools"],
       "matchManagers": ["mise"],
       "automerge": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["minor", "patch"],
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge Renovate Presents",
+      "matchManagers": ["renovate-config"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "branch",
       "ignoreTests": true
     }
   ]

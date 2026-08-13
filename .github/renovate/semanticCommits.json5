@@ -48,5 +48,11 @@
       "semanticCommitScope": "mise",
       "commitMessageTopic": "tool {{depName}}"
     },
+    {
+      "matchManagers": ["renovate-config"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "renovate-config",
+      "commitMessageTopic": "config {{depName}}"
+    }
   ],
 }
