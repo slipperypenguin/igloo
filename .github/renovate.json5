@@ -3,9 +3,11 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
+    "github>home-operations/renovate-presets//apps/cnpg.json5",
+    "github>home-operations/renovate-presets//apps/grafanaDashboards.json5",
     "github>slipperypenguin/igloo//.github/renovate/autoMerge.json5",
+    "github>slipperypenguin/igloo//.github/renovate/changelogs.json5",
     "github>slipperypenguin/igloo//.github/renovate/customManagers.json5",
-    "github>slipperypenguin/igloo//.github/renovate/grafanaDashboards.json5",
     "github>slipperypenguin/igloo//.github/renovate/groups.json5",
     "github>slipperypenguin/igloo//.github/renovate/labels.json5",
     "github>slipperypenguin/igloo//.github/renovate/overrides.json5",
