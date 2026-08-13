@@ -1,9 +1,13 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.13/website/content/v1.13/schemas/config.schema.json
 machine:
   kubelet:
     extraConfig:
       featureGates:
         ImageVolume: true
       serializeImagePulls: false
+      imageMinimumGCAge: 2h
+      imageGCHighThresholdPercent: 60
+      imageGCLowThresholdPercent: 50
     extraMounts:
       - destination: /var/openebs/local
         type: bind
