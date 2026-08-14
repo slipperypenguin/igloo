@@ -11,6 +11,18 @@ spec:
   interval: 1h
   values:
     replicaCount: 2
+    deploymentAnnotations:
+      reloader.stakater.com/auto: "true"
+    notification:
+      enabled: true
+      secretName: tuppr-notifications-secret
+      secretKey: url
+      titleTemplate: "Talos upgrade starting: {{ .Node }}"
+      messageTemplate: "{{ .Node }}: {{ .CurrentVersion }} -> {{ .TargetVersion }} (plan {{ .Plan }})"
     monitoring:
+      dashboards:
+        enabled: true
+      prometheusRule:
+        enabled: true
       serviceMonitor:
         enabled: true
