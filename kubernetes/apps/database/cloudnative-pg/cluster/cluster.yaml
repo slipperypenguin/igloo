@@ -6,7 +6,7 @@ metadata:
   name: igloo-pg
 spec:
   instances: 2
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.3-minimal-trixie
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.6-minimal-trixie
   primaryUpdateStrategy: unsupervised
   postgresql:
     extensions:
