@@ -12,7 +12,7 @@ spec:
     extensions:
       - name: pgvector
         image:
-          reference: ghcr.io/cloudnative-pg/pgvector:0.8.1-18-trixie
+          reference: ghcr.io/cloudnative-pg/pgvector:0.8.6-18-trixie
     parameters:
       # Connection limits
       max_connections: "200"
