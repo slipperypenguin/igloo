@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://github.com/cilium/cilium/blob/main/install/kubernetes/cilium/values.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/main/install/kubernetes/cilium/values.schema.json
 # ref: https://docs.cilium.io/en/stable/helm-reference/
 MTU: 1500 # ref: https://github.com/cilium/cilium/issues/37529
 autoDirectNodeRoutes: true
