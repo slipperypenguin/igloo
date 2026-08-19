@@ -1,4 +1,6 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/main/install/kubernetes/cilium/values.schema.json
+# ref: https://docs.cilium.io/en/stable/helm-reference/
 MTU: 1500 # ref: https://github.com/cilium/cilium/issues/37529
 autoDirectNodeRoutes: true
 bpf:
@@ -44,6 +46,15 @@ hubble:
     prometheus:
       serviceMonitor:
         enabled: true
+  tls:
+    auto:
+      enabled: true
+      method: certmanager
+      certValidityDuration: 90
+      certManagerIssuerRef:
+        group: cert-manager.io
+        kind: Issuer
+        name: hubble-ca-issuer
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.69.0.0/16"
