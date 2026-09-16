@@ -24,6 +24,26 @@ model_list:
       model: anthropic/claude-haiku-4-5
       api_key: os.environ/ANTHROPIC_API_KEY
 
+  - model_name: huggingface/together/deepseek-ai/DeepSeek-R1
+    litellm_params:
+      model: huggingface/together/deepseek-ai/DeepSeek-R1
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/fireworks-ai/zai-org/GLM-4.7
+    litellm_params:
+      model: huggingface/fireworks-ai/zai-org/GLM-4.7
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/Qwen/Qwen3-8B
+    litellm_params:
+      model: huggingface/Qwen/Qwen3-8B
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/meta-models/Muse-Glimmer-30B
+    litellm_params:
+      model: huggingface/meta-models/Muse-Glimmer-30B
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
   - model_name: poolside/laguna-s-2.1
     litellm_params:
       model: openai/poolside/laguna-s-2.1
