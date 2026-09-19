@@ -49,6 +49,11 @@ model_list:
       model: meta/muse-spark-1.3-contributor
       api_key: os.environ/META_API_KEY
 
+  - model_name: mistral-small-latest
+    litellm_params:
+      model: mistral/mistral-small-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
   - model_name: poolside/laguna-s-2.1
     litellm_params:
       model: openai/poolside/laguna-s-2.1
