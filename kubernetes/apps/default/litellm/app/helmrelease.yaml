@@ -61,6 +61,16 @@ spec:
                   secretKeyRef:
                     key: HUGGINGFACE_API_KEY
                     name: litellm-secret
+              META_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    key: META_API_KEY
+                    name: litellm-secret
+              MISTRAL_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    key: MISTRAL_API_KEY
+                    name: litellm-secret
               POOLSIDE_API_KEY:
                 valueFrom:
                   secretKeyRef:
