@@ -24,6 +24,36 @@ model_list:
       model: anthropic/claude-haiku-4-5
       api_key: os.environ/ANTHROPIC_API_KEY
 
+  - model_name: huggingface/deepseek-ai/DeepSeek-V4-Pro
+    litellm_params:
+      model: huggingface/deepseek-ai/DeepSeek-V4-Pro
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/zai-org/GLM-5.3
+    litellm_params:
+      model: huggingface/zai-org/GLM-5.3
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/Qwen/Qwen3.8-27B
+    litellm_params:
+      model: huggingface/Qwen/Qwen3.8-27B
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: huggingface/meta-models/Muse-Glimmer-30B
+    litellm_params:
+      model: huggingface/meta-models/Muse-Glimmer-30B
+      api_key: os.environ/HUGGINGFACE_API_KEY
+
+  - model_name: meta/muse-spark-1.3-contributor
+    litellm_params:
+      model: meta/muse-spark-1.3-contributor
+      api_key: os.environ/META_API_KEY
+
+  - model_name: mistral/mistral-small-latest
+    litellm_params:
+      model: mistral/mistral-small-latest
+      api_key: os.environ/MISTRAL_API_KEY
+
   - model_name: poolside/laguna-s-2.1
     litellm_params:
       model: openai/poolside/laguna-s-2.1
