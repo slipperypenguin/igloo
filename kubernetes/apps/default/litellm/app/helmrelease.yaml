@@ -85,7 +85,7 @@ spec:
                 enabled: true
                 spec:
                   initialDelaySeconds: 120
-                  failureThreshold: 120
+                  failureThreshold: 30
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
