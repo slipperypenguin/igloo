@@ -56,7 +56,7 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     extraArgs:
-      - --annotation-prefix=external-dns.alpha.kubernetes.io/
+      - --enable-legacy-annotation-prefix
     sources: ["gateway-httproute", "service"]
     txtOwnerId: main
     txtPrefix: k8s.main.
