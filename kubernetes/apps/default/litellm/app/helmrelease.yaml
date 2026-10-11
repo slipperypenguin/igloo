@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/berriai/litellm-database
-              tag: v1.104.0@sha256:fbe28229d2d02181c0a7d9df9599de614b491f3d897d2d7da18404f088310218
+              tag: v1.104.3@sha256:95ef69d1ef01a55049e1c8e113909fd6859ecdaaa0be33f55d3fd6efe5de3f52
             args:
               - --host
               - "0.0.0.0"
