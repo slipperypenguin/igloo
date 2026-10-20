@@ -19,6 +19,12 @@ spec:
       retries: 3
   values:
     csi:
+      # Pinned: cephcsi v3.18+ is built for x86-64-v3 (AVX2) and crashes on mbp-node-01 (Ivy Bridge).
+      # Rook 1.21 no longer pins CSI images, so ceph-csi-operator would otherwise use its built-in default.
+      # Renovate is capped below v3.18.0 in .github/renovate/overrides.json5.
+      cephcsi:
+        repository: quay.io/cephcsi/cephcsi
+        tag: v3.17.1
       serviceMonitor:
         enabled: true
     image:
