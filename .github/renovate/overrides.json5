@@ -12,6 +12,12 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["/factory\\.talos\\.dev/"],
       "overridePackageName": "ghcr.io/siderolabs/installer"
+    },
+    {
+      "description": "Cap cephcsi below v3.18.0: v3.18+ requires x86-64-v3 and crashes on mbp-node-01 (Ivy Bridge)",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["quay.io/cephcsi/cephcsi"],
+      "allowedVersions": "<3.18.0"
     }
   ]
 }
