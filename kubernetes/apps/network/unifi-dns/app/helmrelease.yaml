@@ -57,6 +57,10 @@ spec:
     policy: sync
     extraArgs:
       - --annotation-prefix=external-dns.alpha.kubernetes.io/
+      - --webhook-provider-read-timeout=30s
+      - --webhook-provider-write-timeout=30s
+      - --provider-cache-time=5m
+      - --min-event-sync-interval=30s
     sources: ["gateway-httproute", "service"]
     txtOwnerId: main
     txtPrefix: k8s.main.
