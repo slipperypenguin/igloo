@@ -53,7 +53,7 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
     extraArgs:
-      - --annotation-prefix=external-dns.alpha.kubernetes.io/
+      - --enable-legacy-annotation-prefix
       - --webhook-provider-read-timeout=30s
       - --webhook-provider-write-timeout=30s
       - --provider-cache-time=5m
