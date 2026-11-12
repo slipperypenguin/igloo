@@ -14,7 +14,14 @@ spec:
     timeout: 20m
   upgrade:
     cleanupOnFail: true
+    timeout: 20m
     remediation:
+      # With DISABLE_SCHEMA_UPDATE "False", litellm applies forward-only Prisma
+      # migrations to igloo-pg on startup. Rolling back to an older image after
+      # a migration lands risks running it against a schema it doesn't know, so
+      # remediate by uninstalling and reinstalling the desired version. All
+      # state lives in Postgres, so an uninstall removes nothing persistent.
+      strategy: uninstall
       retries: 3
   values:
     controllers:
