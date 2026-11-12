@@ -13,7 +13,14 @@ spec:
       retries: -1
   upgrade:
     cleanupOnFail: true
+    timeout: 15m
     remediation:
+      # open-webui runs forward-only alembic migrations against igloo-pg on
+      # startup. Once one lands, rolling back can never succeed (the older image
+      # can't locate the newer revision), so remediate by uninstalling and
+      # reinstalling the desired version. The data PVC is an existingClaim and
+      # chat data lives in Postgres, so neither is removed by an uninstall.
+      strategy: uninstall
       retries: 3
   values:
     controllers:
