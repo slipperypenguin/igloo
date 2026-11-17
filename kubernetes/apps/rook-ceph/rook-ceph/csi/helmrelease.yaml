@@ -31,7 +31,7 @@ spec:
         controllerPlugin:
           priorityClassName: system-cluster-critical
         imageSet:
-          name: rook-csi-operator-image-set-configmap
+          name: ceph-csi-image-set
         nodePlugin:
           priorityClassName: system-node-critical
     drivers:
@@ -50,3 +50,12 @@ spec:
       nvmeof:
         enabled: false
         name: rook-ceph.nvmeof.csi.ceph.com
+---
+# Pin cephcsi below v3.18 (x86-64-v3 only, crashes on mbp-node-01). Kept out of Rook's
+# rook-csi-operator-image-set-configmap because Rook 1.21 blanks it when it sees a v3.17 image.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ceph-csi-image-set
+data:
+  plugin: quay.io/cephcsi/cephcsi:v3.17.1
