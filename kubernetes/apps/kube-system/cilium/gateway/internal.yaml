@@ -5,7 +5,7 @@ kind: Gateway
 metadata:
   name: internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: &hostname internal.igloo.sh
+    external-dns.kubernetes.io/target: &hostname internal.igloo.sh
     gatus.home-operations.com/endpoint: |-
       group: internal
       guarded: true
@@ -19,7 +19,7 @@ spec:
       value: 192.168.20.12
   infrastructure:
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: *hostname
+      external-dns.kubernetes.io/hostname: *hostname
   listeners:
     - name: http
       protocol: HTTP
